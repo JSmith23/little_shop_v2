@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
 
   resources :users, only: [:show]
+  resources :items, only: [:index]
 
 end

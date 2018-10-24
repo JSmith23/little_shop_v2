@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_many :items
   validates_presence_of :name,
                         :address,
                         :city,
@@ -11,6 +11,7 @@ class User < ApplicationRecord
   
   validates_uniqueness_of :email
   validates_confirmation_of :password
+
 
   enum role: %w(registered_user admin merchant)
 
