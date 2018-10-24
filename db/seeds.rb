@@ -19,6 +19,10 @@ users = [
   { name: "Michael Finocchiaro", address: "123 Main Street", city: "Denver", state: "CO", email: "michaelfinocchiaro@email.com", password: "MFinocchiaro123", password_confirmation: "MFinocchiaro123", role: 2 }
 ]
 
+items = [
+  
+]
+
 users.each do |u|
   User.create(u)
 end
