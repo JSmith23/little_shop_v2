@@ -14,7 +14,8 @@ describe User, type: :model do
     it { should validate_presence_of :enabled}
   end
 
-  describe "Relationships" do 
+  describe "Relationships" do
     it { should have_many(:items)}
-  end 
+    it { should have_many(:orders)}
+  end
 end
