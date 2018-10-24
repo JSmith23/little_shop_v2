@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :items, only: [:index]
 
+  resources :users do
+    resources :orders, only: [:index]
+  end
+
+
 end

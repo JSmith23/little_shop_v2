@@ -9,7 +9,7 @@ describe Item, type: :model do
     it { should validate_presence_of :description}
   end
 
-  describe "Relationshios" do 
+  describe "Relationshios" do
     it { should belong_to(:user)}
-  end 
+  end
 end

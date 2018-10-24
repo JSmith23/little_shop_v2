@@ -186,3 +186,410 @@ Migrating to ChangeColumnName (20181024210437)
   [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_development"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_test"[0m
+  [1m[35m (540.8ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_development" ENCODING = 'unicode'[0m
+  [1m[35m (414.4ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (44.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20181024001842)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "email" character varying, "password_digest" character varying, "role" integer DEFAULT 0, "enabled" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024001842"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItems (20181024024433)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "thumbnail" character varying, "price" decimal, "inventory" integer, "description" text, "enabled" boolean DEFAULT 't', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d4b6334db2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024024433"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeColumnName (20181024210437)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "items" RENAME COLUMN "users_id" TO "user_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 22:05:16.217048"], ["updated_at", "2018-10-24 22:05:16.217048"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (198.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_development"[0m
+  [1m[35m (205.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_test"[0m
+  [1m[35m (410.5ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_development" ENCODING = 'unicode'[0m
+  [1m[35m (405.9ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20181024001842)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "email" character varying, "password_digest" character varying, "role" integer DEFAULT 0, "enabled" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024001842"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItems (20181024024433)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "thumbnail" character varying, "price" decimal, "inventory" integer, "description" text, "enabled" boolean DEFAULT 't', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d4b6334db2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024024433"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeColumnName (20181024210437)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "items" RENAME COLUMN "users_id" TO "user_id"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 22:06:40.580936"], ["updated_at", "2018-10-24 22:06:40.580936"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (198.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_development"[0m
+  [1m[35m (195.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_test"[0m
+  [1m[35m (341.0ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_development" ENCODING = 'unicode'[0m
+  [1m[35m (415.2ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20181024001842)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "email" character varying, "password_digest" character varying, "role" integer DEFAULT 0, "enabled" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024001842"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItems (20181024024433)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "thumbnail" character varying, "price" decimal, "inventory" integer, "description" text, "enabled" boolean DEFAULT 't', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d4b6334db2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024024433"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20181024220147)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "status" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024220147"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 22:06:46.355483"], ["updated_at", "2018-10-24 22:06:46.355483"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "benwinch@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ben Winch"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "benwinch@email.com"], ["password_digest", "$2a$10$ZSMEQrgmkaWBc2/PivJFie4zDD6e4yig5Mh5dGwWamo83dxp3jsM6"], ["created_at", "2018-10-24 22:06:46.470217"], ["updated_at", "2018-10-24 22:06:46.470217"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "billkerwin@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bill Kerwin"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "billkerwin@email.com"], ["password_digest", "$2a$10$n5dVCWwrV.gf4aXpoD0jI.ICQ4cjIxJU5STm00GK84i//S12FHzvW"], ["created_at", "2018-10-24 22:06:46.533730"], ["updated_at", "2018-10-24 22:06:46.533730"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "bobbogle@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bob Bogle"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "bobbogle@email.com"], ["password_digest", "$2a$10$JiT6/Bm2dwTr0qEn3J47su8kOaw/eFhw19TNpNXaKMGg2qkPEOiNW"], ["created_at", "2018-10-24 22:06:46.593157"], ["updated_at", "2018-10-24 22:06:46.593157"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "brianjames@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Brian James"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "brianjames@email.com"], ["password_digest", "$2a$10$XnViKgusE4YCl/lBoK/SAu2eqzLzpZFaLcalcuQS6i31wyiCo1wg6"], ["created_at", "2018-10-24 22:06:46.649586"], ["updated_at", "2018-10-24 22:06:46.649586"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "carolbrandon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Carol Brandon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "carolbrandon@email.com"], ["password_digest", "$2a$10$zs2.qaDcbgE0Gf4NX882/.uYFW5IfnWE1kcuvV7rNyoBgm2y7548W"], ["created_at", "2018-10-24 22:06:46.708110"], ["updated_at", "2018-10-24 22:06:46.708110"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "christinarau@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Christina Rau"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "christinarau@email.com"], ["password_digest", "$2a$10$ZsITedKYI0vHReGkXXgMGe5Fm4Zd52GegxXt9eQbQ8d.b9LIPGg5i"], ["created_at", "2018-10-24 22:06:46.768171"], ["updated_at", "2018-10-24 22:06:46.768171"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "cierrafisher@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Cierra Fisher"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "cierrafisher@email.com"], ["password_digest", "$2a$10$fWbDvfYE2AOvcKi7QHu0PeMx8S81Eu.EyuOJZWqzEmjC3MmTMD0.q"], ["created_at", "2018-10-24 22:06:46.826173"], ["updated_at", "2018-10-24 22:06:46.826173"]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "courtneyjohston@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Courtney Johnston"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "courtneyjohston@email.com"], ["password_digest", "$2a$10$jzS22Vu.euDjMo8enmt5XOLF.9UQRmsCrC.o/PrVPiTPB.4lBte6u"], ["created_at", "2018-10-24 22:06:46.884331"], ["updated_at", "2018-10-24 22:06:46.884331"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "dougcannon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Doug Cannon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "dougcannon@email.com"], ["password_digest", "$2a$10$64P0CzJKJkxLyw6hb2OogexLE5GMiqQu1MVxL6kOceeZMUrlS9qfm"], ["role", 1], ["created_at", "2018-10-24 22:06:46.942769"], ["updated_at", "2018-10-24 22:06:46.942769"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "glennrussell@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Glenn Russell"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "glennrussell@email.com"], ["password_digest", "$2a$10$DMVRjlpqB4LegFMFJrKVrusIxLRnvfETuCvNkEAFF.IvxzEuDizOu"], ["role", 1], ["created_at", "2018-10-24 22:06:47.006479"], ["updated_at", "2018-10-24 22:06:47.006479"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "grahamshopshire@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Graham Shopshire"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "grahamshopshire@email.com"], ["password_digest", "$2a$10$H6ttg8ml5Rz5KPgfNsK5/OvWPAG4/eMj/NlbQ5HD7qImK/L06kpA."], ["role", 1], ["created_at", "2018-10-24 22:06:47.064526"], ["updated_at", "2018-10-24 22:06:47.064526"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jamesthane@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "James Thane"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jamesthane@email.com"], ["password_digest", "$2a$10$Y1mKHdhZxkOl.giA2n8E2..SyOpCbe.6e1wZkJDPgraLWx8zaxzqW"], ["role", 1], ["created_at", "2018-10-24 22:06:47.123861"], ["updated_at", "2018-10-24 22:06:47.123861"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jeffreykeeten@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jeffrey Keeten"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jeffreykeeten@email.com"], ["password_digest", "$2a$10$6EP2h8norNH8WF8auTnK9.zkaFMx4EL3w1VN8kdLheX8q0XaglhwO"], ["role", 1], ["created_at", "2018-10-24 22:06:47.181856"], ["updated_at", "2018-10-24 22:06:47.181856"]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "joncorelis@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jon Corelis"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "joncorelis@email.com"], ["password_digest", "$2a$10$aPfIvHvs/X.c2hJCPFF6uu2DeX2d4d14PT4K0r6F41biid/tjvB9G"], ["role", 1], ["created_at", "2018-10-24 22:06:47.241327"], ["updated_at", "2018-10-24 22:06:47.241327"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "josephnaus@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Joseph Naus"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "josephnaus@email.com"], ["password_digest", "$2a$10$pQo6GgbIYfoeLmFcCMn.mOvz6vxb2.e8eLZn52p1skspFpwuc4GsC"], ["role", 2], ["created_at", "2018-10-24 22:06:47.297960"], ["updated_at", "2018-10-24 22:06:47.297960"]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "michaelfinocchiaro@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Michael Finocchiaro"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "michaelfinocchiaro@email.com"], ["password_digest", "$2a$10$lEFyQok74MnGP.x22paRAuZ9IbUqleKbeSS2j6uHYWeGcWK3i4dAm"], ["role", 2], ["created_at", "2018-10-24 22:06:47.356652"], ["updated_at", "2018-10-24 22:06:47.356652"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (41.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddUsertoOrders (20181024222422)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "orders" ADD "user_id" bigint[0m
+  [1m[35m (31.6ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_user_id" ON "orders"  ("user_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024222422"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (212.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_development"[0m
+  [1m[35m (234.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_test"[0m
+  [1m[35m (497.5ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_development" ENCODING = 'unicode'[0m
+  [1m[35m (399.3ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20181024001842)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "email" character varying, "password_digest" character varying, "role" integer DEFAULT 0, "enabled" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024001842"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItems (20181024024433)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "thumbnail" character varying, "price" decimal, "inventory" integer, "description" text, "enabled" boolean DEFAULT 't', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d4b6334db2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024024433"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20181024220147)
+  [1m[35m (39.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "status" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024220147"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUsertoOrders (20181024222422)
+  [1m[35m (40.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "orders" ADD "user_id" bigint[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_user_id" ON "orders"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024222422"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 22:27:12.406833"], ["updated_at", "2018-10-24 22:27:12.406833"]]
+  [1m[35m (25.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "benwinch@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ben Winch"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "benwinch@email.com"], ["password_digest", "$2a$10$8fi/kL4kFaBY0YXgjz.VROpGi64KedzWD.OX1PAjuymip1OfeQutW"], ["created_at", "2018-10-24 22:27:12.548615"], ["updated_at", "2018-10-24 22:27:12.548615"]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "billkerwin@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bill Kerwin"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "billkerwin@email.com"], ["password_digest", "$2a$10$3KcGW906fQJkyILzLU6HIO.XvHtIFGw9GkUI0pyAA.rGkeEk7kJY6"], ["created_at", "2018-10-24 22:27:12.650438"], ["updated_at", "2018-10-24 22:27:12.650438"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "bobbogle@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bob Bogle"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "bobbogle@email.com"], ["password_digest", "$2a$10$PGdhvEKiN8OxpCtNdfM3AeeFoAwdFTZOfqK3eJqQGTswTZoZI2SZq"], ["created_at", "2018-10-24 22:27:12.708703"], ["updated_at", "2018-10-24 22:27:12.708703"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "brianjames@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Brian James"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "brianjames@email.com"], ["password_digest", "$2a$10$D..hmRHVDzgEMPewMvSoL.GMvhV0FiVn63B2igxIKwSrmoprQkWWu"], ["created_at", "2018-10-24 22:27:12.766964"], ["updated_at", "2018-10-24 22:27:12.766964"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "carolbrandon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Carol Brandon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "carolbrandon@email.com"], ["password_digest", "$2a$10$je40ucMMwmXV.GIus4kLeua0YEoORlg.QwaijhyhV1rT2DxGSdbDO"], ["created_at", "2018-10-24 22:27:12.825541"], ["updated_at", "2018-10-24 22:27:12.825541"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "christinarau@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Christina Rau"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "christinarau@email.com"], ["password_digest", "$2a$10$mhixHkMMpfwjhrCfEG1YgOSE6McEjWFrO39RfDJ4zYMjaVwWZvBQm"], ["created_at", "2018-10-24 22:27:12.885513"], ["updated_at", "2018-10-24 22:27:12.885513"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "cierrafisher@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Cierra Fisher"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "cierrafisher@email.com"], ["password_digest", "$2a$10$N.gKXwt6OZGjw.5wTfRMlOE0URPQs3ZOt9/QAPgFHY4D4T0Mrnqzu"], ["created_at", "2018-10-24 22:27:12.943920"], ["updated_at", "2018-10-24 22:27:12.943920"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "courtneyjohston@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Courtney Johnston"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "courtneyjohston@email.com"], ["password_digest", "$2a$10$i4bFstpwMJ8Iao.52h3mzOyvez8TOUvN1CjZaka2/St2/DCZFJa4m"], ["created_at", "2018-10-24 22:27:13.002989"], ["updated_at", "2018-10-24 22:27:13.002989"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "dougcannon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Doug Cannon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "dougcannon@email.com"], ["password_digest", "$2a$10$sI.AnFICMCgsiOXLJuVMC.jRKoxcSWp5ba7jO/gMFuA1p56n3W75W"], ["role", 1], ["created_at", "2018-10-24 22:27:13.060853"], ["updated_at", "2018-10-24 22:27:13.060853"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "glennrussell@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Glenn Russell"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "glennrussell@email.com"], ["password_digest", "$2a$10$lAyd9Lq.UJ9AHNRPK7Ifp.7Mbr07JCpvy2I2SAivteFZ8E8E1.TwS"], ["role", 1], ["created_at", "2018-10-24 22:27:13.117851"], ["updated_at", "2018-10-24 22:27:13.117851"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "grahamshopshire@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Graham Shopshire"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "grahamshopshire@email.com"], ["password_digest", "$2a$10$r1SvBt7nkZFypO1wdsb.COC/VNP.IoFEo1jwrFhrGd8ITwrEAeexq"], ["role", 1], ["created_at", "2018-10-24 22:27:13.176184"], ["updated_at", "2018-10-24 22:27:13.176184"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jamesthane@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "James Thane"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jamesthane@email.com"], ["password_digest", "$2a$10$wo1r4kxY1rCwywA41RKmte6NamiGP7UTRUStHy9pzGPbmkodyJpH."], ["role", 1], ["created_at", "2018-10-24 22:27:13.234387"], ["updated_at", "2018-10-24 22:27:13.234387"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jeffreykeeten@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jeffrey Keeten"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jeffreykeeten@email.com"], ["password_digest", "$2a$10$/AlpW3GIzZL6AjmzZqYbDuk7TeI8Yp5hfKhxlgc3IRiatLSRLd4AO"], ["role", 1], ["created_at", "2018-10-24 22:27:13.292207"], ["updated_at", "2018-10-24 22:27:13.292207"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "joncorelis@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jon Corelis"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "joncorelis@email.com"], ["password_digest", "$2a$10$yUbvyScvnLQjzy3edUBEEO1DujisKwzCRuMDHgTxQHwI7CR/4PEw."], ["role", 1], ["created_at", "2018-10-24 22:27:13.348612"], ["updated_at", "2018-10-24 22:27:13.348612"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "josephnaus@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Joseph Naus"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "josephnaus@email.com"], ["password_digest", "$2a$10$NRAOddEhYCtXO108yepOxum7D9NxiG57tdjym/adasWy/uEh5PiM6"], ["role", 2], ["created_at", "2018-10-24 22:27:13.406947"], ["updated_at", "2018-10-24 22:27:13.406947"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "michaelfinocchiaro@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Michael Finocchiaro"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "michaelfinocchiaro@email.com"], ["password_digest", "$2a$10$geGdT6LoiVMyID22terESeNzDzHstqm853fHW4T4OwqRXBrN9ltMC"], ["role", 2], ["created_at", "2018-10-24 22:27:13.466247"], ["updated_at", "2018-10-24 22:27:13.466247"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (194.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_development"[0m
+  [1m[35m (178.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_v2_test"[0m
+  [1m[35m (501.8ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_development" ENCODING = 'unicode'[0m
+  [1m[35m (407.7ms)[0m  [1m[35mCREATE DATABASE "little_shop_v2_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1999126370004739500)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20181024001842)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "email" character varying, "password_digest" character varying, "role" integer DEFAULT 0, "enabled" boolean DEFAULT 't', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024001842"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItems (20181024024433)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "thumbnail" character varying, "price" decimal, "inventory" integer, "description" text, "enabled" boolean DEFAULT 't', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d4b6334db2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_items_on_user_id" ON "items"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024024433"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20181024220147)
+  [1m[35m (39.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "status" character varying, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f868b47f6a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_orders_on_user_id" ON "orders"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181024220147"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 22:32:23.526932"], ["updated_at", "2018-10-24 22:32:23.526932"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1999126370004739500)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "benwinch@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (2.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Ben Winch"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "benwinch@email.com"], ["password_digest", "$2a$10$qFV8A3P5dU5q58bI0MWTkOYmH9pHZbsu7KiMoG/dxzLyU/PAgic2S"], ["created_at", "2018-10-24 22:32:23.643635"], ["updated_at", "2018-10-24 22:32:23.643635"]]
+  [1m[35m (40.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "billkerwin@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bill Kerwin"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "billkerwin@email.com"], ["password_digest", "$2a$10$7guB9yeBIWDnNP98DrF70ugleRvlCcNx7bsL1EJOPY4dzkLJF9WAe"], ["created_at", "2018-10-24 22:32:23.747476"], ["updated_at", "2018-10-24 22:32:23.747476"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "bobbogle@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Bob Bogle"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "bobbogle@email.com"], ["password_digest", "$2a$10$BP5YglSbRZFMkYOKBFaMbOvnu17sDR0GtZxpYu7YO0oA6BwCzaIJa"], ["created_at", "2018-10-24 22:32:23.814567"], ["updated_at", "2018-10-24 22:32:23.814567"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "brianjames@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Brian James"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "brianjames@email.com"], ["password_digest", "$2a$10$yA8XpoUowwBKnH6AfsOJRuL29cU5C3MdjB7KjW0RUxZn7vbRQjlhO"], ["created_at", "2018-10-24 22:32:23.871035"], ["updated_at", "2018-10-24 22:32:23.871035"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "carolbrandon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Carol Brandon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "carolbrandon@email.com"], ["password_digest", "$2a$10$tWphalcEIcmQBN98nwAq4OR1piAAN9ThL8ZBiPNoZFfWk7s.VBkKO"], ["created_at", "2018-10-24 22:32:23.930662"], ["updated_at", "2018-10-24 22:32:23.930662"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "christinarau@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Christina Rau"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "christinarau@email.com"], ["password_digest", "$2a$10$AIAgr3MB75SIRPjY/Q3KoeDyRZbmYd5QbbfUewiOi91ffLfpLM7V."], ["created_at", "2018-10-24 22:32:23.989849"], ["updated_at", "2018-10-24 22:32:23.989849"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "cierrafisher@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Cierra Fisher"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "cierrafisher@email.com"], ["password_digest", "$2a$10$Xymn5W1JFMhB0ErxfQidkeStO3WXF64ZnXZNQoq5B9ckmUJ.jVmtm"], ["created_at", "2018-10-24 22:32:24.045831"], ["updated_at", "2018-10-24 22:32:24.045831"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "courtneyjohston@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Courtney Johnston"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "courtneyjohston@email.com"], ["password_digest", "$2a$10$YVL4mqB5E8LEM09eWb6.TuGZqzweZf7OJp2ncddFxvETg8ZyB4B/m"], ["created_at", "2018-10-24 22:32:24.108786"], ["updated_at", "2018-10-24 22:32:24.108786"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "dougcannon@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Doug Cannon"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "dougcannon@email.com"], ["password_digest", "$2a$10$FTrxzfOcNExoa0MBneVjCuvDp05pCMtEAoH1VgyXMkLc9yfpsfVnG"], ["role", 1], ["created_at", "2018-10-24 22:32:24.211988"], ["updated_at", "2018-10-24 22:32:24.211988"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "glennrussell@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Glenn Russell"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "glennrussell@email.com"], ["password_digest", "$2a$10$D1qNeTBy9RpL7m4wTDnowOozZOJokaWym81mLA1SNGlbni8shvrUO"], ["role", 1], ["created_at", "2018-10-24 22:32:24.271045"], ["updated_at", "2018-10-24 22:32:24.271045"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "grahamshopshire@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Graham Shopshire"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "grahamshopshire@email.com"], ["password_digest", "$2a$10$jbMXCdmNPGvWtXANcTNnveq2cqnpinrPA2D0QqL/k6XqED4ve6asO"], ["role", 1], ["created_at", "2018-10-24 22:32:24.331413"], ["updated_at", "2018-10-24 22:32:24.331413"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jamesthane@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "James Thane"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jamesthane@email.com"], ["password_digest", "$2a$10$6l9LtQVU0WpWuMpovrSEL.4f6IiIpotEsYGP5lVj83u18nl.Fgha6"], ["role", 1], ["created_at", "2018-10-24 22:32:24.394746"], ["updated_at", "2018-10-24 22:32:24.394746"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "jeffreykeeten@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jeffrey Keeten"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "jeffreykeeten@email.com"], ["password_digest", "$2a$10$BgH3MofUJMTse8MVBuJ3V.GUE5BC3Ur.PXhKUGwgAnyTNw3yUkGK2"], ["role", 1], ["created_at", "2018-10-24 22:32:24.452251"], ["updated_at", "2018-10-24 22:32:24.452251"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "joncorelis@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Jon Corelis"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "joncorelis@email.com"], ["password_digest", "$2a$10$hWt7Kf6X/bwXzP9A0ekzauPW/bkUAzsDL1.xF4v4rlHrev4uAW3Q6"], ["role", 1], ["created_at", "2018-10-24 22:32:24.511544"], ["updated_at", "2018-10-24 22:32:24.511544"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "josephnaus@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Joseph Naus"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "josephnaus@email.com"], ["password_digest", "$2a$10$EOYMm2pBS4jBXUxhFllLsuTejalFW8OhjoaFgb39apM6vPw/bzZ8C"], ["role", 2], ["created_at", "2018-10-24 22:32:24.575296"], ["updated_at", "2018-10-24 22:32:24.575296"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "michaelfinocchiaro@email.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "city", "state", "email", "password_digest", "role", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Michael Finocchiaro"], ["address", "123 Main Street"], ["city", "Denver"], ["state", "CO"], ["email", "michaelfinocchiaro@email.com"], ["password_digest", "$2a$10$oCjDXo.EyKYlzPj47ulVZ.gKF8vdzq9ANhEj2mzco4h7GbYD5SBYi"], ["role", 2], ["created_at", "2018-10-24 22:32:24.634267"], ["updated_at", "2018-10-24 22:32:24.634267"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
