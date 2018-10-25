@@ -11,5 +11,7 @@ describe Item, type: :model do
 
   describe "Relationshios" do
     it { should belong_to(:user)}
+    it { should have_many(:orders).through(:order_items)}
+    it { should have_many(:order_items)}
   end
 end
