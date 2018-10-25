@@ -25,19 +25,19 @@ Nikki: A little sensitive in the feedback I give. Give prompt if need quick hone
 
 * How would you describe your work style?
 Michael: Like to just do. Frustrated with too much planning.
-Tom:
+Tom:  I work until I don't know something then its a matter of being as resourceful as I can to continue on.
 Jimmy: Get it done approach.
 Nikki: I plan and prep. But get into it. Like lists and checkmarks.
 
 * What are your strengths? How can our strengths complement each other?
 Michael: Executing. Strategic Thinking.
-Tom:
+Tom: My strengths are team building and following directions.
 Jimmy: Influecing. Executing.
 Nikki: Relationship Building. Strategic Thinking.
 
 * What’s gone well or poorly in your previous projects?
 Michael: Poorly: When noticing things aren't getting done, worked overtime to complete on own. Well: Pretty flexible partners.
-Tom:
+Tom: The things that usually went wrong in past projects were all real world related which was unfortunate. Also being behind can really affect what you think you can contribute.
 Jimmy: Poorly: Tests-left to the last minute. Well: Everything else.
 Nikki: Poorly: Did not speak up, spent too much time planning/researching. Well: Updating Workplans.
 
@@ -53,7 +53,7 @@ Flexible. Queit place. Book study rooms when pairing. Work from home/communicate
 
 * What scheduling restraints do you have? What are your scheduling preferences?
 Michael: Wednesday 10/24 afternoon/evening, Friday nights (flexible).
-Tom:
+Tom: I am fairly flexible other than a dinner I have to go to tomorrow but, it will be past 7pm.
 Jimmy: Tuesday 10/23 afternoon/evening.
 Nikki: Saturday night.
 
@@ -61,13 +61,13 @@ Pairing afternoons. Pairing/remote pairing weekends. AS NEEDED.
 
 * What is your style for giving feedback? Does anything ever hold you back from giving feedback?
 Michael: Direct.
-Tom:
+Tom: I give feedback by understanding why or how you were thinking to cause what you were doing incorrectly, so that I can help you fix it.
 Jimmy: Direct.
 Nikki: Ask me for direct.
 
 * What do you identify as being your biggest strength(s) technically, as they relate to this project? Where do you feel you could use improvement in your technical skills, as they relate to this project? How can our team help support you in improving these skills?
 Michael: Strength: Styling Growth:
-Tom:
+Tom: I think my biggest strengths technically is reading and understanding error messages because I get them frequently. I need to improve on too many things to write down but, I know being with this team will improve me overall greatly.
 Jimmy: Strength: Growth:
 Nikki: Strength: Git/Github, organizational skill. Growth:
 
