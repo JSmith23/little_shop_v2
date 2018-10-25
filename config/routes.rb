@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "welcome#index"
   get 'register', to: 'users#new', as: "register"
   get 'login', to: 'sessions#new', as: "login"
   get 'logout', to: 'sessions#destroy', as: "logout"
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
 
   get '/profile/edit/:id', to: 'users#edit', as: 'edit_profile'
   patch '/profile/edit/:id', to: 'users#update'
-  
+
   resources :sessions
 
   resources :items, only: [:index]
