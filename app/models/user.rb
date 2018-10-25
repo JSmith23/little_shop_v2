@@ -5,6 +5,7 @@ class User < ApplicationRecord
                         :address,
                         :city,
                         :state,
+                        :zip,
                         :email,
                         :password,
                         :role,
