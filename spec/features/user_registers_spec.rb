@@ -23,6 +23,7 @@ describe 'As an unregistered visitor' do
       address = '123 Main Street'
       city = 'Denver'
       state = 'CO'
+      zip = '80014'
       email = 'davidjones@email.com'
       password = 'luckyguess1234'
 
@@ -30,13 +31,14 @@ describe 'As an unregistered visitor' do
       fill_in :user_address, with: address
       fill_in :user_city, with: city
       fill_in :user_state, with: state
+      fill_in :user_zip, with: zip
       fill_in :user_email, with: email
       fill_in :user_password, with: password
       fill_in :user_password_confirmation, with: password
 
       click_on 'Create User'
 
-      within('main.user-profile') do
+      within("main.user-profile") do
         
         expect(page).to have_content("Welcome, #{name}")
 
