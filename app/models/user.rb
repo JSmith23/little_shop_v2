@@ -12,7 +12,7 @@ class User < ApplicationRecord
                         :enabled
 
   validates_uniqueness_of :email
-  validates_confirmation_of :password
+  # validates_confirmation_of :password
 
 
   enum role: %w(registered_user admin merchant)
