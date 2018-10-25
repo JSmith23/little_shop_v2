@@ -7,14 +7,14 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to profile_path(user), notice: "Logged In!"
-    else 
+    else
       flash.now.alert = "Email or password is invalid"
       render :new
-    end 
+    end
   end
 
-  def destroy 
-    session[:user_id] = nil 
-    redirect_to new_session_path notice: "Logged Out!"
-  end 
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path notice: "Logged Out!"
+  end
 end

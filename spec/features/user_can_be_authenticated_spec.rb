@@ -22,7 +22,63 @@ describe 'user can create account' do
 
     expect(current_path).to eq(profile_path(User.last))
 
-
     expect(page).to have_content("Logged in as #{name}")
+  end
+
+  it 'user can login via form' do
+    user = User.create!(name: "Test Person", address: "123 lane", city: "Denver", state: "CO", zip: "80205", email: "test@test.com", password: "12345", password_confirmation: "12345")
+
+    visit root_path
+
+    click_on "Log In"
+
+    expect(current_path).to eq(login_path)
+
+    fill_in :email, with: "test@test.com"
+    fill_in :password, with: "12345"
+
+    click_on "Log in"
+
+
+    expect(current_path).to eq(profile_path(user))
+  end
+
+  it 'user cannot login via form with invalid information' do
+    user = User.create!(name: "Test Person", address: "123 lane", city: "Denver", state: "CO", zip: "80205", email: "test@test.com", password: "12345", password_confirmation: "12345")
+
+    visit root_path
+
+    click_on "Log In"
+
+    expect(current_path).to eq(login_path)
+
+    fill_in :email, with: "test@test.com"
+    fill_in :password, with: "1234"
+
+    click_on "Log in"
+
+    expect(current_path).to eq(sessions_path)
+  end
+
+  it 'user can logout while they are logged in' do
+    user = User.create!(name: "Test Person", address: "123 lane", city: "Denver", state: "CO", zip: "80205", email: "test@test.com", password: "12345", password_confirmation: "12345")
+
+    visit root_path
+
+    click_on "Log In"
+
+    expect(current_path).to eq(login_path)
+
+    fill_in :email, with: "test@test.com"
+    fill_in :password, with: "12345"
+
+    click_on "Log in"
+
+
+    expect(current_path).to eq(profile_path(user))
+
+    click_on "Log Out"
+
+    expect(current_path).to eq(root_path)
   end
 end
