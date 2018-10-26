@@ -8,8 +8,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:success] = "You have successfully registered and are now logged in."
       redirect_to profile_path(@user)
+    elsif User.find_by(email: user_params[:email])
+      flash[:error] = "An account is already registered with that email address."
+      render :new
     else
+      flash[:error] = "Something went wrong.  Please complete all required fields and try again."
       render :new
     end
   end
