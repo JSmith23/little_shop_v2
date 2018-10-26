@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
 
+  def index
+    if current_user.role = 'admin'
+      @users = User.all
+    else
+      flash[:error] = "You are not authorized to view the requested page."
+      redirect_to root_path
+    end
+  end
+
   def new
     @user = User.new
   end
@@ -16,6 +25,13 @@ class UsersController < ApplicationController
   
   def show
     redirect_to login_path unless current_user 
+    if params[:id] && current_user.role == 'admin'
+      @user = User.find(params[:id])
+      @greeting = "Profile data for #{@user.name}"
+    else
+      @user = current_user
+      @greeting = "Welcome, #{@user.name}"
+    end
   end
 
   def edit
