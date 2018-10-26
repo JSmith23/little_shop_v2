@@ -1,17 +1,17 @@
 <main class='user-profile'>
-  <h1>Welcome, <%= @user.name %></h1>
+  <h1>Welcome, <%= current_user.name %></h1>
   <table class='user-profile-data'>
     <tr>
       <td>Email:</td>
-      <td><%= @user.email %></td>
+      <td><%= current_user.email %></td>
     </tr>
     <tr>
       <td>Address:</td>
       <td>
-        <%= @user.address %><br>
-        <%= "#{@user.city}, #{@user.state} #{@user.zip}" %>
+        <%= current_user.address %><br>
+        <%= "#{current_user.city}, #{current_user.state} #{current_user.zip}" %>
       </td>
     </tr>
   </table>
-  <%= link_to "Edit Profile", edit_profile_path(@user), class: 'edit-profile-button' %>
+  <%= link_to "Edit Profile", profile_edit_path, class: 'edit-profile-button' %>
 </main>
