@@ -22,13 +22,13 @@
       </div>
       <nav class='nav-container'>
         <% if !current_user %>
-          <%= render 'visitor_nav' %>
+          <%= render 'layouts/visitor_nav' %>
         <% elsif current_user.role == 'registered_user' %>
-          <%= render 'user_nav' %>
+          <%= render 'layouts/user_nav' %>
         <% elsif current_user.role == 'merchant' %>
-          <%= render 'merchant_nav' %>
+          <%= render 'layouts/merchant_nav' %>
         <% elsif current_user.role == 'admin' %>
-          <%= render 'admin_nav' %>
+          <%= render 'layouts/admin_nav' %>
         <% end %>
       </nav>
       <div class='flash-container'>
