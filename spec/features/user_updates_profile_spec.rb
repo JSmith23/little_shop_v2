@@ -50,26 +50,6 @@ describe 'As a registered user, merchant, or admin' do
     end
   end
 
-  describe 'if I do not change any information and click submit' do
-    it 'should display the edit profile page with a message that no changes were submitted' do
-
-      visit profile_edit_path
-
-      # no changes made to any fields
-
-      click_on 'Update User'
-
-      within("main.update-user") do
-        expect(current_path).to eq(profile_edit_path)
-        expect(page).to have_content("Update Profile Information")
-      end
-
-      within(".flash-container") do
-        expect(page).to have_content("No changes submitted.")
-      end
-    end
-  end
-
   describe 'if I enter an email address that is already used' do
     it 'should not save the changes and display a message that the email is already in use' do
 
