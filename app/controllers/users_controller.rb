@@ -22,11 +22,22 @@ class UsersController < ApplicationController
     redirect_to login_path unless current_user 
   end
 
-  def patch
-    @user = User.update(user_params)
-    if @user.save
-      redirect_to profile_path(@user)
+  def update
+    # Only accept password change if both fields are filled in
+    if  params[:user][:password].blank? || 
+        params[:user][:password_confirmation].blank?
+    # Otherwise, remove both from params
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    if current_user.update_attributes(user_params)
+      flash[:success] = "Your profile has been updated."
+      redirect_to profile_path
+    elsif User.find_by(email: user_params[:email])
+      flash[:error] = "An account is already registered with that email address."
+      render :edit
     else
+      flash[:error] = "No changes submitted."
       render :edit
     end
   end
