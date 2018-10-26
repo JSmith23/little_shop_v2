@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get 'profile/edit', to: 'users#edit'
   patch 'profile/edit', to: 'users#update'
+
+  get 'dashboard', to: 'users#show'
   
   resources :sessions
 
