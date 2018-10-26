@@ -33,6 +33,9 @@ class UsersController < ApplicationController
     if current_user.update_attributes(user_params)
       flash[:success] = "Your profile has been updated."
       redirect_to profile_path
+    elsif User.find_by(email: user_params[:email])
+      flash[:error] = "An account is already registered with that email address."
+      render :edit
     else
       flash[:error] = "No changes submitted."
       render :edit
