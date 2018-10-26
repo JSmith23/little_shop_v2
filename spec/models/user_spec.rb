@@ -12,11 +12,21 @@ describe User, type: :model do
     it { should validate_presence_of :password}
     it { should validate_confirmation_of :password}
     it { should validate_presence_of :role}
-    it { should validate_presence_of :enabled}
   end
 
   describe "Relationships" do
     it { should have_many(:items)}
     it { should have_many(:orders)}
+  end
+
+  describe "Methods" do
+
+    it 'can toggle the enabled attribute' do
+      user = create(:user)
+      expect(user.enabled).to eq(true)
+      user.toggle_enabled
+      expect(user.enabled).to eq(false)
+    end
+
   end
 end
