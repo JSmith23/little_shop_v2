@@ -1,5 +1,10 @@
 require 'rails_helper'
 describe 'user sees order information' do
+  before(:each) do
+    @user = create(:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+  end
+
   it 'user sees all orders on order index for user' do
     user = create(:user)
     order_1 = Order.create!(id: 1, status: "pending", user_id: user.id)

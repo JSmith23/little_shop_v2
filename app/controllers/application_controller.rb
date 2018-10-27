@@ -4,19 +4,20 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
 
+
   def load_cart
     @cart ||= Cart.new(session[:cart])
   end 
   
   private 
   
-  def current_user 
+  def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end 
-  
+  end
+
   helper_method :current_user
 
-  def authorize 
+  def authorize
     redirect_to login_path, alert: "Not Authorized" if current_user.nil?
   end 
 

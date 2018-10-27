@@ -12,14 +12,20 @@ Rails.application.routes.draw do
 
   get 'profile/edit', to: 'users#edit'
   patch 'profile/edit', to: 'users#update'
-  
+
+  get 'dashboard', to: 'users#show'
+  get 'dashboard/orders', to: 'orders#index'
+  get 'dashboard/items', to: 'items#index'
+
   resources :sessions
 
-  resources :items, only: [:index]
+  resources :items, only: [:index, :new, :create, :edit]
+
 
   resources :carts, only: [:create]
 
-  resources :users, only: [:index, :show] do
+
+  resources :users, only: [:index, :show, :destroy] do
     resources :orders, only: [:index]
   end
 
