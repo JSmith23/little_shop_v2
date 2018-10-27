@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   resources :sessions
 
-  resources :items, only: [:index]
+  resources :items, only: [:index, :new, :create, :edit]
 
   resources :users, only: [:index, :show] do
     resources :orders, only: [:index]
