@@ -9,22 +9,22 @@
   </head>
 
   <body>
-  <div id="container">
-  <div id="user_header">
-  <% if current_user   %>
-  Logged in as <%= current_user.name %>.
-  <%= link_to "Log Out", logout_path %>
-  <% else%>
-  <%= link_to "Register", register_path %> or
-  <%= link_to "Log In", login_path %>
-  <% end %>
-  </div>
+    <div id="container">
+      <div id="user_header">
+        <% if current_user %>
+          Logged in as <%= current_user.name %>.
+          <%= link_to "Log Out", logout_path %>
+        <% else%>
+          <%= link_to "Register", register_path %> or
+          <%= link_to "Log In", login_path %>
+        <% end %>
+      </div>
       <div class='flash-container'>
         <% flash.each do |type, message| %>
           <%= content_tag :div, message, class: type %>
         <% end %>
       </div>
-    <%= yield %>
+      <%= yield %>
     </div>
   </body>
 </html>
