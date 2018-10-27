@@ -21,4 +21,8 @@ class User < ApplicationRecord
     self.enabled = !self.enabled
   end
 
+  def merchant_orders
+    # return all orders where order contains items with user_id = @user.id
+  end
+
 end
