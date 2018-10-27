@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def index
-    if current_user.role = 'admin'
-      @users = User.all
+    if current_user.role == 'admin'
+      @users = User.order(:name)
     else
       flash[:error] = "You are not authorized to view the requested page."
       redirect_to root_path
@@ -67,6 +67,12 @@ class UsersController < ApplicationController
       flash[:error] = "No changes submitted."
       render :edit
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.toggle_enabled
+    redirect_back(fallback_location: root_path)
   end
 
   private
