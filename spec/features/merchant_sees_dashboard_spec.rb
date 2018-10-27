@@ -45,8 +45,6 @@ describe 'As a merchant user' do
 
       visit dashboard_path
 
-      save_and_open_page
-
       within("main.dashboard") do
         expect(page).to have_content("My Orders")
       end
