@@ -29,16 +29,15 @@ describe 'As a merchant user' do
     OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
   end
 
-  describe 'when I visit dashboard/items' do
-    it 'should display all of items' do
+  describe 'when I visit dashboard/orders' do
+    it 'should display all of the orders that include one or more of my items' do
 
-      visit dashboard_items_path
+      visit dashboard_orders_path
 
-      within('main.dashboard-items') do
-        expect(page).to have_content('All Merchant Items')
+      within('main.dashboard-orders') do
+        expect(page).to have_content('All Merchant Orders')
       end
     end
-
     it 'should display all of items' do
 
       visit dashboard_items_path
@@ -54,24 +53,6 @@ describe 'As a merchant user' do
         expect(page).to have_content(@item_4.id)
         expect(page).to have_content(@item_4.price)
         expect(page).to have_content(@item_4.inventory)
-      end
-    end
-
-    it 'should display a button to add a new item' do
-
-      visit dashboard_items_path
-
-      within('main.dashboard-items') do
-        expect(page).to have_selector("input[type=submit][value='Add an Item']")
-      end
-    end
-
-    it 'should display a button next to each item to edit item information' do
-
-      visit dashboard_items_path
-
-      within('main.dashboard-items') do
-        expect(page).to have_selector("input[type=submit][value='Edit Item']")
       end
     end
 

@@ -15,8 +15,6 @@ class User < ApplicationRecord
 
   enum role: %w(registered_user merchant admin)
 
-  alias_attribute :user, :merchant_user
-
 
   has_secure_password
 

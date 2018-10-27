@@ -1,3 +1,12 @@
-<% @orders.each do |order| %>
-<%= order.status %>
-<% end %>
+<main class='dashboard-orders'>
+  <h1>All Merchant Orders</h1>
+
+  <% @orders.each do |order| %>
+    <h3><%= order.id %></h3>
+    <ul>
+      <li>Created at: <%= order.created_at %>
+      <li>Update at: <%= order.updated_at %>
+      <li>Status: <%= order.status %>
+    </ul>
+  <% end %>
+</main>

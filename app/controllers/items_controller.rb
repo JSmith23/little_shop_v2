@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController 
+class ItemsController < ApplicationController
 	def index
 		if !current_user
 			@items = Item.where(enabled: true)
@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 			@items = Item.where(user_id: current_user.id)
 		end
 	end
-	
+
 	def edit
 		@item = Item.find(params[:id])
 	end
@@ -19,4 +19,4 @@ class ItemsController < ApplicationController
 
 	end
 
-end 
+end
