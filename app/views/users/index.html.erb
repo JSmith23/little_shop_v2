@@ -3,6 +3,6 @@
   <% @users.each do |user| %>
     <h4><%= link_to user.name, user_path(user) %></h4>
     <% disable_button_text = user.enabled ? "Disable" : "Enable" %>
-    <%= button_to disable_button_text, :method=> user.toggle_enabled %>
+    <%= button_to disable_button_text, user, :method => 'delete' %>
   <% end %>
 </main>

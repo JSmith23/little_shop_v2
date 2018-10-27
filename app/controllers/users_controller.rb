@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def index
-    if current_user.role = 'admin'
-      @users = User.all
+    if current_user.role == 'admin'
+      @users = User.order(:name)
     else
       flash[:error] = "You are not authorized to view the requested page."
       redirect_to root_path
@@ -17,8 +17,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:success] = "You have successfully registered and are now logged in."
       redirect_to profile_path(@user)
+    elsif User.find_by(email: user_params[:email])
+      flash[:error] = "An account is already registered with that email address."
+      render :new
     else
+      flash[:error] = "Something went wrong.  Please complete all required fields and try again."
       render :new
     end
   end
@@ -62,6 +67,12 @@ class UsersController < ApplicationController
       flash[:error] = "No changes submitted."
       render :edit
     end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.toggle_enabled
+    redirect_back(fallback_location: root_path)
   end
 
   private
