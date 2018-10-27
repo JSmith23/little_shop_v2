@@ -15,6 +15,9 @@ class User < ApplicationRecord
 
   enum role: %w(registered_user merchant admin)
 
+  alias_attribute :user, :merchant_user
+
+
   has_secure_password
 
   def toggle_enabled
@@ -22,8 +25,7 @@ class User < ApplicationRecord
   end
 
   def merchant_orders
-    []
-    # return all orders where order contains items with user_id = @user.id
+    Order.joins(:items).where('items.user_id = ?', self.id)
   end
 
 end

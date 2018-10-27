@@ -60,6 +60,7 @@ describe 'As a merchant user' do
     it 'should display a button to add a new item' do
 
       visit dashboard_items_path
+save_and_open_page
 
       within('main.dashboard-items') do
         expect(page).to have_selector("input[type=submit][value='Add an Item']")
