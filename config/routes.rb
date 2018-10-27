@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   patch 'profile/edit', to: 'users#update'
 
   get 'dashboard', to: 'users#show'
+  get 'dashboard/orders', to: 'orders#index'
+  get 'dashboard/items', to: 'items#index'
   
   resources :sessions
 
