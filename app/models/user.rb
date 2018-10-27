@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_secure_password
 
   def toggle_enabled
-    self.enabled = !self.enabled
+    update_attribute :enabled, !self.enabled
   end
 
   def merchant_orders
