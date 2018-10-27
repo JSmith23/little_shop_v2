@@ -8,15 +8,22 @@ class User < ApplicationRecord
                         :zip,
                         :email,
                         :password,
-                        :role,
-                        :enabled
-
+                        :role
   validates_uniqueness_of :email
   # validates_confirmation_of :password
 
 
-  enum role: %w(registered_user admin merchant)
+  enum role: %w(registered_user merchant admin)
 
   has_secure_password
+
+  def toggle_enabled
+    update_attribute :enabled, !self.enabled
+  end
+
+  def merchant_orders
+    []
+    # return all orders where order contains items with user_id = @user.id
+  end
 
 end

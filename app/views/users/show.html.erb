@@ -1,15 +1,15 @@
 <main class='user-profile'>
-  <h1>Welcome, <%= current_user.name %></h1>
+  <h1><%= @greeting %></h1>
   <table class='user-profile-data'>
     <tr>
       <td>Email:</td>
-      <td><%= current_user.email %></td>
+      <td><%= @user.email %></td>
     </tr>
     <tr>
       <td>Address:</td>
       <td>
-        <%= current_user.address %><br>
-        <%= "#{current_user.city}, #{current_user.state} #{current_user.zip}" %>
+        <%= @user.address %><br>
+        <%= "#{@user.city}, #{@user.state} #{@user.zip}" %>
       </td>
     </tr>
   </table>

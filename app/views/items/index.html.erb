@@ -1,4 +1,15 @@
-<% @items.each do |item| %>
-<p><%= item.name %></p>
-<p><%= item.thumbnail %></p>
-<% end %>
+<main class='dashboard-items'>
+  <h1>All Merchant Items</h1>
+  <%= button_to  "Add an Item", new_item_path, method: 'get' %>
+
+  <% @items.each do |item| %>
+    <h3><%= item.name %></h3>
+    <%= image_tag item.thumbnail %>
+    <ul>
+      <li>Item ID: <%= item.id %>
+      <li>Price: $<%= item.price %>
+      <li>Inventory: <%= item.inventory %>
+    </ul>
+    <%= button_to "Edit Item", edit_item_path(item), method: 'get' %> 
+  <% end %>
+</main>

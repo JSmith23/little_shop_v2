@@ -1,0 +1,17 @@
+<main class='add-item'>
+  <h1>Add Item</h2>
+  <%= form_for @items do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <%= f.label :inventory %>
+    <%= f.text_field :inventory %>
+    <%= f.label :thumbnail %>
+    <%= f.text_field :thumbnail %>
+    <%= f.submit %>
+  <% end %>
+
+</main>

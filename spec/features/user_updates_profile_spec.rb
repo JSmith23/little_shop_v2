@@ -50,16 +50,24 @@ describe 'As a registered user, merchant, or admin' do
     end
   end
 
-  describe 'if I do not change any information and click submit' do
-    it 'should display the edit profile page with a message that no changes were submitted' do
+  describe 'if I enter an email address that is already used' do
+    it 'should not save the changes and display a message that the email is already in use' do
 
+      @user_2 = User.create(name: "David Jones", 
+                            address: "456 First Avenue",
+                            city: "Boulder",
+                            state: "CO",
+                            zip: "80001",
+                            email: "davidjones@email.com",
+                            password: "test1234",
+                            password_confirmation: "test1234")
+      
       visit profile_edit_path
 
-      # no changes made to any fields
+      # Enter an existing email address
+      fill_in :user_email, with: @user_2.email
 
       click_on 'Update User'
-
-      save_and_open_page
 
       within("main.update-user") do
         expect(current_path).to eq(profile_edit_path)
@@ -67,7 +75,7 @@ describe 'As a registered user, merchant, or admin' do
       end
 
       within(".flash-container") do
-        expect(page).to have_content("No changes submitted.")
+        expect(page).to have_content("An account is already registered with that email address.")
       end
     end
   end
