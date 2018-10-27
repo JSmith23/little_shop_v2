@@ -1,4 +1,5 @@
 <% @items.each do |item| %>
 <p><%= item.name %></p>
 <p><%= item.thumbnail %></p>
+  <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
 <% end %>
