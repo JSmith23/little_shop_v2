@@ -9,7 +9,13 @@
   </head>
 
   <body>
+  Cart: <%= @cart.count_all %>
     <div id="container">
+
+      <% flash.each do |type, message| %>
+      <%= content_tag :div, message, class: type %>
+      <% end %>
+
       <div id="user_header">
         <% if current_user %>
           Logged in as <%= current_user.name %>.
@@ -31,9 +37,6 @@
         <% end %>
       </nav>
       <div class='flash-container'>
-        <% flash.each do |type, message| %>
-          <%= content_tag :div, message, class: type %>
-        <% end %>
       </div>
       <%= yield %>
     </nav>
