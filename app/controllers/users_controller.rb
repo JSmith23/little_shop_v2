@@ -27,9 +27,9 @@ class UsersController < ApplicationController
       render :new
     end
   end
-  
+
   def show
-    redirect_to login_path unless current_user 
+    redirect_to login_path unless current_user
     if params[:id] && current_user.role == 'admin'
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
@@ -46,12 +46,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    redirect_to login_path unless current_user 
+    redirect_to login_path unless current_user
   end
 
   def update
     # Only accept password change if both fields are filled in
-    if  params[:user][:password].blank? || 
+    if  params[:user][:password].blank? ||
         params[:user][:password_confirmation].blank?
     # Otherwise, remove both from params
       params[:user].delete(:password)

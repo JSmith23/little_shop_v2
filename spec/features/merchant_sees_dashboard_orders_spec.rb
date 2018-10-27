@@ -29,37 +29,32 @@ describe 'As a merchant user' do
     OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
   end
 
-  describe 'when I visit the dashboard path' do
-    it 'should display a merchant dashboard' do
+  describe 'when I visit dashboard/orders' do
+    it 'should display all of the orders that include one or more of my items' do
 
-      visit dashboard_path
+      visit dashboard_orders_path
 
-      within("main.dashboard") do
-        expect(page).to have_content("Merchant Dashboard")
+      within('main.dashboard-orders') do
+        expect(page).to have_content('All Merchant Orders')
       end
     end
-  end
+    it 'should display all of items' do
 
-  describe 'if any users have orders with my items' do
-    it 'should display a link to dashboard orders' do
+      visit dashboard_items_path
 
-      visit dashboard_path
-
-      within("main.dashboard") do
-        expect(page).to have_content("My Orders")
+      within('main.dashboard-items') do
+        expect(page).to have_content('All Merchant Items')
+        expect(page).to have_content(@item_4.name)
+        expect(page).to have_content(@item_5.name)
+        expect(page).to have_content(@item_6.name)
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+        expect(page).to_not have_content(@item_3.name)
+        expect(page).to have_content(@item_4.id)
+        expect(page).to have_content(@item_4.price)
+        expect(page).to have_content(@item_4.inventory)
       end
     end
+
   end
-
-  describe 'if I have any items' do
-    it 'should display a link to dashboard items' do
-
-      visit dashboard_path
-
-      within("main.dashboard") do
-        expect(page).to have_content("My Items")
-      end
-    end
-  end
-
 end
