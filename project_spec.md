@@ -107,7 +107,7 @@ Plus the following links
 ### "User" CRUD
 
 ```
-5. [ ] done
+5. [X] done
 
 As a visitor
 When I click on the 'register' link in the nav bar
@@ -130,7 +130,7 @@ I see a flash message indicating that I am now registered and logged in
 ```
 
 ```
-6. [ ] done
+6. [X] done
 
 As a visitor
 When I visit the user registration page
@@ -185,7 +185,7 @@ And I see a flash message telling me that email address is already in use
 ```
 
 ```
-10. [ ] done
+10. [X] done
 
 As an admin user
 When I visit the user index page ("/users")
@@ -220,7 +220,7 @@ This user can now log in
 ```
 
 ```
-13. [ ] done
+13. [X] done
 
 As an admin user
 When I visit the user index page
@@ -256,7 +256,7 @@ And I only see that user's orders
 ### "Session" CRUD
 
 ```
-16. [ ] done
+16. [X] done
 
 As a visitor
 When I visit the login path
@@ -425,7 +425,7 @@ then I am redirected to "/users/8" and see their user profile page
 ### "Items" CRUD
 
 ```
-31. [ ] done
+31. [X] done
 
 As a merchant
 When I visit my dashboard page ("/dashboard")
