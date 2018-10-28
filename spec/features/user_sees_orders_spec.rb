@@ -33,7 +33,7 @@ describe 'user sees order information' do
 
   it 'user sees all orders on order index for user' do
 
-    visit user_orders_path(@user)
+    visit orders_path
 
     expect(page).to have_content(@order_1.id)
     expect(page).to have_content("Created at: #{@order_1.created_at}")

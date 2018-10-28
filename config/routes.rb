@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'dashboard/orders', to: 'orders#index'
   get 'dashboard/items', to: 'items#index'
 
+  get 'orders', to: 'orders#index'
+
   resources :sessions
 
   resources :items, only: [:index, :new, :create, :edit]

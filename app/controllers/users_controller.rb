@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     if params[:id] && current_user.role == 'admin'
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
+      @orders = @user.orders
     elsif current_user.role == 'merchant'
       @user = current_user
       @greeting = "Merchant Dashboard for #{@user.name}"
