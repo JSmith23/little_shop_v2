@@ -58,14 +58,23 @@ class UsersController < ApplicationController
     rescue ActiveRecord::RecordInvalid => e
       handle_update_exceptions(e)
     else
-      flash[:success] = "Your profile has been updated."
+      self.redirect_after_successful_update(user_params[:id])
+    end
+  end
+
+  def redirect_after_successful_update(user_id)
+    flash[:success] = "Your profile has been updated."
+    if current_user.role == 'admin'
+      user = User.find(user_params[:id])
+      redirect_to user_path(user)
+    else
       redirect_to profile_path
     end
   end
 
   def destroy
     user = User.find(params[:id])
-    user.toggle_enabled
+    flash[:success] = "#{user.name} has been #{user.toggle_enabled}."
     redirect_back(fallback_location: root_path)
   end
 

@@ -17,6 +17,7 @@ class User < ApplicationRecord
 
   def toggle_enabled
     update_attribute :enabled, !self.enabled
+    self.enabled ? "enabled" : "disabled"
   end
 
   def merchant_orders
