@@ -50,22 +50,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    # Only accept password change if both fields are filled in
-    if  params[:user][:password].blank? ||
-        params[:user][:password_confirmation].blank?
-    # Otherwise, remove both from params
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
-    if current_user.update_attributes(user_params)
+    self.remove_empty_password_from_params
+    begin
+      current_user.update_attributes!(user_params)
+    rescue ActiveRecord::RecordInvalid => e
+      handle_update_exceptions(e)
+    else
       flash[:success] = "Your profile has been updated."
       redirect_to profile_path
-    elsif User.find_by(email: user_params[:email])
-      flash[:error] = "An account is already registered with that email address."
-      render :edit
-    else
-      flash[:error] = "No changes submitted."
-      render :edit
     end
   end
 
@@ -73,6 +65,26 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     user.toggle_enabled
     redirect_back(fallback_location: root_path)
+  end
+
+  def remove_empty_password_from_params
+    # Only accept password change if both fields are filled in
+    if  params[:user][:password].blank? ||
+        params[:user][:password_confirmation].blank?
+    # Otherwise, remove both from params
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+  end
+
+  def handle_update_exceptions(error)
+    if error.message == 'Validation failed: Email has already been taken'
+      flash[:error] = "An account is already registered with that email address."
+      render :edit
+    else
+      flash[:error] = "Something went wrong."
+      render :edit
+    end
   end
 
   private
