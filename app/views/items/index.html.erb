@@ -1,7 +1,7 @@
 
 <main class='dashboard-items'>
   <h1>All Merchant Items</h1>
-  <%= button_to  "Add an Item", new_item_path, method: 'get' %>
+  <%= button_to  "Add an Item", carts_path, method: 'get' %>
 
   <% @items.each do |item| %>
     <h3><%= item.name %></h3>
@@ -11,7 +11,9 @@
       <li>Price: $<%= item.price %>
       <li>Inventory: <%= item.inventory %>
     </ul>
+    <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
     <%= button_to "Edit Item", edit_item_path(item), method: 'get' %> 
+
   <% end %>
 </main>
 
