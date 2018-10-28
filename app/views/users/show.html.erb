@@ -14,4 +14,5 @@
     </tr>
   </table>
   <%= link_to "Edit Profile", profile_edit_path, class: 'edit-profile-button' %>
+  <%= link_to  "My Orders", orders_path if @orders.length > 0 %>
 </main>
