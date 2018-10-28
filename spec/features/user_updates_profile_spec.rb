@@ -28,7 +28,6 @@ describe 'As a registered user, merchant, or admin' do
       address = "456 First Avenue"
       city = "Boulder"
       zip = "80301"
-      password = "BWinch123"
 
       fill_in :user_address, with: address
       fill_in :user_city, with: city
@@ -80,5 +79,25 @@ describe 'As a registered user, merchant, or admin' do
     end
   end
 
+  describe 'if I delete any required fields' do
+    it 'does not save and I see a message to fill in all required fields' do
+        
+      visit profile_edit_path
+
+      fill_in :user_address, with: ""
+
+      click_on 'Update User'
+
+      within("main.update-user") do
+        expect(current_path).to eq(profile_edit_path)
+        expect(page).to have_content("Update Profile Information")
+      end
+
+      within(".flash-container") do
+        expect(page).to have_content("Update failed. Please ensure all required fields are filled in and try again.")
+      end
+
+    end
+  end
 
 end
