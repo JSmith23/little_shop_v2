@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def merchant_orders
-    Order.joins(:items).where('items.user_id = ?', self.id)
+    Order.joins(:items).where('items.user_id = ?', self.id).distinct
   end
 
 end
