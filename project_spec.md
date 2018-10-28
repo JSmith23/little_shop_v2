@@ -143,7 +143,7 @@ I see a flash message telling me the email address is already in use
 ```
 
 ```
-7. [ ] done
+7. [X] done
 
 As a registered user, merchant, or admin
 When I visit my own profile page
@@ -155,7 +155,7 @@ Then I also see a link to my orders page ("/orders")
 ```
 
 ```
-8. [ ] done
+8. [X] done
 
 As a registered user, merchant, or admin
 When I visit my profile page
@@ -172,7 +172,7 @@ And I see my updated information
 ```
 
 ```
-9. [ ] done
+9. [X] done
 
 As a registered user, merchant, or admin
 When I attempt to edit my profile data
@@ -196,7 +196,7 @@ I see an "enable" button next to any users whose accounts are disabled
 ```
 
 ```
-11. [ ] done
+11. [X] done
 
 As an admin user
 When I visit the user index page
@@ -208,7 +208,7 @@ This user cannot log in
 ```
 
 ```
-12. [ ] done
+12. [X] done
 
 As an admin user
 When I visit the user index page
