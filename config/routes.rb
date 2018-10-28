@@ -19,13 +19,15 @@ Rails.application.routes.draw do
 
   get 'orders', to: 'orders#index'
 
+  patch 'users/edit/:id', to: 'users#update', as: 'update_user'
+
   resources :sessions
 
   resources :items, only: [:index, :new, :create, :edit]
 
   resources :carts, only: [:index, :create]
 
-  resources :users, only: [:index, :show, :destroy] do
+  resources :users, only: [:index, :show, :destroy, :edit] do
     resources :orders, only: [:index, :destroy]
   end
 
