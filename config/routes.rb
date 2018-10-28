@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create, :edit]
 
 
-  resources :carts, only: [:create]
+  resources :carts, only: [:index, :create]
 
 
   resources :users, only: [:index, :show, :destroy] do
