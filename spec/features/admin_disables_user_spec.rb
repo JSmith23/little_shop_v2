@@ -18,6 +18,10 @@ describe 'As an admin user' do
       click_on 'Disable', match: :first
       expect(User.order(:name).first.enabled).to eq(false)
 
+      within(".flash-container") do
+        expect(page).to have_content("#{User.order(:name).first.name} has been disabled.")
+      end
+
     end
   end
 
