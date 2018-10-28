@@ -36,12 +36,13 @@ class UsersController < ApplicationController
     elsif current_user.role == 'merchant'
       @user = current_user
       @greeting = "Merchant Dashboard for #{@user.name}"
-      @orders = @user.orders
+      @orders = @user.merchant_orders
       @items = @user.items
       render :dashboard
     else
       @user = current_user
       @greeting = "Welcome, #{@user.name}"
+      @orders = @user.orders
     end
   end
 
