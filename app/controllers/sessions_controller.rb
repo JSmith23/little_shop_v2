@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      flash[:notice] = "You are already logged in."
+      redirect_to profile_path
+    end
   end
 
   def create
