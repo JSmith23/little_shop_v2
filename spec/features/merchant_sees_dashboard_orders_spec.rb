@@ -9,6 +9,7 @@ describe 'As a merchant user' do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
     @order_1 = @user_1.orders.create(status: 'pending')
     @order_2 = @user_2.orders.create(status: 'pending')
+    @order_3 = @user_2.orders.create(status: 'pending')
     @item_1 = Item.create( name: "Oval Link Chain Belt",	description: "Add something a little unexpected with this oval link chain belt that takes your look from casual to chic in an instant.", price:	36.26, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0625201317031085M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
     @item_2 = Item.create( name: "Liz Claiborne® Tipped Tank Top - Petite",	description: "Beat the heat in our crepe tank top with contrast tipping for extra sizzle.  roundneck gently rounded hem polyester washable imported", price:	43.51, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1220201417021434M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
     @item_3 = Item.create( name: "St. John’s Bay® Inlet Mens Canvas Boat Shoes",	description: "Casual in canvas, these preppy slip-on boat shoes are ideal for laid-back living.   cotton canvas upper slip on with lace-up detail contrast stitching canvas lining textile/rubber sole", price: 48.34, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1215201417013852M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
@@ -35,15 +36,24 @@ describe 'As a merchant user' do
       visit dashboard_orders_path
 
       within('main.dashboard-orders') do
-        expect(page).to have_content('All Merchant Orders')
+        expect(page).to have_content("Merchant Orders for #{@merchant.name}")
       end
     end
+
     it 'should display all of orders' do
 
       visit dashboard_orders_path
 
-      within('main.dashboard-orders') do
+      within("main.dashboard-orders") do
         expect(page).to have_content(@order_1.id)
+        expect(page).to have_content("Created at: #{@order_1.created_at}")
+        expect(page).to have_content("Updated at: #{@order_1.updated_at}")
+        expect(page).to have_content("Status: #{@order_1.status}")
+        expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
+        expect(page).to have_content("Total Price: #{@order_1.total_price}")
+        expect(page).to have_content(@order_2.id)
+        expect(page).to_not have_content(@order_3.id)
+        expect(page).to have_selector("input[type=submit][value='Cancel Order']")
       end
     end
 
