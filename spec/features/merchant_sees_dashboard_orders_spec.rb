@@ -38,21 +38,12 @@ describe 'As a merchant user' do
         expect(page).to have_content('All Merchant Orders')
       end
     end
-    it 'should display all of items' do
+    it 'should display all of orders' do
 
-      visit dashboard_items_path
+      visit dashboard_orders_path
 
-      within('main.dashboard-items') do
-        expect(page).to have_content('All Merchant Items')
-        expect(page).to have_content(@item_4.name)
-        expect(page).to have_content(@item_5.name)
-        expect(page).to have_content(@item_6.name)
-        expect(page).to_not have_content(@item_1.name)
-        expect(page).to_not have_content(@item_2.name)
-        expect(page).to_not have_content(@item_3.name)
-        expect(page).to have_content(@item_4.id)
-        expect(page).to have_content(@item_4.price)
-        expect(page).to have_content(@item_4.inventory)
+      within('main.dashboard-orders') do
+        expect(page).to have_content(@order_1.id)
       end
     end
 

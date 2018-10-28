@@ -1,4 +1,6 @@
 require_relative '../app/models/user'
+require_relative '../app/models/item'
+require_relative '../app/models/order'
 
 users = [
   { name: "Ben Winch", address: "123 Main Street", city: "Denver", state: "CO", zip: '80014', email: "benwinch@email.com", password: "BWinch123", password_confirmation: "BWinch123", role: 0 },

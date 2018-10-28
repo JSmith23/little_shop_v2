@@ -7,8 +7,9 @@ describe 'user sees order information' do
 
   it 'user sees all orders on order index for user' do
     user = create(:user)
-    order_1 = Order.create!(id: 1, status: "pending", user_id: user.id)
-    order_2 = Order.create!(id: 2, status: "fulfilled", user_id: user.id)
+
+    order_1 = user.orders.create!(id: 1, status: "pending")
+    order_2 = user.orders.create!(id: 2, status: "fulfilled")
 
     visit user_orders_path(user)
 
