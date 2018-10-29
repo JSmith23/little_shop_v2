@@ -33,8 +33,8 @@ describe 'user sees order information' do
 
   it 'user sees all orders on order index for user' do
 
-    visit orders_path(@user.id)
-save_and_open_page
+    visit profile_orders_path
+
     expect(page).to have_content("Order #{@order_1.id}")
     expect(page).to have_content("Created at: #{@order_1.created_at}")
     expect(page).to have_content("Updated at: #{@order_1.updated_at}")

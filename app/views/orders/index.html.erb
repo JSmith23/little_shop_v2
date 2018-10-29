@@ -2,7 +2,7 @@
   <h1>All User Orders for <%="#{current_user.name}"%></h1>
 
   <% @orders.each do |order| %>
-    <h3><%= order.id %></h3>
+    <h3><%= link_to "Order #{order.id}", order_path(order.id), class: 'order-show-link' %></h3>
     <ul>
       <li>Created at: <%= order.created_at %></li>
       <li>Updated at: <%= order.updated_at %></li>
