@@ -5,7 +5,7 @@
 <% else %>
     <ul>
         <% @cart.items.each do |item| %>
-            <li id="<%= item.item_id %>">
+            <li id="item_<%= item.item_id %>">
                 <b>Name:</b> <%= item.name %>
                 <br/>
                 <b>Image:</b> <%= image_tag item.thumbnail %>
@@ -17,6 +17,13 @@
                 <b>Quantity:</b> <%= item.quantity %>
                 <br/>
                 <b>Subtotal:</b> <%= item.subtotal %>
+                <br/>
+
+                <%= button_to "Remove Item", line_item_path(id: item.item_id), class: "btn btn-danger", method: :delete %>
+                <br/>
+                <%= button_to "Increment Quantity", line_item_increment_path(line_item_id: item.item_id) %>
+                <br/>
+                <%= button_to "Decrement Quantity", line_item_decrement_path(line_item_id: item.item_id), method: :delete %>
             </li>
         <% end%>
     </ul>
