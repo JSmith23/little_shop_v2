@@ -7,15 +7,19 @@
 
   <% @items.each do |item| %>
     <div id="item_<%= item.id %>">
-      <h3><%= item.name %></h3>
-      <%= image_tag item.thumbnail %>
+      <h3><%= link_to item.name, item_path(item) %></h3>
+      <%= link_to item_path(item) do %>
+        <%= image_tag item.thumbnail %>
+      <% end %>
       <ul>
         <li>Item ID: <%= item.id %>
         <li>Price: $<%= item.price %>
         <li>Inventory: <%= item.inventory %>
       </ul>
       <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
-      <%= button_to "Edit Item", edit_item_path(item), method: 'get' %>
+      <% if current_user.role == 'admin' || current_user.role == 'merchant' %>
+        <%= button_to "Edit Item", edit_item_path(item), method: 'get' %>
+      <% end %>
     </div>
   <% end %>
 </main>
