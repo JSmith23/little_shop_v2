@@ -42,7 +42,6 @@ describe 'As a merchant user' do
     it 'should display all of items' do
 
       visit dashboard_items_path
-
       within('main.dashboard-items') do
         expect(page).to have_content('All Merchant Items')
         expect(page).to have_content(@item_4.name)

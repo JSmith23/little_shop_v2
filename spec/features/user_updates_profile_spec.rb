@@ -53,7 +53,7 @@ describe 'As a registered user, merchant, or admin' do
   describe 'if I enter an email address that is already used' do
     it 'should not save the changes and display a message that the email is already in use' do
 
-      @user_2 = User.create(name: "David Jones", 
+      @user_2 = User.create(name: "David Jones",
                             address: "456 First Avenue",
                             city: "Boulder",
                             state: "CO",
@@ -61,7 +61,7 @@ describe 'As a registered user, merchant, or admin' do
                             email: "davidjones@email.com",
                             password: "test1234",
                             password_confirmation: "test1234")
-      
+
       visit profile_edit_path
 
       # Enter an existing email address

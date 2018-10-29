@@ -36,7 +36,6 @@ describe 'As a merchant user' do
       visit dashboard_orders_path
 
       click_link "Order #{@order_1.id}"
-      save_and_open_page
 
       expect(current_path).to eq(orders_path(@order_1.id))
     end

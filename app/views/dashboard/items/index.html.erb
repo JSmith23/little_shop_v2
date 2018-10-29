@@ -1,5 +1,10 @@
-<main class='all-items'>
-  <h1>All Items</h1>
+<main class='dashboard-items'>
+
+<h2> All Merchant Items </h2>
+
+<div class="add-new-item">
+  <%= link_to "Add New Item", new_dashboard_item_path %>
+</div>
 
   <% @items.each do |item| %>
     <h3><%= item.name %></h3>
@@ -10,7 +15,5 @@
       <li>Inventory: <%= item.inventory %>
     </ul>
     <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
-
-
   <% end %>
 </main>

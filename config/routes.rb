@@ -1,33 +1,39 @@
 Rails.application.routes.draw do
 
-  root "welcome#index"
+  root 'welcome#index'
 
-  get 'login', to: 'sessions#new'
-  get 'logout', to: 'sessions#destroy'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
 
-  get 'register', to: 'users#new'
-  post 'register', to: 'users#create'
+  get '/register', to: 'users#new'
+  post '/register', to: 'users#create'
 
-  get 'profile', to: 'users#show'
+  get '/profile', to: 'users#show'
+  get '/profile/edit/', to: 'users#edit'
+  patch '/profile/edit/', to: 'users#edit'
+  get '/profile/orders', to: 'orders#index'
 
-  get 'profile/edit', to: 'users#edit'
-  patch 'profile/edit', to: 'users#update'
 
-  get 'dashboard', to: 'users#show'
-  get 'dashboard/orders', to: 'orders#index'
-  get 'dashboard/items', to: 'items#index'
-  get 'orders/:id' => 'orders#show'
+  namespace :dashboard do
+    resources :items, only: [:index, :new]
+    resources :orders, only: [:index]
+  end
 
-  # resources :orders, only: [:show]
+  get '/dashboard', to: 'dashboard#show'
+
+  resources :orders, only: [:index, :show, :destroy]
+
 
   resources :sessions
 
-  resources :items, only: [:index, :new, :create, :edit]
+  resources :items, only: [:show, :index, :new, :create, :edit, :update, :destroy]
 
   resources :carts, only: [:index, :create]
 
   resources :users, only: [:index, :show, :destroy] do
-    resources :orders, only: [:index, :destroy]
+    resources :orders, only: [:index]
   end
 
 end
