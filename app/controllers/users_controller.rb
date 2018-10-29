@@ -57,25 +57,25 @@ class UsersController < ApplicationController
     else
       @user = current_user
     end
+
   end
   
   def update
     self.remove_empty_password_from_params
     begin
-      user = User.find(params[:id])
-      user.update_attributes!(user_params)
-      binding.pry
+      @user = User.find(params[:id])
+      @user.update_attributes!(user_params)
     rescue ActiveRecord::RecordInvalid => e
       handle_update_exceptions(e)
     else
-      self.redirect_after_successful_update(user)
+      self.redirect_after_successful_update
     end
   end
 
-  def redirect_after_successful_update(user)
-    if current_user.role == 'admin' && current_user != user
-      flash[:success] = "Profile for #{user.name} has been updated."
-      redirect_to user_path(user)
+  def redirect_after_successful_update
+    if current_user.role == 'admin' && current_user != @user
+      flash[:success] = "Profile for #{@user.name} has been updated."
+      redirect_to user_path(@user)
     else
       flash[:success] = "Your profile has been updated."
       redirect_to profile_path
