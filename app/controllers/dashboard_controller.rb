@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
 
   def show
     if current_user.role == "merchant"
-      @user = current_user
+      @merchant = current_user
     else
       redirect_to root_path
     end

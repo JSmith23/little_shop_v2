@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index, :show, :destroy]
 
+  resources :users, only: [:show, :update, :edit, :index] do
+    resources :orders, only: [:index]
+  end
 
   resources :sessions
 

@@ -33,7 +33,9 @@ describe 'As a merchant user' do
   describe 'when I visit dashboard/orders' do
     it 'should display all of the orders that include one or more of my items' do
 
-      visit dashboard_orders_path
+      visit dashboard_path
+
+      click_on "Orders"
 
       within('main.dashboard-orders') do
         expect(page).to have_content("Merchant Orders for #{@merchant.name}")

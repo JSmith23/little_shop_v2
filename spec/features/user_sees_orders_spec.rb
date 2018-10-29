@@ -33,9 +33,9 @@ describe 'user sees order information' do
 
   it 'user sees all orders on order index for user' do
 
-    visit dashboard_orders_path
-
-    expect(page).to have_content(@order_1.id)
+    visit orders_path(@user.id)
+save_and_open_page
+    expect(page).to have_content("Order #{@order_1.id}")
     expect(page).to have_content("Created at: #{@order_1.created_at}")
     expect(page).to have_content("Updated at: #{@order_1.updated_at}")
     expect(page).to have_content("Status: #{@order_1.status}")

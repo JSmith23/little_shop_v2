@@ -3,7 +3,7 @@
 <h2> All Merchant Items </h2>
 
 <div class="add-new-item">
-  <%= link_to "Add New Item", new_dashboard_item_path %>
+  <%= button_to  "Add an Item", carts_path, method: 'get' %>
 </div>
 
   <% @items.each do |item| %>
@@ -14,6 +14,7 @@
       <li>Price: $<%= item.price %>
       <li>Inventory: <%= item.inventory %>
     </ul>
+    <%= link_to "Edit Item", edit_item_path(item) %>
     <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
   <% end %>
 </main>

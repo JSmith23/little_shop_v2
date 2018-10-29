@@ -1,5 +1,5 @@
 <main class='dashboard-orders'>
-  <h1>All Merchant Orders for <%="#{current_user.name}"%></h1>
+  <h1>All User Orders for <%="#{current_user.name}"%></h1>
 
   <% @orders.each do |order| %>
     <h3><%= order.id %></h3>
@@ -11,7 +11,7 @@
       <li>Total Price: <%= order.total_price %></li>
     </ul>
       <% if order.status == 'pending' %>
-        <%= button_to "Cancel Order", user_order_path(@user, order), :method => 'delete' %>
+        <%= button_to "Cancel Order", order_path(order.id), :method => 'delete' %>
       <% end %>
   <% end %>
 
