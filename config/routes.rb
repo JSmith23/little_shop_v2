@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root "welcome#index"
-  
+
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
 
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'dashboard/items', to: 'items#index'
 
   get 'orders', to: 'orders#index'
+  get 'orders/:id', to: 'orders#show'
 
   resources :sessions
 
