@@ -43,7 +43,7 @@ describe 'As a merchant user' do
     it 'should display all of orders' do
 
       visit dashboard_orders_path
-save_and_open_page
+
       within("main.dashboard-orders") do
         expect(page).to have_content(@order_1.id)
         expect(page).to have_content("Created at: #{@order_1.created_at}")

@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#show'
   get 'dashboard/orders', to: 'orders#index'
   get 'dashboard/items', to: 'items#index'
+  get 'orders/:id' => 'orders#show'
 
-  get 'orders', to: 'orders#index'
-  get 'orders/:id', to: 'orders#show'
+  # resources :orders, only: [:show]
 
   resources :sessions
 

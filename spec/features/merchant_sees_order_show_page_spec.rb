@@ -31,14 +31,14 @@ describe 'As a merchant user' do
   end
 
   describe 'when I visit an orders show page' do
-    it 'should display the customers information and the items ordered that sell' do
+    it 'should display the customers information and the items ordered that I sell' do
 
       visit dashboard_orders_path
 
       click_link "Order #{@order_1.id}"
+      save_and_open_page
 
-      expect(path).to eq(orders_path("#{@order_1.id}"))
-
+      expect(current_path).to eq(orders_path(@order_1.id))
     end
   end
 end

@@ -14,6 +14,8 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    redirect_to order_path(@order)
   end
 
   def destroy

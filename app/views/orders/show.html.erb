@@ -1,0 +1,18 @@
+<main class='user-profile'>
+  <h1><%= @greeting %></h1>
+  <table class='user-profile-data'>
+    <tr>
+      <td>Order:</td>
+      <td><%= @order.id %></td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td>
+        <%= @user.address %><br>
+        <%= "#{@user.city}, #{@user.state} #{@user.zip}" %>
+      </td>
+    </tr>
+  </table>
+  <%= link_to "Edit Profile", profile_edit_path, class: 'edit-profile-button' %>
+  <%= link_to  "My Orders", orders_path if @orders.length > 0 %>
+</main>
