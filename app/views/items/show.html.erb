@@ -1,0 +1,9 @@
+<main class = "show-item">
+  <h1><%= @item.name %></h1>
+  <p><%= @item.description %></p>
+  <ul>
+    <li>Merchant Name: <%= @item.user.name %></li>
+    <li>Quantity in Stock: <%= @item.inventory %></li>
+    <li>Current Price: <%= @item.price %></li>
+  </ul>
+</main>
