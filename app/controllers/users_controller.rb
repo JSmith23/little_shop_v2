@@ -33,15 +33,17 @@ class UsersController < ApplicationController
     if params[:id] && current_user.role == 'admin'
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
+      @orders = @user.orders
     elsif current_user.role == 'merchant'
       @user = current_user
       @greeting = "Merchant Dashboard for #{@user.name}"
-      @orders = @user.orders
+      @orders = @user.merchant_orders
       @items = @user.items
       render :dashboard
     else
       @user = current_user
       @greeting = "Welcome, #{@user.name}"
+      @orders = @user.orders
     end
   end
 
@@ -50,6 +52,33 @@ class UsersController < ApplicationController
   end
 
   def update
+    self.remove_empty_password_from_params
+    begin
+      current_user.update_attributes!(user_params)
+    rescue ActiveRecord::RecordInvalid => e
+      handle_update_exceptions(e)
+    else
+      self.redirect_after_successful_update(user_params[:id])
+    end
+  end
+
+  def redirect_after_successful_update(user_id)
+    flash[:success] = "Your profile has been updated."
+    if current_user.role == 'admin'
+      user = User.find(user_params[:id])
+      redirect_to user_path(user)
+    else
+      redirect_to profile_path
+    end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    flash[:success] = "#{user.name} has been #{user.toggle_enabled}."
+    redirect_back(fallback_location: root_path)
+  end
+
+  def remove_empty_password_from_params
     # Only accept password change if both fields are filled in
     if  params[:user][:password].blank? ||
         params[:user][:password_confirmation].blank?
@@ -57,22 +86,16 @@ class UsersController < ApplicationController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
-    if current_user.update_attributes(user_params)
-      flash[:success] = "Your profile has been updated."
-      redirect_to profile_path
-    elsif User.find_by(email: user_params[:email])
+  end
+
+  def handle_update_exceptions(error)
+    if error.message == 'Validation failed: Email has already been taken'
       flash[:error] = "An account is already registered with that email address."
       render :edit
     else
-      flash[:error] = "No changes submitted."
+      flash[:error] = "Something went wrong."
       render :edit
     end
-  end
-
-  def destroy
-    user = User.find(params[:id])
-    user.toggle_enabled
-    redirect_back(fallback_location: root_path)
   end
 
   private

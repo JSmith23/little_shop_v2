@@ -7,23 +7,21 @@ class User < ApplicationRecord
                         :state,
                         :zip,
                         :email,
-                        :password,
                         :role
-  validates_uniqueness_of :email
-  # validates_confirmation_of :password
 
+  validates_uniqueness_of :email
 
   enum role: %w(registered_user merchant admin)
-
 
   has_secure_password
 
   def toggle_enabled
     update_attribute :enabled, !self.enabled
+    self.enabled ? "enabled" : "disabled"
   end
 
   def merchant_orders
-    Order.joins(:items).where('items.user_id = ?', self.id)
+    Order.joins(:items).where('items.user_id = ?', self.id).distinct
   end
 
 end

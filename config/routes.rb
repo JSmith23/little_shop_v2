@@ -17,9 +17,12 @@ Rails.application.routes.draw do
   get 'dashboard/orders', to: 'orders#index'
   get 'dashboard/items', to: 'items#index'
 
+  get 'orders', to: 'orders#index'
+
   resources :sessions
 
   resources :items, only: [:index, :new, :create, :edit]
+
 
 
   resources :carts, only: [:create]
@@ -27,8 +30,7 @@ Rails.application.routes.draw do
   delete "/cart", to: "carts#destroy", as: :destroy_cart
 
   resources :users, only: [:index, :show, :destroy] do
-    resources :orders, only: [:index]
+    resources :orders, only: [:index, :destroy]
   end
-
 
 end
