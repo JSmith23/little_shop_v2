@@ -1,5 +1,5 @@
 <main class='dashboard-orders'>
-  <h1>All Merchant Orders</h1>
+  <h1>All Merchant Orders for <%="#{current_user.name}"%></h1>
 
   <% @orders.each do |order| %>
     <h3><%= order.id %></h3>
