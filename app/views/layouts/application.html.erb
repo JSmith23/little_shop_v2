@@ -10,7 +10,7 @@
 
   <body>
 
-  Cart: <%= @cart.count_all %>
+    <%= link_to "Cart: #{@cart.count_all}", cart_path %>
     <div id="container">
       <div class='flash-container'>
         <% flash.each do |type, message| %>

@@ -32,8 +32,10 @@ describe 'user sees order information' do
   end
 
   it 'user sees all orders on order index for user' do
-
-    visit orders_path
+    order_1 = Order.create!(id: 1, status: "pending", user_id: @user.id)
+    order_2 = Order.create!(id: 2, status: "fulfilled", user_id: @user.id)
+    
+    visit user_orders_path(@user)
 
     expect(page).to have_content(@order_1.id)
     expect(page).to have_content("Created at: #{@order_1.created_at}")
