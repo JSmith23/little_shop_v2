@@ -30,34 +30,14 @@ describe 'As a merchant user' do
     OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
   end
 
-  describe 'when I visit dashboard/orders' do
-    it 'should display all of the orders that include one or more of my items' do
-
-      visit dashboard_path
-
-      click_on "Orders"
-
-      within('main.dashboard-orders') do
-        expect(page).to have_content("Merchant Orders for #{@merchant.name}")
-      end
-    end
-
-    it 'should display all of orders' do
+  describe 'when I visit an orders show page' do
+    it 'should display the customers information and the items ordered that I sell' do
 
       visit dashboard_orders_path
 
-      within("main.dashboard-orders") do
-        expect(page).to have_content(@order_1.id)
-        expect(page).to have_content("Created at: #{@order_1.created_at}")
-        expect(page).to have_content("Updated at: #{@order_1.updated_at}")
-        expect(page).to have_content("Status: #{@order_1.status}")
-        expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
-        expect(page).to have_content("Total Price: #{@order_1.total_price}")
-        expect(page).to have_content(@order_2.id)
-        expect(page).to_not have_content(@order_3.id)
-        expect(page).to have_selector("input[type=submit][value='Cancel Order']")
-      end
-    end
+      click_link "Order #{@order_1.id}"
 
+      expect(current_path).to eq(order_path("#{@order_1.id}"))
+    end
   end
 end
