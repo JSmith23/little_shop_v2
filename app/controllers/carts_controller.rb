@@ -1,6 +1,6 @@
 class CartsController < ApplicationController 
-    def index 
-
+    def show
+        @cart = Cart.new(session[:cart])
     end
      
     def create 
@@ -10,5 +10,10 @@ class CartsController < ApplicationController
         flash[:notice] = "You now have #{@cart.count_of(item.id)} #{item.name}."
         redirect_back(fallback_location: root_path)
     end 
+
+    def destroy
+        session[:cart] = nil
+        redirect_to cart_path
+    end
 end 
 

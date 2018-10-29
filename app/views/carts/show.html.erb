@@ -1,0 +1,27 @@
+<%= button_to "Empty cart", destroy_cart_path, class: "btn btn-danger", method: :delete %>
+
+<% if @cart.empty? %>
+    <p>Your cart is empty!</p>
+<% else %>
+    <ul>
+        <% @cart.items.each do |item| %>
+            <li id="<%= item.item_id %>">
+                <b>Name:</b> <%= item.name %>
+                <br/>
+                <b>Image:</b> <%= image_tag item.thumbnail %>
+                <br/>
+                <b>Merchant name:</b> <%= item.merchant_name %>
+                <br/>
+                <b>Price:</b> <%= item.price %>
+                <br/>
+                <b>Quantity:</b> <%= item.quantity %>
+                <br/>
+                <b>Subtotal:</b> <%= item.subtotal %>
+            </li>
+        <% end%>
+    </ul>
+
+    <div class="grand_total">
+        Grand total: <%= @cart.grand_total %>
+    </div>
+<% end %>
