@@ -32,6 +32,8 @@ describe 'user sees order information' do
   end
 
   it 'user sees all orders on order index for user' do
+    order_1 = Order.create!(id: 1, status: "pending", user_id: @user.id)
+    order_2 = Order.create!(id: 2, status: "fulfilled", user_id: @user.id)
 
     visit profile_orders_path
 
