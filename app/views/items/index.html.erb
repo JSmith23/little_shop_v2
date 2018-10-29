@@ -1,6 +1,9 @@
 
 <main class='dashboard-items'>
   <h1>All Merchant Items</h1>
+  <%if current_user && current_user.role == 'merchant'%>
+  <%= button_to  "Add an Item", carts_path, method: 'get' %>
+  <%end%>
 
   <% @items.each do |item| %>
     <div id="item_<%= item.id %>">
