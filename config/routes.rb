@@ -21,9 +21,7 @@ Rails.application.routes.draw do
 
   resources :sessions
 
-  resources :items, only: [:index, :new, :create, :edit]
-
-
+  resources :items, only: [:index, :new, :create, :edit, :show]
 
   resources :carts, only: [:create]
   get "/cart", to: "carts#show"
