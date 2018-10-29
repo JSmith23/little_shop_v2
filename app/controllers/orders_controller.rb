@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
       redirect_to login_path
     end
   end
-  
+
   def destroy
     order = Order.find(params[:id])
     order.cancel
