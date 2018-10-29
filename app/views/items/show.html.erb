@@ -6,4 +6,5 @@
     <li>Quantity in Stock: <%= @item.inventory %></li>
     <li>Current Price: <%= @item.price %></li>
   </ul>
+  <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
 </main>
