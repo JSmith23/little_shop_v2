@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     begin
       user = User.find(params[:id])
       user.update_attributes!(user_params)
+      binding.pry
     rescue ActiveRecord::RecordInvalid => e
       handle_update_exceptions(e)
     else
@@ -77,7 +78,7 @@ class UsersController < ApplicationController
       redirect_to user_path(user)
     else
       flash[:success] = "Your profile has been updated."
-      redirect_to profile_path(user)
+      redirect_to profile_path
     end
   end
 

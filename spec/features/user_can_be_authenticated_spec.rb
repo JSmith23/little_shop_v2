@@ -39,7 +39,7 @@ describe 'user can create account' do
     click_on "Log in"
 
 
-    expect(current_path).to eq(profile_path(user))
+    expect(current_path).to eq(profile_path)
   end
 
   it 'user cannot login via form with invalid information' do
@@ -74,7 +74,7 @@ describe 'user can create account' do
     click_on "Log in"
 
 
-    expect(current_path).to eq(profile_path(user))
+    expect(current_path).to eq(profile_path)
 
     click_on "Log Out"
 
