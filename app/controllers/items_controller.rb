@@ -1,9 +1,11 @@
 class ItemsController < ApplicationController
 	def index
-		if !current_user
+		if current_user && current_user.role == 'merchant'
+			@user = current_user
+			@items = Item.where(user_id: @user.id)
+			@heading = "Merchant Items for #{@user.name}"
+		else
 			@items = Item.where(enabled: true)
-		elsif current_user.role == 'merchant'
-			@items = Item.where(user_id: current_user.id)
 		end
 	end
 
@@ -18,5 +20,4 @@ class ItemsController < ApplicationController
 	def create
 
 	end
-
 end
