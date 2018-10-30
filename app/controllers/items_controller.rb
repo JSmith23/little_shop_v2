@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
 
 	def new
 		@item = Item.new
+		@user = current_user
 	end
 
 	def show
@@ -16,12 +17,17 @@ class ItemsController < ApplicationController
 	end
 
 	def create
-		@item = Item.new(item_params)
-		binding.pry
+		if item_params[:thumbnail] == ""
+			params[:item][:thumbnail] = "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
+		end
+		@item = Item.new(item_params.merge(user_id: current_user.id))
     if @item.save
       flash[:success] = "New item has been saved."
       redirect_to items_path
-    else
+		elsif item_params[:price].to_i <= 0 || item_params[:inventory].to_i <= 0
+			flash[:error] = "Price and inventory must be greater than 0.  Please try again."
+			render :new
+		else
       flash[:error] = "Something went wrong.  Please complete all required fields and try again."
       render :new
     end
