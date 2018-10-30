@@ -635,7 +635,7 @@ I see a button or link to decrement the count of items I want to purchase
 ```
 
 ```
-46. [ ] done
+46. [X] done
 
 As a visitor
 When I visit my cart
@@ -645,7 +645,7 @@ The words "log in" is a link to the login page
 ```
 
 ```
-47. [ ] done
+47. [X] done
 
 As a registered user, merchant, or admin
 When I visit my cart
