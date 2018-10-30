@@ -35,7 +35,7 @@ describe 'As a merchant user' do
 
       visit dashboard_path
 
-      click_on "Orders"
+      click_on "My Orders"
 
       within('main.dashboard-orders') do
         expect(page).to have_content("Merchant Orders for #{@merchant.name}")
