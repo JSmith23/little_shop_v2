@@ -1,15 +1,16 @@
-
-<main class='all-items'>
-  <h1>All Items</h1>
-
-  <% @items.each do |item| %>
-    <h3><%= item.name %></h3>
-    <%= image_tag item.thumbnail %>
-    <ul>
-      <li>Item ID: <%= item.id %>
-      <li>Price: $<%= item.price %>
-      <li>Inventory: <%= item.inventory %>
-    </ul>
-    <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
-  <% end %>
+<main>
+<%= button_to  "Add an Item", carts_path, method: 'get' %>
+   <% @items.each do |item| %>
+   <div id="item_<%= item.id %>">
+     <h3><%= item.name %></h3>
+     <%= image_tag item.thumbnail %>
+     <ul>
+       <li>Item ID: <%= item.id %>
+       <li>Price: $<%= item.price %>
+       <li>Inventory: <%= item.inventory %>
+     </ul>
+     <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
+     <%= button_to "Edit Item", edit_item_path(item), method: 'get' %>
+   </div>
+ <% end %>
 </main>
