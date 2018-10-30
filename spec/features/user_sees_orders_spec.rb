@@ -47,18 +47,4 @@ describe 'user sees order information' do
     # expect(page).to_not have_content(@order_3.id)
     expect(page).to have_selector("input[type=submit][value='Cancel Order']")
   end
-
-  it 'user can cancel order' do
-    order_1 = Order.create!(id: 1, status: "pending", user_id: @user.id)
-    order_2 = Order.create!(id: 2, status: "fulfilled", user_id: @user.id)
-
-    visit profile_orders_path
-
-    within(:css, "#order#{@order_1.id}") do
-      click_on "Cancel Order"
-    end
-
-    expect(page).to have_content("Order #{@order_1.id}")
-    expect(page).to have_content("Status: cancelled")
-  end
 end
