@@ -54,7 +54,7 @@ describe 'As a merchant user' do
         expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
         expect(page).to have_content("Total Price: #{@order_1.total_price}")
         expect(page).to have_content("Order #{@order_2.id}")
-        expect(page).to_not have_content(@order_3.id)
+        expect(page).to_not have_content("Order #{@order_3.id}")
         expect(page).to have_selector("input[type=submit][value='Cancel Order']")
       end
     end
