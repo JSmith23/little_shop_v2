@@ -34,40 +34,50 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
       @orders = @user.orders
+      @edit_path = edit_user_path(@user)
     elsif current_user.role == 'merchant'
       @user = current_user
       @greeting = "Merchant Dashboard for #{@user.name}"
       @orders = @user.merchant_orders
       @items = @user.items
+      @edit_path = profile_edit_path
       render :dashboard
     else
       @user = current_user
       @greeting = "Welcome, #{@user.name}"
       @orders = @user.orders
+      @edit_path = profile_edit_path
     end
   end
 
   def edit
     redirect_to login_path unless current_user
-  end
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
 
+  end
+  
   def update
     self.remove_empty_password_from_params
     begin
-      current_user.update_attributes!(user_params)
+      @user = User.find(params[:id])
+      @user.update_attributes!(user_params)
     rescue ActiveRecord::RecordInvalid => e
       handle_update_exceptions(e)
     else
-      self.redirect_after_successful_update(user_params[:id])
+      self.redirect_after_successful_update
     end
   end
 
-  def redirect_after_successful_update(user_id)
-    flash[:success] = "Your profile has been updated."
-    if current_user.role == 'admin'
-      user = User.find(user_params[:id])
-      redirect_to user_path(user)
+  def redirect_after_successful_update
+    if current_user.role == 'admin' && current_user != @user
+      flash[:success] = "Profile for #{@user.name} has been updated."
+      redirect_to user_path(@user)
     else
+      flash[:success] = "Your profile has been updated."
       redirect_to profile_path
     end
   end
@@ -93,7 +103,7 @@ class UsersController < ApplicationController
       flash[:error] = "An account is already registered with that email address."
       render :edit
     else
-      flash[:error] = "Something went wrong."
+      flash[:error] = "Update failed.  Please ensure all required fields are filled in and try again."
       render :edit
     end
   end

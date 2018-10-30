@@ -46,8 +46,9 @@ Rails.application.routes.draw do
     delete :decrement
   end
 
-  resources :users, only: [:index, :show, :destroy] do
-    resources :orders, only: [:index]
+
+  resources :users, only: [:index, :show, :destroy, :edit] do
+    resources :orders, only: [:index, :destroy]
   end
 
 end
