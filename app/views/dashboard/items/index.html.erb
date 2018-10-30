@@ -7,14 +7,17 @@
 </div>
 
   <% @items.each do |item| %>
+  <div id="item_<%=item.id %>">
     <h3><%= item.name %></h3>
     <%= image_tag item.thumbnail %>
     <ul>
       <li>Item ID: <%= item.id %>
       <li>Price: $<%= item.price %>
+      <li>Description: <%= item.description %>
       <li>Inventory: <%= item.inventory %>
     </ul>
     <%= link_to "Edit Item", edit_item_path(item) %>
     <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
+    </div>
   <% end %>
 </main>

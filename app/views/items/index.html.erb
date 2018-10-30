@@ -11,10 +11,10 @@
      <ul>
        <li>Item ID: <%= item.id %>
        <li>Price: $<%= item.price %>
+       <li>Description: <%= item.description %>
        <li>Inventory: <%= item.inventory %>
      </ul>
      <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
-     <%= button_to "Edit Item", edit_item_path(item), method: 'get' %>
    </div>
  <% end %>
 </main>

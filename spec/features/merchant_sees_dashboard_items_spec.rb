@@ -74,5 +74,44 @@ describe 'As a merchant user' do
       end
     end
 
+    it 'should be able to edit item' do
+
+      visit dashboard_items_path
+
+      within(:css, "#item_#{@item_4.id}") do
+        click_on 'Edit Item'
+      end
+
+      fill_in "Name", with: @item_4.name
+      fill_in "Description", with: "This is a different description"
+      fill_in "Price", with: @item_4.price
+      fill_in "Inventory", with: @item_4.inventory
+      fill_in "Thumbnail", with: @item_4.thumbnail
+
+      click_on 'Update Item'
+
+      expect(page).to have_content("This is a different description")
+
+    end
+
+    it 'should have to fill out all fields' do
+
+      visit dashboard_items_path
+
+      within(:css, "#item_#{@item_4.id}") do
+        click_on 'Edit Item'
+      end
+
+      fill_in "Name", with: @item_4.name
+      fill_in "Description", with: "This is a different description"
+      fill_in "Price", with: ' '
+      fill_in "Inventory", with: @item_4.inventory
+      fill_in "Thumbnail", with: @item_4.thumbnail
+
+      click_on 'Update Item'
+
+      expect(page).to have_content("Update Unsuccessful.")
+    end
+
   end
 end

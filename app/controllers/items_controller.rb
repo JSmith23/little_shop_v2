@@ -7,6 +7,20 @@ class ItemsController < ApplicationController
 		@item = Item.find(params[:id])
 	end
 
+	def update
+		if item_params[:thumbnail] == ""
+			params[:item][:thumbnail] = "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
+		end
+		@item = Item.find(params[:id])
+    if Item.find(params[:id]).update(item_params)
+      redirect_to dashboard_items_path
+      flash[:notice] = "Update Successful!"
+    else
+      redirect_to edit_item_path(params[:id])
+      flash[:notice] = "Update Unsuccessful."
+    end
+	end
+
 	def new
 		@item = Item.new
 		@user = current_user
@@ -42,5 +56,4 @@ class ItemsController < ApplicationController
                                   :inventory,
                                   :thumbnail )
   end
-
 end
