@@ -233,7 +233,7 @@ And I see a link to edit their profile data
 ```
 
 ```
-14. [ ] done
+14. [X] done
 
 As an admin user
 When I visit a user's profile page ("/users/5")
@@ -267,7 +267,7 @@ And I see a flash message that I am logged in
 ```
 
 ```
-17. [ ] done
+17. [X] done
 
 As a registered user, merchant, or admin
 When I visit the login path
@@ -276,7 +276,7 @@ And I see a flash message that tells me I am already logged in
 ```
 
 ```
-18. [ ] done
+18. [X] done
 
 As a registered user, merchant, or admin
 When I visit the login path
@@ -285,7 +285,7 @@ And I see a flash message that tells me I am already logged in
 ```
 
 ```
-19. [ ] done
+19. [X] done
 
 As a registered user, merchant, or admin
 When I visit the logout path
@@ -593,7 +593,7 @@ The navigation bar increments my cart counter
 ```
 
 ```
-43. [ ] done
+43. [X] done
 
 As any kind of user on the system
 When I visit my cart ("/cart")
@@ -610,7 +610,7 @@ I also see a grand total of what everything in my cart will cost
 ```
 
 ```
-44. [ ] done
+44. [X] done
 
 As any kind of user on the system
 When I visit my cart ("/cart")
@@ -621,7 +621,7 @@ The navigation bar shows 0 items in my cart
 ```
 
 ```
-45. [ ] done
+45. [X] done
 
 As any kind of user on the system
 When I visit my cart

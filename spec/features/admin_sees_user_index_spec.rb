@@ -50,3 +50,31 @@ describe 'As an admin user' do
     end
   end
 end
+
+describe 'As a registered user' do
+  it 'I cannot access users index' do
+
+    create_list(:user, 20)
+    @user = create(:user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+    visit users_path
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You are not authorized to view the requested page.")
+  end
+end
+
+describe 'As a merchant user' do
+  it 'I cannot access users index' do
+
+    create_list(:user, 20)
+    @merchant = create(:user, :merchant)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
+
+    visit users_path
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("You are not authorized to view the requested page.")
+  end
+end
