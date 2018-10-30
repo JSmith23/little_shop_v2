@@ -3,6 +3,8 @@
 <ul>
   <li><strong>Description: </strong><%= @item.description %></li>
   <li><strong>Merchant Name: </strong><%= @item.user.name %></li>
+  <li><strong>Inventory: </strong><%= @item.inventory %></li>
+
   <li><strong>Price: $</strong><%= @item.price %></li>
 </ul>
 <%= button_to "Add to Cart", cart_path(item_id: @item.id) %>
