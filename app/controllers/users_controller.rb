@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    if admin_user?
+    if current_user.role == 'admin'
       @users = User.order(:name)
     else
       flash[:error] = "You are not authorized to view the requested page."
@@ -51,6 +51,12 @@ class UsersController < ApplicationController
 
   def edit
     redirect_to login_path unless current_user
+    if params[:id] && admin_user?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+
   end
   
   def update
@@ -102,16 +108,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  helper_method :user
-
-  def user
-    @user ||= if params[:id]
-      User.find(params[:id])
-    else
-      current_user
-    end
-  end
 
   def user_params
     params.require(:user).permit( :name,
