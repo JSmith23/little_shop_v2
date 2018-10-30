@@ -12,7 +12,7 @@ describe 'As a merchant user' do
     @description = "They stick to things."
     @price = 2
     @inventory = 100
-    @thumbnail = "https://images-na.ssl-images-amazon.com/images/I/81yLsbCvlnL._SX425_.jpg"
+    @thumbnail = "http://s7d2.scene7.com/is/image/JCPenney/DP0625201317031085M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2"
     @default_thumbnail = "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
   end
 

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :edit]
   end
 
+  get 'merchants', to: 'users#index'
+  
   get '/dashboard', to: 'dashboard#show'
 
   resources :orders, only: [:show, :destroy, :index]
@@ -39,7 +41,6 @@ Rails.application.routes.draw do
   resources :sessions
 
   resources :items, only: [:show, :index, :new, :create, :edit, :update, :destroy]
-
 
   resources :carts, only: [:create]
   get "/cart", to: "carts#show"

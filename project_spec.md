@@ -57,7 +57,7 @@ Disabled content should also be restricted from showing up in the statistics pag
 ### Navigation
 
 ```
-1. [ ] done
+1. [X] done
 
 As a visitor
 I see a navigation bar
@@ -72,7 +72,7 @@ Next to the shopping cart link I see a count of the items in my cart
 ```
 
 ```
-2. [ ] done
+2. [X] done
 
 As a registered user
 I see the same links as a visitor
@@ -95,7 +95,7 @@ X a link to my merchant dashboard ("/dashboard")
 ```
 
 ```
-4. [ ] done
+4. [X] done
 
 As an admin user
 I see the same links as a registered user
@@ -307,7 +307,7 @@ Then I also see a link to my merchant orders ("/dashboard/orders")
 ```
 
 ```
-21. [ ] done
+21. [X] done
 
 As an admin user
 When I visit the merchants index page ("/merchants")
@@ -318,7 +318,7 @@ I see an "enable" button next to any merchants whose accounts are disabled
 ```
 
 ```
-22. [ ] done
+22. [X] done
 
 As an admin user
 When I visit the merchant index page
@@ -330,7 +330,7 @@ This merchant cannot log in
 ```
 
 ```
-23. [ ] done
+23. [X] done
 
 As an admin user
 When I visit the merchant index page
