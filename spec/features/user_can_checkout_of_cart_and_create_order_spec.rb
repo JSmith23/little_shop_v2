@@ -6,7 +6,6 @@ describe 'user checks out of cart' do
     @user_1, @user_2 = create_list(:user, 2)
     @merchant = create(:user, :merchant)
     @other_merchant = create(:user, :merchant)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
     @order_1 = @user_1.orders.create(status: 'pending')
     @order_2 = @user_2.orders.create(status: 'pending')
     @order_3 = @user_2.orders.create(status: 'pending')
@@ -33,6 +32,23 @@ describe 'user checks out of cart' do
   describe 'as a registered user when I visit my cart' do
     it 'I see a checkout button' do
 
+    visit root_path
+
+    click_on "Register"
+
+    expect(current_path).to eq(register_path)
+
+    fill_in :user_name, with: "Test Person"
+    fill_in :user_address, with: "123 alphabet lane"
+    fill_in :user_city, with: "Denver"
+    fill_in :user_state, with: "CO"
+    fill_in :user_zip, with: "80205"
+    fill_in :user_email, with: "test@test.com"
+    fill_in :user_password, with: "test"
+    fill_in :user_password_confirmation, with: "test"
+
+    click_on "Create User"
+
     visit items_path
 
     within(:css, "#item_#{@item_1.id}") do
@@ -44,6 +60,28 @@ describe 'user checks out of cart' do
     visit cart_path
 
     expect(page).to have_content("Check Out")
+    end
+
+    it 'I click on the checkout button and an order is created' do
+
+
+
+    end
+  end
+  describe 'as a visitor' do
+    it 'I am asked to login before I can checkout' do
+
+      visit items_path
+
+      within(:css, "#item_#{@item_1.id}") do
+        click_button "Add Item"
+      end
+
+      expect(page).to have_content("You now have 1 #{@item_1.name}.")
+
+      visit cart_path
+
+      expect(page).to have_content("You must Register or Login to checkout.")
     end
   end
 end
