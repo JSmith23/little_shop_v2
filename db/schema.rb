@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20181025170129) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "thumbnail"
+    t.string "thumbnail", default: "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
     t.decimal "price"
     t.integer "inventory"
     t.text "description"
