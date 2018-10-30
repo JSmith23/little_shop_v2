@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
   def index
-    if current_user.role == 'admin'
+    if admin_user? && request_path == 'users'
       @users = User.order(:name)
+      @heading = "All Users"
+    elsif request_path == 'merchants'
+      @users = User.where(role: 'merchant').order(:name)
+      @heading = "All Merchants"
     else
       flash[:error] = "You are not authorized to view the requested page."
       redirect_to root_path
