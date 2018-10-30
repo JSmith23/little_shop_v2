@@ -25,7 +25,13 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
-  helper_method :current_user, :admin_user?, :registered_user?, :merchant_user?
+  def request_path
+    # removes all numbers and slashes from path_info
+    # e.g., '/users/5/orders' returns 'usersorders'
+    request.env["PATH_INFO"].tr("0-9", "").tr("/", "")
+  end
+
+  helper_method :current_user, :admin_user?, :registered_user?, :merchant_user?, :request_path
 
   def authorize
     redirect_to login_path, alert: "Not Authorized" if current_user.nil?
