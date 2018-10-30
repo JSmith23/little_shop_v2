@@ -59,7 +59,6 @@ describe 'user sees order information' do
     end
 
     expect(page).to have_content("Order #{@order_1.id}")
-    #other assertion about cancelled status
-
+    expect(page).to have_content("Status: cancelled")
   end
 end
