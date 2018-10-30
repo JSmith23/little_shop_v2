@@ -20,9 +20,11 @@ Rails.application.routes.draw do
   get '/profile/orders', to: 'orders#index'
   delete '/profile/orders', to: 'orders#destroy'
 
+  patch '/items/edit/', to: 'items#update'
+
 
   namespace :dashboard do
-    resources :items, only: [:index, :new]
+    resources :items, only: [:index, :new, :edit, :update]
     resources :orders, only: [:index, :edit]
   end
 

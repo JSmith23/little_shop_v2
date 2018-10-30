@@ -1,6 +1,6 @@
 <main class='edit-item'>
   <h1>Update Item Information</h2>
-  <%= form_for @item, url: edit_item_path do |f| %>
+  <%= form_for @item do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
     <%= f.label :description %>
@@ -10,7 +10,7 @@
     <%= f.label :inventory %>
     <%= f.text_field :inventory %>
     <%= f.label :thumbnail %>
-    <%= f.text_field :thumbnail %>
+    <%= f.text_field :thumbnail%>
     <%= f.submit %>
   <% end %>
 
