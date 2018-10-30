@@ -14,6 +14,14 @@ class User < ApplicationRecord
   enum role: %w(registered_user merchant admin)
 
   has_secure_password
+  
+  def disable
+    update(enabled: false)
+  end
+
+  def enable
+    update(enabled: true)
+  end
 
   def toggle_enabled
     update_attribute :enabled, !self.enabled

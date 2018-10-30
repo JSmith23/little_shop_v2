@@ -2,6 +2,8 @@ FactoryBot.define do
 
   factory :user do
 
+    role { 'registered_user' }
+
     trait :admin do
       role { 'admin' }
     end

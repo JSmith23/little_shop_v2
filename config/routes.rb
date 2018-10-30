@@ -35,4 +35,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :destroy]
   end
 
+  resources :merchants, only: [:index] do
+    post :disable
+    post :enable
+  end
 end

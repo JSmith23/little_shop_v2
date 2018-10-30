@@ -4,7 +4,7 @@ describe 'As a registered user, merchant, or admin' do
 
   before(:each) do
     @user = create(:user)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    login(@user)
   end
 
   describe 'when I visit my own profile edit page' do

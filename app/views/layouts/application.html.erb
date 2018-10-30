@@ -29,11 +29,11 @@
       <nav class='nav-container'>
         <% if !current_user %>
           <%= render 'layouts/visitor_nav' %>
-        <% elsif current_user.role == 'registered_user' %>
+        <% elsif current_user.registered_user? %>
           <%= render 'layouts/user_nav' %>
-        <% elsif current_user.role == 'merchant' %>
+        <% elsif current_user.merchant? %>
           <%= render 'layouts/merchant_nav' %>
-        <% elsif current_user.role == 'admin' %>
+        <% elsif current_user.admin? %>
           <%= render 'layouts/admin_nav' %>
         <% end %>
       </nav>
