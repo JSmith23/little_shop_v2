@@ -505,7 +505,7 @@ All fields are re-populated with my previous data
 ```
 
 ```
-37. [ ] done
+37. [X] done
 
 As a merchant
 When I visit my items page
