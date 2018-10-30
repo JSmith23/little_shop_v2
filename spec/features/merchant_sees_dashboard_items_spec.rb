@@ -74,5 +74,9 @@ describe 'As a merchant user' do
       end
     end
 
+    it 'should be able to edit item' do
+
+    end
+
   end
 end

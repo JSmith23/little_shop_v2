@@ -805,18 +805,18 @@ Except deleting content
 59. [ ] done
 
 As a merchant user
-I can only view my own merchant dashboard
-I can only view my own merchant orders
+X I can only view my own merchant dashboard
+X I can only view my own merchant orders
 I can only add/edit/update and enable/disable my own items
 ```
 
 ```
-60. [ ] done
+60. [X] done
 
 As a registered user (who is not an admin, but may be a merchant)
-I can only view my own dashboard
-I can only change my own profile data
-I can only cancel my own pending orders
+X I can only view my own dashboard
+X I can only change my own profile data
+X I can only cancel my own pending orders
 ```
 
 ## Extensions
