@@ -6,11 +6,11 @@
     <%= f.label :description %>
     <%= f.text_area :description %>
     <%= f.label :price %>
-    <%= f.text_field :price %>
+    <%= f.number_field :price, min: 1, step: 1 %>
     <%= f.label :inventory %>
-    <%= f.text_field :inventory %>
+    <%= f.number_field :inventory, min: 1 %>
     <%= f.label :thumbnail %>
-    <%= f.text_field :thumbnail %>
+    <%= f.text_field :thumbnail, :value => '' %>
     <%= f.submit %>
   <% end %>
 
