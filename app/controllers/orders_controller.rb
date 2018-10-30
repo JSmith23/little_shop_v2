@@ -7,9 +7,6 @@ class OrdersController < ApplicationController
     elsif request_path == 'profileorders'
       @user = current_user
       @orders = @user.orders
-    elsif merchant_user? && request_path == 'dashboardorders'
-      @user = current_user
-      @orders = @user.merchant_orders
     end
   end
 
