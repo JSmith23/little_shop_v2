@@ -41,6 +41,8 @@ describe 'As a registered user, merchant, or admin' do
       fill_in :user_address, with: address
       fill_in :user_city, with: city
       fill_in :user_zip, with: zip
+      # fill_in :user_password, with: password
+      # fill_in :user_password_confirmation, with: password
 
       click_on 'Update User'
 
@@ -62,6 +64,7 @@ describe 'As a registered user, merchant, or admin' do
   describe 'if I enter an email address that is already used' do
     it 'should not save the changes and display a message that the email is already in use' do
 
+
       user = create(:user)
 
       user_2 = User.create(name: "David Jones", 
@@ -72,6 +75,7 @@ describe 'As a registered user, merchant, or admin' do
                             email: "davidjones@email.com",
                             password: "test1234",
                             password_confirmation: "test1234")
+
       
       visit login_path
       fill_in "Email", with: user.email

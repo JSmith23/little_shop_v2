@@ -67,7 +67,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="551" y="300" name="Users">
+<table x="915" y="285" name="Users">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -120,27 +120,6 @@
 <part>id</part>
 </key>
 </table>
-<table x="302" y="102" name="Cart">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="created_at" null="1" autoincrement="0">
-<datatype>TIMESTAMP</datatype>
-<default>NULL</default></row>
-<row name="updated_at" null="1" autoincrement="0">
-<datatype>TIMESTAMP</datatype>
-<default>NULL</default></row>
-<row name="status" null="1" autoincrement="0">
-<datatype>ENUM</datatype>
-<default>NULL</default></row>
-<row name="user_id" null="1" autoincrement="0">
-<datatype>BIGINT</datatype>
-<default>NULL</default><relation table="Users" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
 <table x="901" y="102" name="OrderItems">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
@@ -158,25 +137,6 @@
 <default>NULL</default></row>
 <row name="status" null="1" autoincrement="0">
 <datatype>ENUM</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="502" y="102" name="CartItems">
-<row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="item_id" null="1" autoincrement="0">
-<datatype>BIGINT</datatype>
-<default>NULL</default><relation table="Items" row="id" />
-</row>
-<row name="cart_id" null="1" autoincrement="0">
-<datatype>BIGINT</datatype>
-<default>NULL</default><relation table="Cart" row="id" />
-</row>
-<row name="quantity" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
