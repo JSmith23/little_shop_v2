@@ -738,7 +738,7 @@ The order status changes from "pending" to "complete"
 ```
 
 ```
-54. [ ]  done
+54. [X]  done
 
 As an admin
 When I visit the orders index page ("/orders")
