@@ -2,6 +2,7 @@
 <% if admin_user? || merchant_user? %>
   <%= button_to  "Add an Item", new_item_path, method: 'get' %>
 <% end %>
+
    <% @items.each do |item| %>
    <div id="item_<%= item.id %>">
      <h3><%= link_to "#{item.name}", item_path(item.id), class: 'item-show-link' %></h3>

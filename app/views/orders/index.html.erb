@@ -3,6 +3,7 @@
   <h1><%= @heading %></h1>
 
   <% @orders.each do |order| %>
+  <div id="order<%=order.id %>">
     <h3><%= link_to "Order #{order.id}", order_path(order.id), class: 'order-show-link' %></h3>
     <ul>
       <li>Created at: <%= order.created_at %></li>
@@ -14,6 +15,7 @@
       <% if order.status == 'pending' %>
         <%= button_to "Cancel Order", order_path(order.id), :method => 'delete' %>
       <% end %>
-  <% end %>
+        </div>
+    <% end %>
 
 </main>

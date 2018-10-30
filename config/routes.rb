@@ -18,11 +18,12 @@ Rails.application.routes.draw do
   get '/profile/edit/', to: 'users#edit'
   patch '/profile/edit/', to: 'users#update'
   get '/profile/orders', to: 'orders#index'
+  delete '/profile/orders', to: 'orders#destroy'
 
 
   namespace :dashboard do
     resources :items, only: [:index, :new]
-    resources :orders, only: [:index]
+    resources :orders, only: [:index, :edit]
   end
 
   get '/dashboard', to: 'dashboard#show'
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :destroy, :index]
 
   resources :users, only: [:show, :update, :edit, :index, :destroy] do
-    resources :orders, only: [:index, :destroy]
+    resources :orders, only: [:index, :destroy, :edit]
   end
 
   resources :sessions
