@@ -18,6 +18,6 @@ class OrdersController < ApplicationController
   def destroy
     order = Order.find(params[:id])
     order.cancel
-    redirect_back(fallback_location: root_path)
+    redirect_to(profile_orders_path)
   end
 end

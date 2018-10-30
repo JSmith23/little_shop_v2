@@ -1,5 +1,4 @@
 <main>
-<%= button_to  "Add an Item", carts_path, method: 'get' %>
    <% @items.each do |item| %>
    <div id="item_<%= item.id %>">
      <h3><%= link_to "#{item.name}", item_path(item.id), class: 'item-show-link' %></h3>
