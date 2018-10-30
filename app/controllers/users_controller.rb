@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   def edit
     redirect_to login_path unless current_user
-    if params[:id]
+    if params[:id] && admin_user?
       @user = User.find(params[:id])
     else
       @user = current_user
