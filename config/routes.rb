@@ -29,8 +29,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:show, :destroy]
 
-  resources :users, only: [:show, :update, :edit, :index] do
-    resources :orders, only: [:index]
+  resources :users, only: [:show, :update, :edit, :index, :destroy] do
+    resources :orders, only: [:index, :destroy]
   end
 
   resources :sessions
@@ -44,11 +44,6 @@ Rails.application.routes.draw do
   resources :line_items, only: [:destroy] do
     post :increment
     delete :decrement
-  end
-
-
-  resources :users, only: [:index, :show, :destroy, :edit] do
-    resources :orders, only: [:index, :destroy]
   end
 
 end
