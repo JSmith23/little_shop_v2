@@ -1,6 +1,5 @@
-<main class='orders-index'>
-  
-  <h1>All User Orders for <%="#{@user.name}"%></h1>
+<main class='dashboard-orders'>
+  <h1>All Merchant Orders for <%="#{current_user.name}"%></h1>
 
   <% @orders.each do |order| %>
     <h3><%= link_to "Order #{order.id}", order_path(order.id), class: 'order-show-link' %></h3>

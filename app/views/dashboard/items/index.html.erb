@@ -1,0 +1,20 @@
+<main class='dashboard-items'>
+
+<h2> All Merchant Items </h2>
+
+<div class="add-new-item">
+  <%= button_to  "Add an Item", carts_path, method: 'get' %>
+</div>
+
+  <% @items.each do |item| %>
+    <h3><%= item.name %></h3>
+    <%= image_tag item.thumbnail %>
+    <ul>
+      <li>Item ID: <%= item.id %>
+      <li>Price: $<%= item.price %>
+      <li>Inventory: <%= item.inventory %>
+    </ul>
+    <%= link_to "Edit Item", edit_item_path(item) %>
+    <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
+  <% end %>
+</main>

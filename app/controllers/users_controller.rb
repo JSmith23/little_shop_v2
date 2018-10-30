@@ -30,24 +30,23 @@ class UsersController < ApplicationController
 
   def show
     redirect_to login_path unless current_user
-    if params[:id] && current_user.role == 'admin'
+    if admin_user? && request_path == "users"
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
-      @orders = @user.orders
       @edit_path = edit_user_path(@user)
-    elsif current_user.role == 'merchant'
+      @orders_path = user_orders_path(user_id: @user.id)
+    elsif admin_user? && request_path == "profile"
       @user = current_user
-      @greeting = "Merchant Dashboard for #{@user.name}"
-      @orders = @user.merchant_orders
-      @items = @user.items
+      @greeting = "Profile data for #{@user.name}"
       @edit_path = profile_edit_path
-      render :dashboard
-    else
+      @orders_path = profile_orders_path
+    elsif registered_user? || merchant_user?
       @user = current_user
       @greeting = "Welcome, #{@user.name}"
-      @orders = @user.orders
       @edit_path = profile_edit_path
+      @orders_path = profile_orders_path
     end
+    @orders = @user.orders
   end
 
   def edit
@@ -56,19 +55,20 @@ class UsersController < ApplicationController
   
   def update
     self.remove_empty_password_from_params
-    begin 
-      user.update_attributes!(user_params)
+    begin
+      @user = User.find(params[:id])
+      @user.update_attributes!(user_params)
     rescue ActiveRecord::RecordInvalid => e
       handle_update_exceptions(e)
     else
-      self.redirect_after_successful_update(user)
+      self.redirect_after_successful_update
     end
   end
 
-  def redirect_after_successful_update(user)
-    if current_user.role == 'admin' && current_user != user
-      flash[:success] = "Profile for #{user.name} has been updated."
-      redirect_to user_path(user)
+  def redirect_after_successful_update
+    if current_user.role == 'admin' && current_user != @user
+      flash[:success] = "Profile for #{@user.name} has been updated."
+      redirect_to user_path(@user)
     else
       flash[:success] = "Your profile has been updated."
       redirect_to profile_path

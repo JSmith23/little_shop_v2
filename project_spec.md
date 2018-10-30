@@ -62,12 +62,12 @@ Disabled content should also be restricted from showing up in the statistics pag
 As a visitor
 I see a navigation bar
 This navigation bar includes links for the following:
-- a link to return to the welcome / home page of the application ("/")
-- a link to browse all items for sale ("/items")
+X a link to return to the welcome / home page of the application ("/")
+X a link to browse all items for sale ("/items")
 - a link to see all merchants ("/merchants")
-- a link to my shopping cart ("/cart")
-- a link to log in ("/login")
-- a link to the user registration page ("/register")
+X a link to my shopping cart ("/cart")
+X a link to log in ("/login")
+X a link to the user registration page ("/register")
 Next to the shopping cart link I see a count of the items in my cart
 ```
 
@@ -77,21 +77,21 @@ Next to the shopping cart link I see a count of the items in my cart
 As a registered user
 I see the same links as a visitor
 Plus the following links
-- a link to my profile page ("/profile")
-- a link to see my orders ("/profile/orders")
-- a link to log out ("/logout")
+X a link to my profile page ("/profile")
+X a link to see my orders ("/profile/orders")
+X a link to log out ("/logout")
 Minus the following links
-- I do not see a link to log in or register
+X I do not see a link to log in or register
 I also see text that says "Logged in as Ian Douglas" (or whatever my name is)
 ```
 
 ```
-3. [ ] done
+3. [X] done
 
 As a merchant user
 I see the same links as a registered user
 Plus the following links
-- a link to my merchant dashboard ("/dashboard")
+X a link to my merchant dashboard ("/dashboard")
 ```
 
 ```
@@ -233,7 +233,7 @@ And I see a link to edit their profile data
 ```
 
 ```
-14. [ ] done
+14. [X] done
 
 As an admin user
 When I visit a user's profile page ("/users/5")
@@ -243,7 +243,7 @@ Except I am returned to the show page path of "/users/5" when I am finished
 ```
 
 ```
-15. [ ] done
+15. [X] done
 
 As an admin user
 When I visit a user's profile page
@@ -298,7 +298,7 @@ Any items I had in my shopping cart are deleted
 ### "Merchant" CRUD
 
 ```
-20. [ ] done
+20. [X] done
 
 As a merchant user
 When I visit my dashboard ("/dashboard)
@@ -441,12 +441,12 @@ As a merchant
 When I visit my items page
 I see a link to add a new item to the system
 I see each item I have already added to the system, including:
-- the ID of the item
-- the name of the item
-- a thumbnail image for that item
-- the price of that item
-- my current inventory count for that item
-- a link or button to edit the item
+X the ID of the item
+X the name of the item
+X a thumbnail image for that item
+X the price of that item
+X my current inventory count for that item
+X a link or button to edit the item
 If the item is enabled, I see a button or link to disable the item
 If the item is disabled, I see a button or link to enable the item
 ```
@@ -549,7 +549,7 @@ All content rules still apply (eg, item name cannot be blank, etc)
 ```
 
 ```
-40. [ ] done
+40. [X] done
 
 As any kind of user on the system
 I can visit the items catalog ("/items")
@@ -564,7 +564,7 @@ Each item's name and thumbnail image are links to that item's show page
 ```
 
 ```
-41. [ ] done
+41. [X] done
 
 As any kind of user on the system
 When I visit an item's show page from the items catalog
@@ -583,7 +583,7 @@ I also see a link to add this item to my cart
 ### "Cart" CRUD
 
 ```
-42. [ ] done
+42. [X] done
 
 As any kind of user on the system
 When I visit an item's show page from the items catalog
@@ -593,7 +593,7 @@ The navigation bar increments my cart counter
 ```
 
 ```
-43. [ ] done
+43. [X] done
 
 As any kind of user on the system
 When I visit my cart ("/cart")
@@ -610,7 +610,7 @@ I also see a grand total of what everything in my cart will cost
 ```
 
 ```
-44. [ ] done
+44. [X] done
 
 As any kind of user on the system
 When I visit my cart ("/cart")
@@ -621,7 +621,7 @@ The navigation bar shows 0 items in my cart
 ```
 
 ```
-45. [ ] done
+45. [X] done
 
 As any kind of user on the system
 When I visit my cart
@@ -665,7 +665,7 @@ I am taken to my orders page ("/profile/orders")
 ```
 
 ```
-49. [ ] done
+49. [X] done
 
 As a registered user, merchant, or admin
 When I visit my orders page
@@ -682,7 +682,7 @@ And I see that order has an updated status of "cancelled"
 ```
 
 ```
-50. [ ] done
+50. [X] done
 
 As a merchant
 When I visit my dashboard
@@ -696,7 +696,7 @@ Each order will show the following information:
 ```
 
 ```
-51. [ ] done
+51. [X] done
 
 As a merchant
 When I visit my merchant orders page

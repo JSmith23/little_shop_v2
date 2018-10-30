@@ -1,15 +1,14 @@
 require 'rails_helper'
-describe 'user sees order information' do
+
+describe 'user checks out of cart' do
 
   before(:each) do
-    @user = create(:user)
-    @other_user = create(:user)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+    @user_1, @user_2 = create_list(:user, 2)
     @merchant = create(:user, :merchant)
     @other_merchant = create(:user, :merchant)
-    @order_1 = @user.orders.create!(status: "pending")
-    @order_2 = @user.orders.create!(status: "fulfilled")
-    @order_3 = @other_user.orders.create!(status: "pending")
+    @order_1 = @user_1.orders.create(status: 'pending')
+    @order_2 = @user_2.orders.create(status: 'pending')
+    @order_3 = @user_2.orders.create(status: 'pending')
     @item_1 = Item.create( name: "Oval Link Chain Belt",	description: "Add something a little unexpected with this oval link chain belt that takes your look from casual to chic in an instant.", price:	36.26, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0625201317031085M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
     @item_2 = Item.create( name: "Liz Claiborne® Tipped Tank Top - Petite",	description: "Beat the heat in our crepe tank top with contrast tipping for extra sizzle.  roundneck gently rounded hem polyester washable imported", price:	43.51, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1220201417021434M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
     @item_3 = Item.create( name: "St. John’s Bay® Inlet Mens Canvas Boat Shoes",	description: "Casual in canvas, these preppy slip-on boat shoes are ideal for laid-back living.   cotton canvas upper slip on with lace-up detail contrast stitching canvas lining textile/rubber sole", price: 48.34, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1215201417013852M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @other_merchant.id )
@@ -28,23 +27,61 @@ describe 'user sees order information' do
     OrderItem.create(order_id: @order_2.id, item_id: @item_7.id, price: 30.22, quantity: 5)
     OrderItem.create(order_id: @order_2.id, item_id: @item_8.id, price: 59.12, quantity: 1)
     OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
-
   end
 
-  it 'user sees all orders on order index for user' do
-    order_1 = Order.create!(id: 1, status: "pending", user_id: @user.id)
-    order_2 = Order.create!(id: 2, status: "fulfilled", user_id: @user.id)
+  describe 'as a registered user when I visit my cart' do
+    it 'I see a checkout button' do
 
-    visit profile_orders_path
+    visit root_path
 
-    expect(page).to have_content("Order #{@order_1.id}")
-    expect(page).to have_content("Created at: #{@order_1.created_at}")
-    expect(page).to have_content("Updated at: #{@order_1.updated_at}")
-    expect(page).to have_content("Status: #{@order_1.status}")
-    expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
-    expect(page).to have_content("Total Price: #{@order_1.total_price}")
-    expect(page).to have_content(@order_2.id)
-    # expect(page).to_not have_content(@order_3.id)
-    expect(page).to have_selector("input[type=submit][value='Cancel Order']")
+    click_on "Register"
+
+    expect(current_path).to eq(register_path)
+
+    fill_in :user_name, with: "Test Person"
+    fill_in :user_address, with: "123 alphabet lane"
+    fill_in :user_city, with: "Denver"
+    fill_in :user_state, with: "CO"
+    fill_in :user_zip, with: "80205"
+    fill_in :user_email, with: "test@test.com"
+    fill_in :user_password, with: "test"
+    fill_in :user_password_confirmation, with: "test"
+
+    click_on "Create User"
+
+    visit items_path
+
+    within(:css, "#item_#{@item_1.id}") do
+      click_button "Add Item"
+    end
+
+    expect(page).to have_content("You now have 1 #{@item_1.name}.")
+
+    visit cart_path
+
+    expect(page).to have_content("Check Out")
+    end
+
+    it 'I click on the checkout button and an order is created' do
+
+
+
+    end
+  end
+  describe 'as a visitor' do
+    it 'I am asked to login before I can checkout' do
+
+      visit items_path
+
+      within(:css, "#item_#{@item_1.id}") do
+        click_button "Add Item"
+      end
+
+      expect(page).to have_content("You now have 1 #{@item_1.name}.")
+
+      visit cart_path
+
+      expect(page).to have_content("You must Register or Login to checkout.")
+    end
   end
 end

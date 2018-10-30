@@ -1,27 +1,42 @@
 Rails.application.routes.draw do
 
-  root "welcome#index"
+  root 'welcome#index'
 
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
 
-  get 'register', to: 'users#new'
-  post 'register', to: 'users#create'
 
-  get 'profile', to: 'users#show'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
 
-  get 'profile/edit', to: 'users#edit'
-  patch 'profile/edit', to: 'users#update'
+  get '/register', to: 'users#new'
+  post '/register', to: 'users#create'
 
-  get 'dashboard', to: 'users#show'
-  get 'dashboard/orders', to: 'orders#index'
-  get 'dashboard/items', to: 'items#index'
+  get '/profile', to: 'users#show'
+  get '/profile/edit/', to: 'users#edit'
+  patch '/profile/edit/', to: 'users#update'
+  get '/profile/orders', to: 'orders#index'
 
-  get 'orders', to: 'orders#index'
+
+  namespace :dashboard do
+    resources :items, only: [:index, :new]
+    resources :orders, only: [:index]
+  end
+
+  get '/dashboard', to: 'dashboard#show'
+
+  resources :orders, only: [:show, :destroy]
+
+  resources :users, only: [:show, :update, :edit, :index, :destroy] do
+    resources :orders, only: [:index, :destroy]
+  end
 
   resources :sessions
 
-  resources :items, only: [:index, :new, :create, :edit]
+  resources :items, only: [:show, :index, :new, :create, :edit, :update, :destroy]
+
 
   resources :carts, only: [:create]
   get "/cart", to: "carts#show"
@@ -31,12 +46,4 @@ Rails.application.routes.draw do
     delete :decrement
   end
 
-  resources :users, only: [:index, :show, :destroy, :edit] do
-    resources :orders, only: [:index, :destroy]
-  end
-
-  resources :merchants, only: [:index] do
-    post :disable
-    post :enable
-  end
 end
