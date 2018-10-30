@@ -41,11 +41,8 @@ describe 'As a registered user, merchant, or admin' do
       fill_in :user_address, with: address
       fill_in :user_city, with: city
       fill_in :user_zip, with: zip
-      # fill_in :user_password, with: password
-      # fill_in :user_password_confirmation, with: password
 
       click_on 'Update User'
-
 
       within("main.user-profile") do
         expect(current_path).to eq(profile_path)
