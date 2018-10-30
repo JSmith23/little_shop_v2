@@ -243,7 +243,7 @@ Except I am returned to the show page path of "/users/5" when I am finished
 ```
 
 ```
-15. [ ] done
+15. [X] done
 
 As an admin user
 When I visit a user's profile page
@@ -298,7 +298,7 @@ Any items I had in my shopping cart are deleted
 ### "Merchant" CRUD
 
 ```
-20. [ ] done
+20. [X] done
 
 As a merchant user
 When I visit my dashboard ("/dashboard)
@@ -549,7 +549,7 @@ All content rules still apply (eg, item name cannot be blank, etc)
 ```
 
 ```
-40. [ ] done
+40. [X] done
 
 As any kind of user on the system
 I can visit the items catalog ("/items")
@@ -564,7 +564,7 @@ Each item's name and thumbnail image are links to that item's show page
 ```
 
 ```
-41. [ ] done
+41. [X] done
 
 As any kind of user on the system
 When I visit an item's show page from the items catalog
@@ -665,7 +665,7 @@ I am taken to my orders page ("/profile/orders")
 ```
 
 ```
-49. [ ] done
+49. [X] done
 
 As a registered user, merchant, or admin
 When I visit my orders page
@@ -682,7 +682,7 @@ And I see that order has an updated status of "cancelled"
 ```
 
 ```
-50. [ ] done
+50. [X] done
 
 As a merchant
 When I visit my dashboard
@@ -696,7 +696,7 @@ Each order will show the following information:
 ```
 
 ```
-51. [ ] done
+51. [X] done
 
 As a merchant
 When I visit my merchant orders page
