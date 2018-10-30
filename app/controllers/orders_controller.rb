@@ -4,9 +4,14 @@ class OrdersController < ApplicationController
     if admin_user? && request_path == 'usersorders'
       @user = User.find(params[:user_id])
       @orders = Order.where(user_id: @user.id)
+      @heading = "All User Orders for #{@user.name}"
+    elsif admin_user? && request_path == 'orders'
+      @orders = Order.all
+      @heading = "All Orders"
     elsif request_path == 'profileorders'
       @user = current_user
       @orders = @user.orders
+      @heading = "All User Orders for #{@user.name}"
     end
   end
 
