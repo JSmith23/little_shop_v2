@@ -1,11 +1,15 @@
 class OrdersController < ApplicationController
   def index
-    if current_user.role == 'registered_user'
-      @user = current_user
+    redirect_to login_path unless current_user
+    if admin_user? && request_path == 'usersorders'
+      @user = User.find(params[:user_id])
       @orders = Order.where(user_id: @user.id)
-      @heading = "Orders for #{@user.name}"
-    else
-      redirect_to login_path
+    elsif request_path == 'profileorders'
+      @user = current_user
+      @orders = @user.orders
+    elsif merchant_user? && request_path == 'dashboardorders'
+      @user = current_user
+      @orders = @user.merchant_orders
     end
   end
 

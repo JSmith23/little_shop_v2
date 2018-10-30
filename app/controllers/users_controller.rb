@@ -30,24 +30,23 @@ class UsersController < ApplicationController
 
   def show
     redirect_to login_path unless current_user
-    if params[:id] && current_user.role == 'admin'
+    if admin_user? && request_path == "users"
       @user = User.find(params[:id])
       @greeting = "Profile data for #{@user.name}"
-      @orders = @user.orders
       @edit_path = edit_user_path(@user)
-    elsif current_user.role == 'merchant'
+      @orders_path = user_orders_path(user_id: @user.id)
+    elsif admin_user? && request_path == "profile"
       @user = current_user
-      @greeting = "Merchant Dashboard for #{@user.name}"
-      @orders = @user.merchant_orders
-      @items = @user.items
+      @greeting = "Profile data for #{@user.name}"
       @edit_path = profile_edit_path
-      render :dashboard
-    else
+      @orders_path = profile_orders_path
+    elsif registered_user? || merchant_user?
       @user = current_user
       @greeting = "Welcome, #{@user.name}"
-      @orders = @user.orders
       @edit_path = profile_edit_path
+      @orders_path = profile_orders_path
     end
+    @orders = @user.orders
   end
 
   def edit
