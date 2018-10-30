@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
 
   def load_cart
     @cart ||= Cart.new(session[:cart])
-  end 
-  
-  private 
-  
+  end
+
+  private
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -35,6 +35,6 @@ class ApplicationController < ActionController::Base
 
   def authorize
     redirect_to login_path, alert: "Not Authorized" if current_user.nil?
-  end 
+  end
 
 end
