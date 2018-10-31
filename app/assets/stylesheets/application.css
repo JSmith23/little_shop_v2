@@ -1,15 +1,105 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+ main {
+   margin-top: 100;
+ }
+
+ .title {
+     float: center;
+     background-color: #F1F1F1;
+     text-align: center;
+     padding: 20px;
+     padding-top: 20px;
+ }
+ .cart a {
+     float: right;
+     color: #000000;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+     font-size: 17px;
+ }
+ .cart a:hover {
+     background-color: #87A8EE;
+     color: black;
+ }
+
+.user-header a {
+    float: right;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.user-header a:hover {
+    background-color: #87A8EE;
+    color: black;
+}
+
+.nav-container a {
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+nav {
+  margin-top: 15px;
+}
+
+.nav-container a:hover {
+    background-color: #87A8EE;
+    color: black;
+}
+
+h3 {
+  position: relative;
+}
+
+.flash-container{
+  position: absolute;
+  top: 35px;
+}
+
+.logged-in{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 12px;
+}
+
+
+.items {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    font-size: 12px;
+    text-align: center;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item-info {
+    height: 130px;
+    overflow: scroll;
+    top: 0px;
+}
+
+
+.items:hover {
+    border: 1px solid #777;
+}
+
+.items img {
+    width: 25%;
+    height: 25%;
+}
