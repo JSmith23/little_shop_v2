@@ -1,8 +1,6 @@
 require 'rails_helper'
 
-# TODO: check the correctness of this test and make test for access restrictions for a registered_user
 describe 'As a registered user' do
-  # I shoudn't be abel to access merchants page
 
   before(:each) do
     @user_1, @user_2, @user_3 = create_list(:user, 3)
@@ -11,7 +9,7 @@ describe 'As a registered user' do
   end
 
   describe 'when I visit the merchants path' do
-    xit 'should display all merchants' do
+    it 'should display all merchants' do
 
       visit merchants_path
 
@@ -28,8 +26,7 @@ describe 'As a registered user' do
       end
     end
 
-    
-    xit 'should NOT display enable/disable buttons for each merchant' do
+    it 'should NOT display enable/disable buttons for each merchant' do
 
       visit merchants_path
 

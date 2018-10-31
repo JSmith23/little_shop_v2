@@ -18,7 +18,6 @@ describe 'As a merchant user' do
     @item_7 = Item.create( name: "New Balance® Jojo Womens Sandals",	description: "Head to the pool or lounge at the beach in these casual, lightweight women's sandals. A synthetic, stretchable upper provides a personalized fit.   synthetic upper soft Lycra upper moldable footbed lightweight EVA sole", price:	30.22, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0207201417175260M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_8 = Item.create( name: "St. John's Bay® Drape-Front Jacquard Cardigan - Petite",	description: "imported machine washable cotton/acrylic/other fiber", price:	59.12, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1016201517095585M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_9 = Item.create( name: "Deer Stags® Mack Boys Hiking Boots - Little Kids/Big Kids",	description: "Lace-up boys' hiking boots from Deer Stags feature a durable synthetic upper and a rugged rubber sole. Water- and oil-resistant for superior traction in any situation.   synthetic upper lace-up oil-resistant water-resistant rubber sole", price:	59.14, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0403201317013346M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
-    @item_10 = Item.create( name: "No thumbnail item",	description: "foobar", price:	59.14, thumbnail: "", enabled: true, inventory: 100, user_id: @merchant.id )
     OrderItem.create(order_id: @order_1.id, item_id: @item_1.id, price: 36.26, quantity: 1)
     OrderItem.create(order_id: @order_1.id, item_id: @item_2.id, price: 43.51, quantity: 2)
     OrderItem.create(order_id: @order_1.id, item_id: @item_3.id, price: 48.34, quantity: 1)
@@ -112,26 +111,6 @@ describe 'As a merchant user' do
       click_on 'Update Item'
 
       expect(page).to have_content("Update Unsuccessful.")
-    end
-
-    it 'should have to fill out all fields except thumbnail' do
-
-      visit dashboard_items_path
-
-      within(:css, "#item_#{@item_10.id}") do
-        click_on 'Edit Item'
-      end
-
-      fill_in "Name", with: @item_10.name
-      fill_in "Description", with: "This is a different description"
-      fill_in "Price", with: @item_10.price
-      fill_in "Inventory", with: @item_10.inventory
-      fill_in "Thumbnail", with: ''
-
-      click_on 'Update Item'
-
-      expect(page).to have_content("Update Successful!")
-      expect(@item_10.reload.thumbnail).to eq("https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif")
     end
 
   end

@@ -1,18 +1,16 @@
 require 'rails_helper'
 
-# TODO: checkout the same comment in registered user spec
-# spec/features/user_sees_all_merchants_spec.rb
-describe 'Merchant list page' do
+describe 'As a merchant user' do
 
   before(:each) do
     @user_1, @user_2, @user_3 = create_list(:user, 3)
     @merchant_1, @merchant_2, @merchant_3 = create_list(:user, 3, :merchant)
-    @admin = create(:user, :admin)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_1)
   end
 
   describe 'when I visit the merchants path' do
-    it 'should display all merchants as an admin user' do
-      login(@admin)
+    it 'should display all merchants' do
+
       visit merchants_path
 
       expect(current_path).to eq(merchants_path)
@@ -28,18 +26,15 @@ describe 'Merchant list page' do
       end
     end
 
-    it 'should NOT be able to visit page as a merchant user' do
-      login(@merchant_1)
+    it 'should NOT display enable/disable buttons for each merchant' do
+
       visit merchants_path
 
-      expect(page).to have_content("You are not authorized to view the requested page.")
-    end
+      within("main.users-index") do
+        expect(page).to_not have_selector("input[type=submit][value='Disable']")
+        expect(page).to_not have_selector("input[type=submit][value='Enable']")
+      end
 
-    it 'should NOT be able to visit page as a registered user' do
-      login(@user_1)
-      visit merchants_path
-
-      expect(page).to have_content("You are not authorized to view the requested page.")
     end
   end
 end

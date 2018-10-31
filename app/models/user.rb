@@ -15,10 +15,6 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def disable
-    update(enabled: false)
-  end
-  
   def toggle_enabled
     update_attribute :enabled, !self.enabled
     self.enabled ? "enabled" : "disabled"
