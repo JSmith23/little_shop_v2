@@ -1,5 +1,13 @@
-
-<h2><%= @order.id %></h2>
-<ul>
-  <li><strong>Status: </strong><%= @order.status %></li>
-</ul>
+<h1>Order <%= @order.id %></h1>
+  <h4><strong>Status: </strong><%= @order.status %></h4>
+  <h4><%= @user.name %></h4>
+  <p><%= @user.address %></p>
+  <p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
+  <% @items.each do |item| %>
+    <%= image_tag  item.thumbnail %>
+    <ul>
+        <li><strong><%= item.name %></strong></li>
+        <li><strong>Price: </strong><%= item.order_items.first.price %></li>
+        <li><strong>Quantity: </strong><%= item.order_items.first.quantity %></li>
+    </ul>
+  <% end %>
