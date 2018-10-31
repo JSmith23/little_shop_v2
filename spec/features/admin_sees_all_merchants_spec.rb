@@ -38,5 +38,15 @@ describe 'As an admin user' do
       end
 
     end
+
+    it 'should display the merchant dashboard when I click a merchant name' do
+
+      visit merchants_path
+
+      click_on @merchant_1.name
+
+      expect(current_path).to eq(merchant_path(@merchant_1))
+
+    end
   end
 end
