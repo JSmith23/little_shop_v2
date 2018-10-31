@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
 
-
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
@@ -29,6 +28,8 @@ Rails.application.routes.draw do
   end
 
   get 'merchants', to: 'users#index'
+  get 'merchants/:id', to: 'dashboard#show', as: 'merchant'
+  get 'merchants/:id/edit', to: 'users#edit', as: 'edit_merchant'
 
   get '/dashboard', to: 'dashboard#show'
 
