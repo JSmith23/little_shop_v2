@@ -19,12 +19,9 @@ Rails.application.routes.draw do
   get '/profile/orders', to: 'orders#index'
   delete '/profile/orders', to: 'orders#destroy'
 
-  patch '/items/edit/', to: 'items#update'
-
-
   namespace :dashboard do
     resources :items, only: [:index]
-    resources :orders, only: [:index, :edit]
+    resources :orders, only: [:index]
   end
 
   get 'merchants', to: 'users#index'
@@ -40,8 +37,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update, :edit, :index, :destroy] do
     resources :orders, only: [:index, :destroy, :edit]
   end
-
-  resources :sessions
 
   resources :items, only: [:show, :index, :new, :create, :edit, :update, :destroy]
 
