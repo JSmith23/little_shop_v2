@@ -56,7 +56,7 @@ describe 'user can create account' do
 
     click_on "Log in"
 
-    expect(current_path).to eq(sessions_path)
+    expect(current_path).to eq(login_path)
   end
 
   it 'user can logout while they are logged in' do
