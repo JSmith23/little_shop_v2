@@ -13,7 +13,11 @@ class ItemsController < ApplicationController
 		end
 		@item = Item.find(params[:id])
     if Item.find(params[:id]).update(item_params)
-      redirect_to dashboard_items_path
+			if admin_user?
+				redirect_to merchant_items_path(@item.user_id)
+			elsif merchant_user?
+      	redirect_to dashboard_items_path
+			end
       flash[:notice] = "Update Successful!"
     else
       redirect_to edit_item_path(params[:id])
@@ -26,7 +30,7 @@ class ItemsController < ApplicationController
 		flash[:success] = "#{item.name} has been #{item.toggle_enabled}."
 		if item.enabled? == false
 			flash[:notice] = "This item is no longer for sale"
-		else  
+		else
 			flash[:notice] = "This item is now for sale"
 		end
 		redirect_back(fallback_location: root_path)
