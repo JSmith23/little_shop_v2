@@ -31,9 +31,9 @@ To access the created database, run `rake db:{drop,create,migrate,seed}`
 * Pry
 * RSpec
 To check the testing run `rspec` from your terminal.
-ShouldaMatchers
+* ShouldaMatchers
 
-*SimpleCov
+* SimpleCov
 To check the the test coverage, use your terminal to open the coverage folder. `open coverage/index.html`.
 
 
