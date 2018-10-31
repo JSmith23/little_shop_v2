@@ -365,7 +365,7 @@ Except I am returned to the show page path of "/merchants/6" when I am finished
 ```
 
 ```
-26. [ ] done
+26. [X] done
 
 As an admin user
 When I visit a merchant's dashboard page
