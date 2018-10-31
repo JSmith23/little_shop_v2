@@ -19,15 +19,15 @@ describe 'As a merchant user' do
     @item_7 = Item.create( name: "New Balance® Jojo Womens Sandals",	description: "Head to the pool or lounge at the beach in these casual, lightweight women's sandals. A synthetic, stretchable upper provides a personalized fit.   synthetic upper soft Lycra upper moldable footbed lightweight EVA sole", price:	30.22, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0207201417175260M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_8 = Item.create( name: "St. John's Bay® Drape-Front Jacquard Cardigan - Petite",	description: "imported machine washable cotton/acrylic/other fiber", price:	59.12, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1016201517095585M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_9 = Item.create( name: "Deer Stags® Mack Boys Hiking Boots - Little Kids/Big Kids",	description: "Lace-up boys' hiking boots from Deer Stags feature a durable synthetic upper and a rugged rubber sole. Water- and oil-resistant for superior traction in any situation.   synthetic upper lace-up oil-resistant water-resistant rubber sole", price:	59.14, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0403201317013346M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
-    OrderItem.create(order_id: @order_1.id, item_id: @item_1.id, price: 36.26, quantity: 1)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_2.id, price: 43.51, quantity: 2)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_3.id, price: 48.34, quantity: 1)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_4.id, price: 21.76, quantity: 3)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_5.id, price: 76.86, quantity: 1)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_6.id, price: 36.26, quantity: 4)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_7.id, price: 30.22, quantity: 5)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_8.id, price: 59.12, quantity: 1)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
+    @order_item_1 = OrderItem.create(order_id: @order_1.id, item_id: @item_1.id, price: 36.26, quantity: 1)
+    @order_item_2 = OrderItem.create(order_id: @order_1.id, item_id: @item_2.id, price: 43.51, quantity: 2)
+    @order_item_3 = OrderItem.create(order_id: @order_1.id, item_id: @item_3.id, price: 48.34, quantity: 1)
+    @order_item_4 = OrderItem.create(order_id: @order_1.id, item_id: @item_4.id, price: 21.76, quantity: 3)
+    @order_item_5 = OrderItem.create(order_id: @order_1.id, item_id: @item_5.id, price: 76.86, quantity: 1)
+    @order_item_6 = OrderItem.create(order_id: @order_2.id, item_id: @item_6.id, price: 36.26, quantity: 4)
+    @order_item_7 = OrderItem.create(order_id: @order_2.id, item_id: @item_7.id, price: 30.22, quantity: 5)
+    @order_item_8 = OrderItem.create(order_id: @order_2.id, item_id: @item_8.id, price: 59.12, quantity: 1)
+    @order_item_9 = OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
   end
 
   describe 'when I visit an orders show page' do
@@ -37,7 +37,44 @@ describe 'As a merchant user' do
 
       click_link "Order #{@order_1.id}"
 
-      expect(current_path).to eq(order_path("#{@order_1.id}"))
+      expect(current_path).to eq(order_path(@order_1))
+      expect(page).to have_content("Order #{@order_1.id}")
+      expect(page).to have_content(@user_1.name)
+      expect(page).to have_content(@user_1.address)
+      expect(page).to have_content("#{@user_1.city}, #{@user_1.state} #{@user_1.zip}")
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_xpath("//img[contains(@src, '#{@item_4.thumbnail}')]")
+      expect(page).to have_content(@order_item_4.price)
+      expect(page).to have_content(@order_item_4.quantity)
+      expect(page).to have_content(@item_5.name)
+      expect(page).to have_xpath("//img[contains(@src, '#{@item_5.thumbnail}')]")
+      expect(page).to have_content(@order_item_5.price)
+      expect(page).to have_content(@order_item_5.quantity)
+      expect(page).to_not have_content(@item_4.name)
+      expect(page).to_not have_xpath("//img[contains(@src, '#{@item_4.thumbnail}')]")
+      
     end
   end
 end
+
+# As a merchant
+# When I visit an order show page
+# I see the customer's name an address, but only the items in the order that are being purchased from me
+# I do not see any items in the order being purchased from other merchants
+# For each item, I see the following information:
+# - the name of the item, which is a link to my item's show page
+# - a small thumbnail of the item
+# - my price for the item
+# - the quantity the user wants to purchase
+
+# If the user's desired quantity is equal to or less than my current inventory quantity for that item
+# And I have not already "fulfilled" that item:
+# - Then I see a button or link to "fulfill" that item
+# - When i click on that link or button I am returned to the order show page
+# - I see the item is now fulfilled
+# - I also see a flash message indicating that I have fulfilled that item
+# - My inventory quantity is permanently reduced by the user's desired quantity
+
+# If the user's desired quantity is greater than my current inventory quantity for that item
+# Then I do not see a "fulfill" button or link
+# Instead I see a big red notice next to the item indicating I cannot fulfill this item
