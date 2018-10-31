@@ -2,7 +2,7 @@
   <h1>All Merchants</h1>
   <% @users.each do |user| %>
     <div id="merchant_<%= user.id %>">
-        <h4><%= link_to user.name, user_path(user) %></h4>
+        <h4><%= link_to user.name, merchant_path(user) %></h4>
         <h5>Status: <%= user.enabled ? "Enabled" : "Disabled" %></h5>
         <% disable_button_text = user.enabled ? "Disable" : "Enable" %>
         <%= button_to disable_button_text, merchant_disable_path(user) %>

@@ -31,10 +31,11 @@ class ApplicationController < ActionController::Base
     request.env["PATH_INFO"].tr("0-9", "").tr("/", "")
   end
 
-  helper_method :current_user, :admin_user?, :registered_user?, :merchant_user?, :request_path
-
-  def authorize
-    redirect_to login_path, alert: "Not Authorized" if current_user.nil?
+  def show_unauthorized_error_and_redirect
+    flash[:error] = "You are not authorized to view the requested page."
+    redirect_to root_path
   end
+
+  helper_method :current_user, :admin_user?, :registered_user?, :merchant_user?, :request_path
 
 end

@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
 			params[:item][:thumbnail] = "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
 		end
 		@item = Item.find(params[:id])
-    if Item.find(params[:id]).update(item_params)
+		
+		if @item.update(item_params)
       redirect_to dashboard_items_path
       flash[:notice] = "Update Successful!"
     else

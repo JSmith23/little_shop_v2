@@ -1,9 +1,7 @@
 <main class='users-index'>
   <h1><%= @heading %></h1>
   <% @users.each do |user| %>
-    <h4><%= link_to user.name,  user.role == 'merchant' ? 
-                                merchant_path(user) : 
-                                user_path(user) %></h4>
+    <h4><%= link_to user.name, user_path(user) %></h4>
     <h5>Status: <%= user.enabled ? "Enabled" : "Disabled" %></h5>
     <% disable_button_text = user.enabled ? "Disable" : "Enable" %>
     <%= button_to disable_button_text, user, :method => 'delete' if admin_user? %>
