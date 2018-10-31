@@ -1,10 +1,12 @@
 class DashboardController < ApplicationController
 
   def show
-    redirect_to root_path unless merchant_user?
-    if current_user.role == "merchant"
+    if merchant_user?
       @merchant = current_user
+    elsif admin_user?
+      @merchant = User.find(params[:id])
     else
+      redirect_to root_path 
     end
   end
 

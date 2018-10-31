@@ -39,6 +39,11 @@ class UsersController < ApplicationController
       @greeting = "Profile data for #{@user.name}"
       @edit_path = edit_user_path(@user)
       @orders_path = user_orders_path(user_id: @user.id)
+    elsif admin_user? && request_path == "merchants"
+      @user = User.find(params[:id])
+      @greeting = "Merchant data for #{@user.name}"
+      @edit_path = edit_user_path(@user)
+      @orders_path = profile_orders_path
     elsif admin_user? && request_path == "profile"
       @user = current_user
       @greeting = "Profile data for #{@user.name}"
@@ -76,9 +81,12 @@ class UsersController < ApplicationController
   end
 
   def redirect_after_successful_update
-    if current_user.role == 'admin' && current_user != @user
+    if admin_user? && @user.role == 'registered_user'
       flash[:success] = "Profile for #{@user.name} has been updated."
       redirect_to user_path(@user)
+    elsif admin_user? && @user.role == 'merchant'
+      flash[:success] = "Profile for #{@user.name} has been updated."
+      redirect_to merchant_path(@user)
     else
       flash[:success] = "Your profile has been updated."
       redirect_to profile_path
