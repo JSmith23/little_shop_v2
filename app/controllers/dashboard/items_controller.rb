@@ -1,10 +1,10 @@
 class Dashboard::ItemsController < ApplicationController
 
   def index
-    @items = Item.where(user_id: current_user.id)
+    if merchant_user?
+      @items = Item.where(user_id: current_user.id)
+    elsif admin_user?
+      @items = Item.where(user_id: params[:id])
+    end
   end
-  #
-  # def new
-  #   @item = Item.new
-  # end
 end
