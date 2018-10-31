@@ -342,7 +342,7 @@ This merchant can now log in
 ```
 
 ```
-24. [ ] done
+24. [X] done
 
 As an admin user
 When I visit the merchant index page
@@ -355,7 +355,7 @@ And I see a link to edit their profile data
 ```
 
 ```
-25. [ ] done
+25. [X] done
 
 As an admin user
 When I visit a merchant's dashboard page ("/merchants/6")
