@@ -29,7 +29,14 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @user = current_user
+    if merchant_user?
+      @user = User.find(@order.user_id)
+      @order_items = @order.order_items
+      # @order_items = @order.order_items.merchant_order_items(@order.id, @user.id)
+    else
+      @user = current_user
+      @order_items = @order.order_items
+    end
   end
 
   def destroy
