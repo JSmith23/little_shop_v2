@@ -13,7 +13,7 @@ describe 'as a current user' do
 
     click_on 'Log in'
 
-    click_on 'My Orders'
+    click_on 'User Orders'
 
 
   within(:css, "#order#{order_1.id}") do

@@ -35,7 +35,7 @@ describe 'As an admin user' do
     it 'displays all orders for the user' do
 
       visit user_path(@user_1)
-      click_on "My Orders"
+      click_on "User Orders"
 
       within("main.orders-index") do
         expect(page).to have_content("All User Orders for #{@user_1.name}")
@@ -50,7 +50,7 @@ describe 'As an admin user' do
     it 'refreshes the orders page and shows the order is cancelled' do
 
       visit user_path(@user_1)
-      click_on "My Orders"
+      click_on "User Orders"
 
       expect(page).to have_content("Status: pending")
 

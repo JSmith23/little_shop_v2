@@ -35,7 +35,7 @@ describe 'As an admin user' do
 
       visit merchant_path(@merchant_1)
 
-      click_on "My Orders"
+      click_on "Merchant Orders"
 
       expect(current_path).to eq(merchant_orders_path(@merchant_1))
       expect(page).to have_content("All Merchant Orders for #{@merchant_1.name}")
