@@ -1,11 +1,7 @@
 class MerchantsController < ApplicationController
     def index
-        if admin_user?
-            @users = User.merchant.order(:name)
-        else
-            flash[:error] = "You are not authorized to view the requested page."
-            redirect_to root_path
-        end
+        return show_unauthorized_error_and_redirect unless admin_user?
+        @users = User.merchant.order(:name)
     end
 
     def disable
@@ -14,10 +10,19 @@ class MerchantsController < ApplicationController
         redirect_to merchants_path
     end
 
-    def enable
+    def edit
+        return show_unauthorized_error_and_redirect unless admin_user?
     end
 
+    # TODO: move dashboard path to /dashboard/:user_id or a like
+    # and leave /merchants/:id for merchant show action
+    # def show
+    #     return show_unauthorized_error_and_redirect unless admin_user?
+    # end
+
     private
+    
+    helper_method :merchant
 
     def merchant
         id = params[:id] || params[:merchant_id]

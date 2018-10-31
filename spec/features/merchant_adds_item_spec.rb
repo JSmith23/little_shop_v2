@@ -78,8 +78,23 @@ describe 'As a merchant user' do
 
 			expect(page).to have_content("Price and inventory must be greater than 0. Please try again.")
 
-      end
+    end
 
+    it 'should not accept blank name' do
+
+      visit items_path
+      click_on "Add an Item"
+
+      fill_in "Name", with: ''
+      fill_in "Description", with: @description
+      fill_in "Price", with: 2
+      fill_in "Inventory", with: 3
+
+      click_on "Create Item"
+
+			expect(page).to have_content("Something went wrong. Please complete all required fields and try again.")
+
+    end
   end
 
 

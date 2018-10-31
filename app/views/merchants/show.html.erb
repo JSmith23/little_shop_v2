@@ -1,0 +1,17 @@
+<main class='user-profile'>
+  <h1><%= 'Welcome' %></h1>
+  <table class='user-profile-data'>
+    <tr>
+      <td>Email:</td>
+      <td><%= user.email %></td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td>
+        <%= user.address %><br>
+        <%= "#{user.city}, #{user.state} #{user.zip}" %>
+      </td>
+    </tr>
+  </table>
+  <%= link_to "Edit Profile", edit_merchant_path(merchant) %>
+</main>
