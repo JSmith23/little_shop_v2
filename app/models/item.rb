@@ -10,4 +10,8 @@ class Item < ApplicationRecord
       update_attribute :enabled, !self.enabled
       self.enabled ? "enabled" : "disabled"
     end
+
+    def merchant_name
+      User.find(user_id).name
+    end
 end
