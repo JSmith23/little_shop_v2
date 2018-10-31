@@ -435,7 +435,7 @@ My URI route should be "/dashboard/items"
 ```
 
 ```
-32. [ ] done
+32. [X] done
 
 As a merchant
 When I visit my items page
@@ -447,12 +447,12 @@ X a thumbnail image for that item
 X the price of that item
 X my current inventory count for that item
 X a link or button to edit the item
-If the item is enabled, I see a button or link to disable the item
-If the item is disabled, I see a button or link to enable the item
+X If the item is enabled, I see a button or link to disable the item
+X If the item is disabled, I see a button or link to enable the item
 ```
 
 ```
-33. [ ] done
+33. [X] done
 
 As a merchant
 When I visit my items page
@@ -463,7 +463,7 @@ I see the item is now disabled
 ```
 
 ```
-34. [ ] done
+34. [X] done
 
 As a merchant
 When I visit my items page

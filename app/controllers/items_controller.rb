@@ -21,6 +21,17 @@ class ItemsController < ApplicationController
     end
 	end
 
+	def destroy
+		item = Item.find(params[:id])
+		flash[:success] = "#{item.name} has been #{item.toggle_enabled}."
+		if item.enabled? == false
+			flash[:notice] = "This item is no longer for sale"
+		else  
+			flash[:notice] = "This item is now for sale"
+		end
+		redirect_back(fallback_location: root_path)
+	end
+
 	def new
 		@item = Item.new
 		@user = current_user

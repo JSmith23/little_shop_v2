@@ -17,7 +17,9 @@
       <li>Inventory: <%= item.inventory %>
     </ul>
     <%= link_to "Edit Item", edit_item_path(item) %>
-    <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
+    <h5>Status: <%= item.enabled ? "Enabled" : "Disabled" %></h5>
+    <% disable_button_text = item.enabled ? "Disable" : "Enable" %>
+    <%= button_to disable_button_text, item, :method => 'delete' %>
     </div>
   <% end %>
 </main>

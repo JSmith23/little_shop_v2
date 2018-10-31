@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     end
 
   end
-  
+
   def update
     self.remove_empty_password_from_params
     begin

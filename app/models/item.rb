@@ -5,4 +5,9 @@ class Item < ApplicationRecord
     validates_presence_of :name, :price, :inventory, :description
     validates_numericality_of :price, :greater_than => 0
     validates_numericality_of :inventory, :greater_than => 0
+
+    def toggle_enabled
+      update_attribute :enabled, !self.enabled
+      self.enabled ? "enabled" : "disabled"
+    end
 end
