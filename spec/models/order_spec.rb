@@ -56,5 +56,11 @@ describe Order, type: :model do
       @order_1.cancel
       expect(@order_1.status).to eq('cancelled')
     end
+
+    it "should return all items in an order for a given merchant" do
+      items = @order_1.items_for_merchant(@merchant)
+
+      expect(items).to eq([@item_4, @item_5])
+    end
 end
 end
