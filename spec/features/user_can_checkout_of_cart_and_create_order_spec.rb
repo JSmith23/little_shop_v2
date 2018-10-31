@@ -63,11 +63,34 @@ describe 'user checks out of cart' do
     end
 
     it 'I click on the checkout button and an order is created' do
+      visit login_path
 
+      fill_in "Email", with: @user_1.email
+      fill_in "Password", with: @user_1.password
 
+      click_on "Log in"
 
+      click_on "Items"
+
+      within(:css, "#item_#{@item_1.id}") do
+        click_button "Add Item"
+      end
+
+      within(:css, "#item_#{@item_2.id}") do
+        click_button "Add Item"
+      end
+
+      visit cart_path
+
+      click_on "Check Out"
+
+      expect(current_path).to eq(profile_orders_path)
+      expect(page).to have_content("Order #{Order.last.id}")
+      expect(page).to have_content("Cart: 0")
     end
   end
+
+
   describe 'as a visitor' do
     it 'I am asked to login before I can checkout' do
 
