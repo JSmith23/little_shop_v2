@@ -40,10 +40,10 @@ To check the the test coverage, use your terminal to open the coverage folder. `
 
 
 ## Contributors (so far)
-Michael Gatewood: mngatewood
-Nikki Holland-Plum: mnhollandplum
-Jimmy Smith: JSmith23
-Tom Nunez: tomjnunez
-Ian Douglas: iandouglas
-Dione Wilson: dionew1
+* Michael Gatewood: mngatewood
+* Nikki Holland-Plum: mnhollandplum
+* Jimmy Smith: JSmith23
+* Tom Nunez: tomjnunez
+* Ian Douglas: iandouglas
+* Dione Wilson: dionew1
 
