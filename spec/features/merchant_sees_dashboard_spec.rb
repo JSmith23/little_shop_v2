@@ -46,7 +46,7 @@ describe 'As a merchant user' do
       visit dashboard_path
 
       within("main.dashboard") do
-        expect(page).to have_content("My Orders")
+        expect(page).to have_content("Merchant Orders")
       end
     end
   end
@@ -57,7 +57,7 @@ describe 'As a merchant user' do
       visit dashboard_path
 
       within("main.dashboard") do
-        expect(page).to have_content("My Items")
+        expect(page).to have_content("Merchant Items")
       end
     end
   end

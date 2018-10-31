@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'merchants/:id', to: 'dashboard#show', as: 'merchant'
   get 'merchants/:id/edit', to: 'users#edit', as: 'edit_merchant'
   get 'merchants/:id/orders', to: 'dashboard/orders#index', as: 'merchant_orders'
+  get 'merchants/:id/items', to: 'dashboard/items#index', as: 'merchant_items'
 
   get '/dashboard', to: 'dashboard#show'
 
