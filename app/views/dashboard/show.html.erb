@@ -5,10 +5,10 @@
   <% if (admin_user? && request_path == 'merchants') ||
         (merchant_user? && request_path == 'dashboard') %>
     <h1>Merchant Dashboard for <%= @merchant.name %></h1>
-    <%= link_to  "My Orders", admin_user? ?
-                              merchant_orders_path(@merchant) : 
+    <%= link_to  "Merchant Orders", admin_user? ?
+                              merchant_orders_path(@merchant) :
                               dashboard_orders_path if @merchant.merchant_orders != [] %>
-    <%= link_to  "My Items", dashboard_items_path if @items != []%>
+    <%= link_to  "Merchant Items", dashboard_items_path if @items != []%>
     <%= link_to  "Edit Merchant Profile", edit_merchant_path(@merchant) if admin_user? %>
   <% end %>
 
