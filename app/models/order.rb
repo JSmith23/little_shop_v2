@@ -20,4 +20,8 @@ class Order < ApplicationRecord
    joins(:items).where("items.user_id = #{user}").uniq
   end
 
+  def items_for_merchant(merchant_id)
+    items.where(user_id: merchant_id)
+  end
+
 end
