@@ -1,6 +1,8 @@
 <main class='dashboard'>
   <h1>Merchant Dashboard for <%= @merchant.name %></h1>
-  <%= link_to  "My Orders", dashboard_orders_path if @merchant.merchant_orders != [] %>
+  <%= link_to  "My Orders", admin_user? ?
+                            merchant_orders_path(@merchant) : 
+                            dashboard_orders_path if @merchant.merchant_orders != [] %>
   <%= link_to  "My Items", dashboard_items_path if @items != []%>
   <%= link_to  "Edit Merchant Profile", edit_merchant_path(@merchant) if admin_user? %>
 </main>
