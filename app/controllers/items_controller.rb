@@ -21,6 +21,12 @@ class ItemsController < ApplicationController
     end
 	end
 
+	def destroy
+		item = Item.find(params[:id])
+		flash[:success] = "#{item.name} has been #{item.toggle_enabled}."
+		redirect_back(fallback_location: root_path)
+	end
+
 	def new
 		@item = Item.new
 		@user = current_user
