@@ -31,11 +31,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if merchant_user?
       @user = User.find(@order.user_id)
-      @order_items = @order.order_items
-      # @order_items = @order.order_items.merchant_order_items(@order.id, @user.id)
+      @items = @order.items_for_merchant(current_user.id)
     else
       @user = current_user
-      @order_items = @order.order_items
+      @items = @order.items.all
     end
   end
 
