@@ -29,6 +29,8 @@ To see the page that is being tested, place `save_and_open_page` in your capybar
 To access the created database, run `rake db:{drop,create,migrate,seed}`
 
 * Pry
+Place `binding.pry` within your code before you run your tests to see what you have access to.
+
 * RSpec
 To check the testing run `rspec` from your terminal.
 * ShouldaMatchers
