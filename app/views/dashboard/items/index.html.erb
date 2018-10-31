@@ -1,4 +1,7 @@
 <main class='dashboard-items'>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+<% if admin_user? || merchant_user? %>
 
 <h2> All Merchant Items </h2>
 
