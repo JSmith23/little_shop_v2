@@ -4,40 +4,50 @@
     <title>LittleShopV2</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
 
-    <%= link_to "Cart: #{@cart.count_all}", cart_path %>
-    <div id="container">
+    <header>
+      <div class="cart">
+      <%= link_to "Cart: #{@cart.count_all}", cart_path %>
+      </div>
+
       <div class='flash-container'>
-        <% flash.each do |type, message| %>
-        <%= content_tag :div, message, class: type %>
-        <% end %>
-      </div>
-      <div id="user_header">
-        <% if current_user %>
-          Logged in as <%= current_user.name %>.
-          <%= link_to "Log Out", logout_path %>
-        <% else%>
-          <%= link_to "Register", register_path %> or
-          <%= link_to "Log In", login_path %>
-        <% end %>
-      </div>
-      <nav class='nav-container'>
-        <% if !current_user %>
-          <%= render 'layouts/visitor_nav' %>
-        <% elsif current_user.registered_user? %>
-          <%= render 'layouts/user_nav' %>
-        <% elsif current_user.merchant? %>
-          <%= render 'layouts/merchant_nav' %>
-        <% elsif current_user.admin? %>
-          <%= render 'layouts/admin_nav' %>
-        <% end %>
-      </nav>
+            <% flash.each do |type, message| %>
+            <%= content_tag :div, message, class: type %>
+            <% end %>
+          </div>
+          <div class="title">
+            Welcome to Little Shop!
+            </div>
+          <div class="user-header">
+            <% if current_user %>
+            <div class='logged-in'>
+              Logged in as <%= current_user.name %>.
+              </div>
+              <%= link_to "Log Out", logout_path %>
+            <% else%>
+              <%= link_to "Register", register_path %>
+              <%= link_to "Log In", login_path %>
+            <% end %>
+          </div>
+          </header>
+          <nav class='nav-container'>
+            <% if !current_user %>
+              <%= render 'layouts/visitor_nav' %>
+            <% elsif current_user.registered_user? %>
+              <%= render 'layouts/user_nav' %>
+            <% elsif current_user.merchant? %>
+              <%= render 'layouts/merchant_nav' %>
+            <% elsif current_user.admin? %>
+              <%= render 'layouts/admin_nav' %>
+            <% end %>
+          </nav>
+
       <%= yield %>
-    </nav>
+
   </body>
 </html>
