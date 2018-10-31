@@ -3,11 +3,11 @@
   <h4><%= @user.name %></h4>
   <p><%= @user.address %></p>
   <p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
-  <% @order.order_items.each do |oi| %>
-    <%= image_tag  oi.item.thumbnail %>
+  <% @items.each do |item| %>
+    <%= image_tag  item.thumbnail %>
     <ul>
-        <li><strong><%= oi.item.name %></strong></li>
-        <li><strong>Price: </strong><%= oi.price %></li>
-        <li><strong>Quantity: </strong><%= oi.quantity %></li>
+        <li><strong><%= item.name %></strong></li>
+        <li><strong>Price: </strong><%= item.order_items.first.price %></li>
+        <li><strong>Quantity: </strong><%= item.order_items.first.quantity %></li>
     </ul>
   <% end %>
