@@ -15,6 +15,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def create
+    @order = current_user.orders.create(status: "pending")
+    cart = session[:cart]
+
+    cart.each do |key, value|
+      price = Item.find(key).price
+      @order_item = @order.order_items.create(item_id: key, price: price, quantity: value)
+    end
+    session.delete(:cart)
+    redirect_to profile_orders_path
+  end
+
   def show
     @order = Order.find(params[:id])
     @user = current_user

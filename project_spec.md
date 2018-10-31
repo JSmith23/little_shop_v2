@@ -655,7 +655,7 @@ I see a button or link indicating that I can check out
 ### "Order" CRUD
 
 ```
-48. [ ] done
+48. [X] done
 
 As a registered user, merchant, or admin
 When I visit my cart
