@@ -9,7 +9,7 @@ If you would like to contribute to this project please clone this project down v
 Or visit our Github link: https://github.com/mnhollandplum/little_shop_v2
 
 ## What we used/what you’ll need
-*Rails
+### Rails
 
 We used rails -v 5.1.6. Please check your rails version before working on the application.
 To do this run `rails -v` from your terminal.
