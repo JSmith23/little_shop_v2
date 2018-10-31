@@ -15,8 +15,24 @@ describe 'As a merchant user' do
   it 'item is disabled when the disable button is clicked' do
     visit dashboard_items_path
     click_on "Disable"
-save_and_open_page
+
     expect(page).to have_button("Enable")
     expect(page).to have_content("Disabled")
+    expect(page).to have_content("This item is no longer for sale")
+  end
+
+  it 'item is enabled when the enable button is clicked' do
+    visit dashboard_items_path
+
+    click_on "Disable"
+
+    expect(page).to have_button("Enable")
+    expect(page).to have_content("Disabled")
+    expect(page).to have_content("This item is no longer for sale")
+
+    click_on "Enable"
+    expect(page).to have_button("Disable")
+    expect(page).to have_content("Enabled")
+    expect(page).to have_content("This item is now for sale")
   end
 end
