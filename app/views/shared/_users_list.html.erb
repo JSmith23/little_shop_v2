@@ -1,7 +1,0 @@
-<% users.each do |user| %>
-    <div id="<%= [user.role, user.id].join("_") %>">
-        <h4><%= link_to user.name, user_path(user) %></h4>
-        <h5>Status: <%= user.enabled ? "Enabled" : "Disabled" %></h5>
-        <%= disable_button_for.call(user) %>
-    </div>
-<% end %>

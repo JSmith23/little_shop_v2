@@ -4,8 +4,12 @@ class UsersController < ApplicationController
     if admin_user? && request_path == 'users'
       @users = User.order(:name)
       @heading = "All Users"
+    elsif request_path == 'merchants'
+      @users = User.where(role: 'merchant').order(:name)
+      @heading = "All Merchants"
     else
-      show_unauthorized_error_and_redirect
+      flash[:error] = "You are not authorized to view the requested page."
+      redirect_to root_path
     end
   end
 
@@ -35,6 +39,11 @@ class UsersController < ApplicationController
       @greeting = "Profile data for #{@user.name}"
       @edit_path = edit_user_path(@user)
       @orders_path = user_orders_path(user_id: @user.id)
+    elsif admin_user? && request_path == "merchants"
+      @user = User.find(params[:id])
+      @greeting = "Merchant data for #{@user.name}"
+      @edit_path = edit_user_path(@user)
+      @orders_path = profile_orders_path
     elsif admin_user? && request_path == "profile"
       @user = current_user
       @greeting = "Profile data for #{@user.name}"

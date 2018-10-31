@@ -46,15 +46,6 @@ describe 'As an admin user' do
     end
   end
 
-  describe 'when I visit a merchant profile' do
-    it 'displays <TODO: data from the story>' do
-
-      visit merchant_path(@merchant)
-      
-      # TODO: add check for data
-    end
-  end
-
   describe 'when I click Cancel Order' do
     it 'refreshes the orders page and shows the order is cancelled' do
 
