@@ -39,11 +39,6 @@ class UsersController < ApplicationController
       @greeting = "Profile data for #{@user.name}"
       @edit_path = edit_user_path(@user)
       @orders_path = user_orders_path(user_id: @user.id)
-    elsif admin_user? && request_path == "merchants"
-      @user = User.find(params[:id])
-      @greeting = "Merchant data for #{@user.name}"
-      @edit_path = edit_user_path(@user)
-      @orders_path = profile_orders_path
     elsif admin_user? && request_path == "profile"
       @user = current_user
       @greeting = "Profile data for #{@user.name}"
