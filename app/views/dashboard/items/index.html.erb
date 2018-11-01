@@ -3,26 +3,30 @@
   <%= javascript_include_tag 'application' %>
 
  <h2>All Merchant Items for <%= @user.name %></h2>
-<% if admin_user? || merchant_user? %>
-<div class="add-new-item">
-  <%= button_to  "Add an Item", new_item_path, method: 'get' %>
-</div>
-<%end%>
+    <% if admin_user? || merchant_user? %>
+    <div class="add-new-item">
+      <%= button_to  "Add an Item", new_item_path, method: 'get' %>
+    </div>
+    <%end%>
 
   <% @items.each do |item| %>
-  <div id="item_<%=item.id %>">
+  <div class="merchant-items" id="item_<%=item.id %>">
     <h3><%= item.name %></h3>
     <%= image_tag item.thumbnail %>
-    <ul>
-      <li>Item ID: <%= item.id %>
-      <li>Price: $<%= item.price %>
-      <li>Description: <%= item.description %>
-      <li>Inventory: <%= item.inventory %>
-    </ul>
-    <%= link_to "Edit Item", edit_item_path(item) %>
-    <h5>Status: <%= item.enabled ? "Enabled" : "Disabled" %></h5>
-    <% disable_button_text = item.enabled ? "Disable" : "Enable" %>
-    <%= button_to disable_button_text, item, :method => 'delete' %>
+    <div class="item-info">
+      <ul>
+        <li>Item ID: <%= item.id %>
+        <li>Price: $<%= item.price %>
+        <li>Description: <%= item.description %>
+        <li>Inventory: <%= item.inventory %>
+      </ul>
     </div>
+    <%= link_to "Edit Item", edit_item_path(item) %>
+    <div class="item-status">
+      <h5>Status: <%= item.enabled ? "Enabled" : "Disabled" %></h5>
+      <% disable_button_text = item.enabled ? "Disable" : "Enable" %>
+      <%= button_to disable_button_text, item, :method => 'delete' %>
+    </div>
+  </div>
   <% end %>
 </main>

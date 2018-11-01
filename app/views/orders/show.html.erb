@@ -1,21 +1,30 @@
-<h1>Order <%= @order.id %></h1>
+<main>
+  <h1>Order <%= @order.id %></h1>
   <h4><strong>Status: </strong><%= @order.status %></h4>
-  <h4><%= @user.name %></h4>
-  <p><%= @user.address %></p>
-  <p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
-  <% @items.each do |item| %>
-    <%= image_tag  item.thumbnail %>
-    <ul>
-        <li><strong><%= item.name %></strong></li>
-        <li><strong>Price: </strong><%= item.order_items.find_by(order_id: @order.id).price %></li>
-        <li><strong>Quantity: </strong><%= item.order_items.find_by(order_id: @order.id).quantity %></li>
-        <li><strong>Status: </strong><%= item.order_items.find_by(order_id: @order.id).fulfilled ?
-                                          "Fulfilled" :
-                                          "Pending" %></li>
-    </ul>
-    <%= button_to "Fulfill Item", 
-                  order_order_item_path(@order.id, item.order_items.first.id), 
-                  method: :patch unless item.order_items.find_by(order_id: @order.id).fulfilled || 
-                                        item.order_items.find_by(order_id: @order.id).quantity > item.inventory %>
+  <div class="show-order">
+    <div class="customer">
+      <div class="customer-title"><h3>Customer Info</h3></div>
+      <div>
+        <p><%= @user.name %></p>
+        <p><%= @user.address %></p>
+        <p><%= "#{@user.city}, #{@user.state} #{@user.zip}" %></p>
+      </div>
+    </div>
+    <% @items.each do |item| %>
+      <%= image_tag  item.thumbnail %>
+      <ul>
+          <li><strong><%= item.name %></strong></li>
+          <li><strong>Price: </strong><%= item.order_items.find_by(order_id: @order.id).price %></li>
+          <li><strong>Quantity: </strong><%= item.order_items.find_by(order_id: @order.id).quantity %></li>
+          <li><strong>Status: </strong><%= item.order_items.find_by(order_id: @order.id).fulfilled ?
+                                            "Fulfilled" :
+                                            "Pending" %></li>
+      </ul>
+      <%= button_to "Fulfill Item", 
+                    order_order_item_path(@order.id, item.order_items.first.id), 
+                    method: :patch unless item.order_items.find_by(order_id: @order.id).fulfilled || 
+                                          item.order_items.find_by(order_id: @order.id).quantity > item.inventory %>
 
-  <% end %>
+    <% end %>
+  </div>
+</main>
