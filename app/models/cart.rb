@@ -6,7 +6,7 @@ class Cart
      end
 
      def empty?
-        @contents.empty?
+        self.grand_total == 0
      end
 
      def items

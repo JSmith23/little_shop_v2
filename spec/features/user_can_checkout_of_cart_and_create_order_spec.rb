@@ -52,7 +52,7 @@ describe 'user checks out of cart' do
     visit items_path
 
     within(:css, "#item_#{@item_1.id}") do
-      click_button "Add Item"
+      click_button "Add to Cart"
     end
 
     expect(page).to have_content("You now have 1 #{@item_1.name}.")
@@ -73,11 +73,11 @@ describe 'user checks out of cart' do
       click_on "Items"
 
       within(:css, "#item_#{@item_1.id}") do
-        click_button "Add Item"
+        click_button "Add to Cart"
       end
 
       within(:css, "#item_#{@item_2.id}") do
-        click_button "Add Item"
+        click_button "Add to Cart"
       end
 
       visit cart_path
@@ -97,7 +97,7 @@ describe 'user checks out of cart' do
       visit items_path
 
       within(:css, "#item_#{@item_1.id}") do
-        click_button "Add Item"
+        click_button "Add to Cart"
       end
 
       expect(page).to have_content("You now have 1 #{@item_1.name}.")

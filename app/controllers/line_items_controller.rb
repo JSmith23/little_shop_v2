@@ -10,7 +10,7 @@ class LineItemsController < ApplicationController
         if cart.can_increment_item?(params[:line_item_id])
             cart.increment_item(params[:line_item_id])
         else
-            flash[:error] = "Exceed merchant inventory"
+            flash[:error] = "Exceeds merchant inventory"
         end
         redirect_to cart_path
     end

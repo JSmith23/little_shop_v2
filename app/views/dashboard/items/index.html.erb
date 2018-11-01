@@ -2,10 +2,10 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 
- <h2> All Merchant Items </h2>
+ <h2>All Merchant Items for <%= @user.name %></h2>
 <% if admin_user? || merchant_user? %>
 <div class="add-new-item">
-  <%= button_to  "Add an Item", carts_path, method: 'get' %>
+  <%= button_to  "Add to Cart", carts_path, method: 'get' %>
 </div>
 <%end%>
 
