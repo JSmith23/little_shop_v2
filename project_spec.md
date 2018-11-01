@@ -536,7 +536,7 @@ All fields are re-populated with my previous data
 ```
 
 ```
-39. [ ] done
+39. [X] done
 
 As an admin user
 When I visit a merchant's profile page
@@ -794,7 +794,7 @@ I see an area with statistics:
 ### Security
 
 ```
-58. [ ] done
+58. [X] done
 
 As an admin user
 I should have basic CRUD functionality for all content
@@ -802,7 +802,7 @@ Except deleting content
 ```
 
 ```
-59. [ ] done
+59. [X] done
 
 As a merchant user
 X I can only view my own merchant dashboard
