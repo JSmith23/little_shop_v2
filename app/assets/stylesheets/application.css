@@ -107,19 +107,18 @@ main {
 }
 
 input[type=text], select, textarea {
-    width: 100%; /* Full width */
-    padding: 10px; /* Some padding */
-    border: 1px solid #ccc; /* Gray border */
-    border-radius: 4px; /* Rounded borders */
-    box-sizing: border-box; /* Make sure that padding and width stays in place */
-    margin-top: 6px; /* Add a top margin */
-    margin-bottom: 16px; /* Bottom margin */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
     resize: vertical;
-    align: left/* Allow the user to vertically resize the textarea (not horizontally) */
+    align: left;
 }
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
+.submit input[type=submit] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -130,20 +129,18 @@ input[type=submit] {
     right: 90px;
 }
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
+.submit input[type=submit]:hover {
     background-color: #45a049;
 }
 
-/* Add a background color and some padding around the form */
-.user-registration-form {
+.form {
     border-radius: 5px;
     background-color: #f2f2f2;
     margin: 35px 250px 50px 250px;
     padding: 50px;
 }
 
-.new-user-title {
+.title {
+  float: center;
   text-align: center;
-  align: center;
 }

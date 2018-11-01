@@ -1,8 +1,8 @@
-<main>
-  <div class="new-user-title">
+<main class= "user-registration-form">
+  <div class="title">
     <h1>New User Registration</h1>
   </div>
-  <div class='user-registration-form'>
+  <div class='form'>
   <%= form_for @user, url: register_path do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -20,7 +20,9 @@
     <%= f.password_field :password %>
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
+    <div class="submit">
       <%= f.submit "Create User", :class => "button" %>
+    </div>
   <% end %>
     </div>
 </main>
