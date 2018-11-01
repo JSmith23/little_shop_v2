@@ -1,10 +1,11 @@
 <main>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
-
+<div class="add-new-item">
   <% if admin_user? || merchant_user? %>
-    <%= button_to  "Add an Item", new_item_path, method: 'get' %>
+    <%= button_to  "Add a New Item", new_item_path, method: 'get' %>
   <% end %>
+  </div>
 
   <% @items.each do |item| %>
     <div class="items">
