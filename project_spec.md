@@ -705,7 +705,7 @@ I am taken to that order's show page ("/orders/12")
 ```
 
 ```
-52. [ ] done
+52. [X] done
 
 As a merchant
 When I visit an order show page
@@ -731,7 +731,7 @@ Instead I see a big red notice next to the item indicating I cannot fulfill this
 ```
 
 ```
-53. [ ] done
+53. [X] done
 
 When all items in an order have been "fulfilled" by their merchants
 The order status changes from "pending" to "complete"
@@ -794,7 +794,7 @@ I see an area with statistics:
 ### Security
 
 ```
-58. [ ] done
+58. [X] done
 
 As an admin user
 I should have basic CRUD functionality for all content
@@ -802,7 +802,7 @@ Except deleting content
 ```
 
 ```
-59. [ ] done
+59. [X] done
 
 As a merchant user
 X I can only view my own merchant dashboard
