@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
   def destroy
     order = Order.find(params[:id])
     order.cancel
+    flash[:success] = "Order has been cancelled."
     redirect_back(fallback_location: root_path)
   end
 end

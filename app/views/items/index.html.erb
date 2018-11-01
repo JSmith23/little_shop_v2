@@ -1,29 +1,29 @@
 <main>
   <%= stylesheet_link_tag 'application', media: 'all' %>
- <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
 
-<% if admin_user? || merchant_user? %>
-  <%= button_to  "Add an Item", new_item_path, method: 'get' %>
-<% end %>
+  <% if admin_user? || merchant_user? %>
+    <%= button_to  "Add an Item", new_item_path, method: 'get' %>
+  <% end %>
 
-   <% @items.each do |item| %>
+  <% @items.each do |item| %>
     <div class="items">
-   <div id="item_<%= item.id %>">
-     <h3><%= link_to"#{item.name}", item_path(item.id), class: 'item-show-link' %></h3>
-     <%= link_to item_path(item) do %> <%=image_tag item.thumbnail %>
-     <%end%>
-     <div class="item-info">
-     <ul>
-        <%= button_to "Add Item", carts_path(item_id: item.id), class: "btn btn-danger" %>
-       <li>Item ID: <%= item.id %>
-       <li>Price: $<%= item.price %>
-       <li>Inventory: <%= item.inventory %>
-       <li>Merchant: <%= item.merchant_name %>
-        <li>Description: <%= item.description %>
-     </ul>
-
-   </div>
-</div>
-   </div>
- <% end %>
+      <div id="item_<%= item.id %>">
+        <h3><%= link_to"#{item.name}", item_path(item.id), class: 'item-show-link' %></h3>
+        <%= link_to item_path(item) do %>
+          <%=image_tag item.thumbnail %>
+        <%end%>
+        <div class="item-info">
+          <ul>
+            <%= button_to "Add to Cart", carts_path(item_id: item.id), class: "btn btn-danger" %>
+            <li>Item ID: <%= item.id %>
+            <li>Price: $<%= item.price %>
+            <li>Inventory: <%= item.inventory %>
+            <li>Merchant: <%= item.merchant_name %>
+            <li>Description: <%= item.description %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </main>

@@ -1,41 +1,44 @@
-<%= button_to "Empty cart", destroy_cart_path, class: "btn btn-danger", method: :delete %>
+<%= button_to "Empty cart", 
+              destroy_cart_path, 
+              class: "btn btn-danger", 
+              method: :delete unless @cart.empty? %>
 
 <% if @cart.empty? %>
-    <p>Your cart is empty!</p>
+  <p>Your cart is empty!</p>
 <% else %>
-    <ul>
-        <% @cart.items.each do |item| %>
-            <li id="item_<%= item.item_id %>">
-                <b>Name:</b> <%= item.name %>
-                <br/>
-                <b>Image:</b> <%= image_tag item.thumbnail %>
-                <br/>
-                <b>Merchant name:</b> <%= item.merchant_name %>
-                <br/>
-                <b>Price:</b> <%= item.price %>
-                <br/>
-                <b>Quantity:</b> <%= item.quantity %>
-                <br/>
-                <b>Subtotal:</b> <%= item.subtotal %>
-                <br/>
+  <ul>
+    <% @cart.items.each do |item| %>
+      <li id="item_<%= item.item_id %>">
+        <b>Name:</b> <%= item.name %>
+        <br/>
+        <b>Image:</b> <%= image_tag item.thumbnail %>
+        <br/>
+        <b>Merchant name:</b> <%= item.merchant_name %>
+        <br/>
+        <b>Price:</b> <%= item.price %>
+        <br/>
+        <b>Quantity:</b> <%= item.quantity %>
+        <br/>
+        <b>Subtotal:</b> <%= item.subtotal %>
+        <br/>
 
-                <%= button_to "Remove Item", line_item_path(id: item.item_id), class: "btn btn-danger", method: :delete %>
-                <br/>
-                <%= button_to "Increment Quantity", line_item_increment_path(line_item_id: item.item_id) %>
-                <br/>
-                <%= button_to "Decrement Quantity", line_item_decrement_path(line_item_id: item.item_id), method: :delete %>
-            </li>
-        <% end%>
-    </ul>
+        <%= button_to "Remove Item", line_item_path(id: item.item_id), class: "btn btn-danger", method: :delete %>
+        <br/>
+        <%= button_to "Increment Quantity", line_item_increment_path(line_item_id: item.item_id) %>
+        <br/>
+        <%= button_to "Decrement Quantity", line_item_decrement_path(line_item_id: item.item_id), method: :delete %>
+      </li>
+    <% end%>
+  </ul>
 
-    <div class="grand_total">
-        Grand total: <%= @cart.grand_total %>
+  <div class="grand_total">
+    Grand total: <%= @cart.grand_total %>
+  </div>
+  <% if !current_user%>
+    <p>You must <%= link_to "Register", register_path %> or <%= link_to "Login", login_path %> to checkout.</p>
+  <% else %>
+  <div class="checkout">
+    <%= link_to "Check Out", orders_path, method: "POST" %>
     </div>
-    <% if !current_user%>
-        <p>You must <%= link_to "Register", register_path %> or <%= link_to "Login", login_path %> to checkout.</p>
-    <% else %>
-    <div class="checkout">
-        <%= link_to "Check Out", orders_path, method: "POST" %>
-        </div>
-      <% end%>
+  <% end%>
 <% end %>

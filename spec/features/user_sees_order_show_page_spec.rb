@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-describe 'user checks out of cart' do
+describe 'As a user' do
 
   before(:each) do
     @user_1, @user_2 = create_list(:user, 2)
     @merchant = create(:user, :merchant)
     @other_merchant = create(:user, :merchant)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_1)
     @order_1 = @user_1.orders.create(status: 'pending')
     @order_2 = @user_2.orders.create(status: 'pending')
     @order_3 = @user_2.orders.create(status: 'pending')
@@ -18,93 +19,40 @@ describe 'user checks out of cart' do
     @item_7 = Item.create( name: "New Balance® Jojo Womens Sandals",	description: "Head to the pool or lounge at the beach in these casual, lightweight women's sandals. A synthetic, stretchable upper provides a personalized fit.   synthetic upper soft Lycra upper moldable footbed lightweight EVA sole", price:	30.22, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0207201417175260M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_8 = Item.create( name: "St. John's Bay® Drape-Front Jacquard Cardigan - Petite",	description: "imported machine washable cotton/acrylic/other fiber", price:	59.12, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP1016201517095585M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
     @item_9 = Item.create( name: "Deer Stags® Mack Boys Hiking Boots - Little Kids/Big Kids",	description: "Lace-up boys' hiking boots from Deer Stags feature a durable synthetic upper and a rugged rubber sole. Water- and oil-resistant for superior traction in any situation.   synthetic upper lace-up oil-resistant water-resistant rubber sole", price:	59.14, thumbnail: "http://s7d2.scene7.com/is/image/JCPenney/DP0403201317013346M.tif?wid=65&hei=65&fmt=jpg&op_usm=.4,.8,0,0&resmode=sharp2", enabled: true, inventory: 100, user_id: @merchant.id )
-    OrderItem.create(order_id: @order_1.id, item_id: @item_1.id, price: 36.26, quantity: 1)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_2.id, price: 43.51, quantity: 2)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_3.id, price: 48.34, quantity: 1)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_4.id, price: 21.76, quantity: 3)
-    OrderItem.create(order_id: @order_1.id, item_id: @item_5.id, price: 76.86, quantity: 1)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_6.id, price: 36.26, quantity: 4)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_7.id, price: 30.22, quantity: 5)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_8.id, price: 59.12, quantity: 1)
-    OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
+    @order_item_1 = OrderItem.create(order_id: @order_1.id, item_id: @item_1.id, price: 36.26, quantity: 1)
+    @order_item_2 = OrderItem.create(order_id: @order_1.id, item_id: @item_2.id, price: 43.51, quantity: 2)
+    @order_item_3 = OrderItem.create(order_id: @order_1.id, item_id: @item_3.id, price: 48.34, quantity: 1)
+    @order_item_4 = OrderItem.create(order_id: @order_1.id, item_id: @item_4.id, price: 21.76, quantity: 3)
+    @order_item_5 = OrderItem.create(order_id: @order_1.id, item_id: @item_5.id, price: 76.86, quantity: 1)
+    @order_item_6 = OrderItem.create(order_id: @order_2.id, item_id: @item_6.id, price: 36.26, quantity: 4)
+    @order_item_7 = OrderItem.create(order_id: @order_2.id, item_id: @item_7.id, price: 30.22, quantity: 5)
+    @order_item_8 = OrderItem.create(order_id: @order_2.id, item_id: @item_8.id, price: 59.12, quantity: 1)
+    @order_item_9 = OrderItem.create(order_id: @order_2.id, item_id: @item_9.id, price: 59.14, quantity: 1)
   end
 
-  describe 'as a registered user when I visit my cart' do
-    it 'I see a checkout button' do
+  describe 'when I visit an orders show page' do
+    it 'should display the customers information and all order items' do
 
-    visit root_path
+      visit order_path(@order_1)
 
-    click_on "Register"
+      expect(page).to have_content("Order #{@order_1.id}")
+      expect(page).to have_content(@user_1.name)
+      expect(page).to have_content(@user_1.address)
+      expect(page).to have_content("#{@user_1.city}, #{@user_1.state} #{@user_1.zip}")
+      expect(page).to have_content(@item_1.name)
+      expect(page).to have_xpath("//img[contains(@src, '#{@item_1.thumbnail}')]")
+      expect(page).to have_content(@order_item_1.price)
+      expect(page).to have_content(@order_item_1.quantity)
+      expect(page).to have_content(@item_2.name)
+      expect(page).to have_content(@item_3.name)
+      expect(page).to have_content(@item_4.name)
+      expect(page).to have_content(@item_5.name)
+      expect(page).to_not have_content(@item_6.name)
+      expect(page).to_not have_content(@item_7.name)
+      expect(page).to_not have_content(@item_8.name)
+      expect(page).to_not have_content(@item_9.name)
 
-    expect(current_path).to eq(register_path)
-
-    fill_in :user_name, with: "Test Person"
-    fill_in :user_address, with: "123 alphabet lane"
-    fill_in :user_city, with: "Denver"
-    fill_in :user_state, with: "CO"
-    fill_in :user_zip, with: "80205"
-    fill_in :user_email, with: "test@test.com"
-    fill_in :user_password, with: "test"
-    fill_in :user_password_confirmation, with: "test"
-
-    click_on "Create User"
-
-    visit items_path
-
-    within(:css, "#item_#{@item_1.id}") do
-      click_button "Add to Cart"
-    end
-
-    expect(page).to have_content("You now have 1 #{@item_1.name}.")
-
-    visit cart_path
-
-    expect(page).to have_content("Check Out")
-    end
-
-    it 'I click on the checkout button and an order is created' do
-      visit login_path
-
-      fill_in "Email", with: @user_1.email
-      fill_in "Password", with: @user_1.password
-
-      click_on "Log in"
-
-      click_on "Items"
-
-      within(:css, "#item_#{@item_1.id}") do
-        click_button "Add to Cart"
-      end
-
-      within(:css, "#item_#{@item_2.id}") do
-        click_button "Add to Cart"
-      end
-
-      visit cart_path
-
-      click_on "Check Out"
-
-      expect(current_path).to eq(profile_orders_path)
-      expect(page).to have_content("Order #{Order.last.id}")
-      expect(page).to have_content("Cart: 0")
-    end
-  end
-
-
-  describe 'as a visitor' do
-    it 'I am asked to login before I can checkout' do
-
-      visit items_path
-
-      within(:css, "#item_#{@item_1.id}") do
-        click_button "Add to Cart"
-      end
-
-      expect(page).to have_content("You now have 1 #{@item_1.name}.")
-
-      visit cart_path
-
-      expect(page).to have_content("You must Register or Login to checkout.")
+      
     end
   end
 end
