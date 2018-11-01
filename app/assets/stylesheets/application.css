@@ -90,5 +90,19 @@ main {
 }
 
 .add-new-item {
+    margin: 30px;
+}
+
+.item-img {
+    position: absolute;
+    left: 1000px;
     margin: 20px;
+
+}
+.item-desc {
+  position: relative;
+  left: 30px;
+  align: center;
+  text-align: left;
+
 }
