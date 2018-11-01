@@ -62,7 +62,7 @@ describe 'As a merchant user' do
       visit dashboard_items_path
 
       within('main.dashboard-items') do
-        expect(page).to have_selector("input[type=submit][value='Add to Cart']")
+        expect(page).to have_selector("input[type=submit][value='Add an Item']")
       end
     end
 

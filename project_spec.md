@@ -525,7 +525,7 @@ If I left the image field blank, I see a placeholder image for the thumbnail
 ```
 
 ```
-38. [ ] done
+38. [X] done
 
 As a merchant
 When I try to edit an existing item
@@ -536,7 +536,7 @@ All fields are re-populated with my previous data
 ```
 
 ```
-39. [ ] done
+39. [X] done
 
 As an admin user
 When I visit a merchant's profile page
