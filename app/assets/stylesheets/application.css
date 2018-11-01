@@ -60,14 +60,16 @@ main {
   font-size: 12px;
 }
  .items {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    box-sizing: border-box;
-    width: 300px;
-    height: 300px;
-    font-size: 12px;
-    text-align: center;
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  box-sizing: border-box;
+  width: 300px;
+  height: 300px;
+  font-size: 12px;
+  text-align: center;
+  margin: 35px;
+  padding: 10px;
  }
  ul {
     list-style-type: none;
@@ -85,4 +87,60 @@ main {
  .items img {
     width: 25%;
     height: 25%;
+}
+
+.add-new-item {
+    margin: 30px;
+}
+
+.item-img {
+    position: absolute;
+    left: 1000px;
+    margin: 20px;
+
+}
+.item-desc {
+  position: relative;
+  left: 30px;
+  align: center;
+  text-align: left;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    align: left;
+}
+
+.submit input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    right: 90px;
+}
+
+.submit input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    margin: 35px 250px 50px 250px;
+    padding: 50px;
+}
+
+.title {
+  float: center;
+  text-align: center;
 }

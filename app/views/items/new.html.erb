@@ -1,5 +1,8 @@
 <main class='add-item'>
-  <h1>Add Item</h2>
+  <div class="new">
+  <h2>Add Item</h2>
+    </div>
+  <div class='form'>
   <%= form_for @item do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -11,7 +14,10 @@
     <%= f.number_field :inventory, min: 1 %>
     <%= f.label :thumbnail %>
     <%= f.text_field :thumbnail, :value => '' %>
-    <%= f.submit %>
+    <div class="submit">
+      <%= f.submit "Create Item", :class => "button" %>
+    </div>
   <% end %>
+  </div>
 
 </main>

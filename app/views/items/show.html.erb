@@ -1,4 +1,12 @@
+<main>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+
+<div class="item-img">
 <img src=<%= @item.thumbnail %>>
+</div>
+
+<div class="item-desc">
 <h2><%= @item.name %></h2>
 <ul>
   <li><strong>Description: </strong><%= @item.description %></li>
@@ -7,4 +15,7 @@
 
   <li><strong>Price: $</strong><%= @item.price %></li>
 </ul>
+
 <%= button_to "Add to Cart", carts_path(item_id: @item.id), class: "btn btn-danger" %>
+</div>
+</main>
