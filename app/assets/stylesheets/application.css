@@ -63,7 +63,7 @@ main {
   left: 10px;
   font-size: 12px;
 }
- .items {
+ .items, .merchant-items {
   margin: 5px;
   border: 1px solid #ccc;
   float: left;
@@ -75,6 +75,11 @@ main {
   margin: 24px;
   padding: 10px;
  }
+
+ .merchant-items {
+  height: 350px;
+ }
+
  ul {
     list-style-type: none;
     margin: 0;
@@ -88,7 +93,10 @@ main {
  .items:hover {
     border: 1px solid #777;
 }
- .items img {
+
+.items img,
+.merchant-items img,
+.show-order img {
     width: 25%;
     height: 25%;
 }
@@ -201,7 +209,7 @@ padding: 6px 18px;
   color: green;
 }
 
-.items h3 {
+.items h3, .merchant-items h3 {
   height: 30px;
 }
 
@@ -209,4 +217,23 @@ padding: 6px 18px;
   height: 200px;
   width: 200px;
   margin-left: 100px;
+}
+
+.item-status {
+  display: flex;
+  justify-content: center;
+}
+
+.item-status input {
+  margin-top: 14px; 
+  margin-left: 12px;
+}
+
+.customer {
+  display: flex;
+  justify-content: baseline;
+}
+
+.customer-title {
+  margin-right: 24px;
 }
