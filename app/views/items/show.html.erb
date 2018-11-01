@@ -2,12 +2,11 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 
-<div class="item-img">
-<img src=<%= @item.thumbnail %>>
-</div>
-
 <div class="item-desc">
 <h2><%= @item.name %></h2>
+  <div class="item-img">
+    <img src=<%= @item.thumbnail %>>
+  </div>
 <ul>
   <li><strong>Description: </strong><%= @item.description %></li>
   <li><strong>Merchant Name: </strong><%= @item.user.name %></li>
