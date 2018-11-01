@@ -28,5 +28,19 @@ describe User, type: :model do
       expect(user.enabled).to eq(false)
     end
 
+    it 'should update the role from user to merchant' do
+      user = create(:user)
+      expect(user.role).to eq('registered_user')
+      user.upgrade_role
+      expect(user.role).to eq('merchant')
+    end
+
+    it 'should update the role from merchant to user' do
+      user = create(:user, :merchant)
+      expect(user.role).to eq('merchant')
+      user.downgrade_role
+      expect(user.role).to eq('registered_user')
+    end
+
   end
 end

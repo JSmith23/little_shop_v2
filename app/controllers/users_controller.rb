@@ -36,9 +36,11 @@ class UsersController < ApplicationController
     redirect_to login_path unless current_user
     if admin_user? && request_path == "users"
       @user = User.find(params[:id])
+      redirect_to merchant_path(@user) unless @user.role == 'registered_user'
       @greeting = "Profile data for #{@user.name}"
       @edit_path = edit_user_path(@user)
       @orders_path = user_orders_path(user_id: @user.id)
+      @role_path = upgrade_user_path(@user)
     elsif admin_user? && request_path == "profile"
       @user = current_user
       @greeting = "Profile data for #{@user.name}"
@@ -112,6 +114,20 @@ class UsersController < ApplicationController
       flash[:error] = "Update failed.  Please ensure all required fields are filled in and try again."
       render :edit
     end
+  end
+
+  def upgrade
+    @user = User.find(params[:id])
+    @user.upgrade_role
+    flash[:success] = "User has been upgraded to merchant."
+    redirect_to merchant_path(@user)
+  end
+
+  def downgrade
+    @user = User.find(params[:id])
+    @user.downgrade_role
+    flash[:success] = "Merchant has been downgraded to registered user."
+    redirect_to user_path(@user)
   end
 
   private

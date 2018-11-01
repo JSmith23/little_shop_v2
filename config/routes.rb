@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
 
   get '/profile', to: 'users#show'
+  patch '/users/:id', to: 'users#upgrade', as: 'upgrade_user'
   get '/profile/edit/', to: 'users#edit'
   patch '/profile/edit/', to: 'users#update'
   get '/profile/orders', to: 'orders#index'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   get 'merchants', to: 'users#index'
+  patch 'merchants/:id', to: 'users#downgrade', as: 'downgrade_merchant'
   get 'merchants/:id', to: 'dashboard#show', as: 'merchant'
   get 'merchants/:id/edit', to: 'users#edit', as: 'edit_merchant'
   get 'merchants/:id/orders', to: 'dashboard/orders#index', as: 'merchant_orders'

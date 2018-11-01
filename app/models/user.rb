@@ -24,4 +24,12 @@ class User < ApplicationRecord
     Order.joins(:items).where('items.user_id = ?', self.id).distinct
   end
 
+  def upgrade_role
+      update_attribute :role, 'merchant' if role == 'registered_user'
+  end
+
+  def downgrade_role
+      update_attribute :role, 'registered_user' if role == 'merchant'
+  end
+
 end
