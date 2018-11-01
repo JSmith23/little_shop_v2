@@ -60,14 +60,16 @@ main {
   font-size: 12px;
 }
  .items {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    box-sizing: border-box;
-    width: 300px;
-    height: 300px;
-    font-size: 12px;
-    text-align: center;
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  box-sizing: border-box;
+  width: 300px;
+  height: 300px;
+  font-size: 12px;
+  text-align: center;
+  margin: 35px;
+  padding: 10px;
  }
  ul {
     list-style-type: none;
@@ -85,4 +87,8 @@ main {
  .items img {
     width: 25%;
     height: 25%;
+}
+
+.add-new-item {
+    margin: 20px;
 }

@@ -16,14 +16,14 @@ describe 'As a merchant user' do
     @default_thumbnail = "https://www.riobeauty.co.uk/images/product_image_not_found_thumb.gif"
   end
 
-  describe 'when I visit the items index and click Add an Item' do
+  describe 'when I visit the items index and click Add a New Item' do
     it 'should display a new item form' do
 
       visit items_path
-      click_on "Add an Item"
+      click_on "Add a New Item"
 
       expect(current_path).to eq(new_item_path)
-  
+
     end
   end
 
@@ -31,7 +31,7 @@ describe 'As a merchant user' do
     it 'should display the items index and a message stating that item was added' do
 
       visit items_path
-      click_on "Add an Item"
+      click_on "Add a New Item"
 
       fill_in "Name", with: @name
       fill_in "Description", with: @description
@@ -45,11 +45,11 @@ describe 'As a merchant user' do
       expect(page).to have_content(@name)
       expect(page).to have_xpath("//img[contains(@src, '#{@thumbnail}')]")
     end
-  
+
     it 'should not require a thumbnail url' do
 
       visit items_path
-      click_on "Add an Item"
+      click_on "Add a New Item"
 
       fill_in "Name", with: @name
       fill_in "Description", with: @description
@@ -67,7 +67,7 @@ describe 'As a merchant user' do
     it 'should not accept 0 or less for price or inventory' do
 
       visit items_path
-      click_on "Add an Item"
+      click_on "Add a New Item"
 
       fill_in "Name", with: @name
       fill_in "Description", with: @description
@@ -83,7 +83,7 @@ describe 'As a merchant user' do
     it 'should not accept blank name' do
 
       visit items_path
-      click_on "Add an Item"
+      click_on "Add a New Item"
 
       fill_in "Name", with: ''
       fill_in "Description", with: @description
