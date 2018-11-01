@@ -377,7 +377,7 @@ And I only see the orders containing items from this merchant
 ### "MerchantUsers" CRUD
 
 ```
-27. [ ] done
+27. [X] done
 
 As an admin user
 When I visit a user's profile page ("/users/5")
@@ -389,7 +389,7 @@ The next time this user logs in they are now a merchant
 ```
 
 ```
-28. [ ] done
+28. [X] done
 
 As an admin user
 When I visit a merchant's profile page ("/merchants/6")
@@ -401,7 +401,7 @@ The next time this user logs in they are now a merchant
 ```
 
 ```
-29. [ ] done
+29. [X] done
 
 As an admin user
 If I visit a profile page for a user, but that user is a merchant
@@ -412,7 +412,7 @@ then I am redirected to "/merchants/7" and see their merchant dashboard page
 ```
 
 ```
-30. [ ] done
+30. [X] done
 
 As an admin user
 If I visit a profile page for a merchant, but that merchant is a regular user
