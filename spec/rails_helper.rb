@@ -4,6 +4,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 SimpleCov.start do
   add_filter "spec"
+  add_filter do |source_file|
+    source_file.filename.include?("config") && !source_file.filename.include?("routes")
+  end
 end
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production

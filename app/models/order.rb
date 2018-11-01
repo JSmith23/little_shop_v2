@@ -21,7 +21,7 @@ class Order < ApplicationRecord
   end
 
   def items_for_merchant(merchant_id)
-    items.where(user_id: merchant_id).to_a
+    items.where(user_id: merchant_id)
   end
 
 end
