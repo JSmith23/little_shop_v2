@@ -144,3 +144,19 @@ input[type=text], select, textarea {
   float: center;
   text-align: center;
 }
+
+.index-container {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.index-container input {
+  margin-top: 24px;
+}
+
+.order-container input {
+  position: relative;
+  top: -18px;
+  left: 150px;
+}

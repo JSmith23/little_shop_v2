@@ -3,7 +3,7 @@
   <h1>All Orders <%="for #{@user.name}" if @user%></h1>
 
   <% @orders.each do |order| %>
-  <div id="order<%=order.id %>">
+  <div id="order<%=order.id %>" class="order-container">
     <h3><%= link_to "Order #{order.id}", order_path(order.id), class: 'order-show-link' %></h3>
     <ul>
       <li>Created at: <%= order.created_at %></li>
