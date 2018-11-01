@@ -24,4 +24,12 @@ class Order < ApplicationRecord
     items.where(user_id: merchant_id)
   end
 
+  def update_status
+    order_items.each do |order_item|
+      return "Order status is pending." if !order_item.fulfilled
+    end
+    update_attribute :status, "complete"
+    return "Order status updated to complete."
+  end
+
 end

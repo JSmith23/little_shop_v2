@@ -705,7 +705,7 @@ I am taken to that order's show page ("/orders/12")
 ```
 
 ```
-52. [ ] done
+52. [X] done
 
 As a merchant
 When I visit an order show page
@@ -731,7 +731,7 @@ Instead I see a big red notice next to the item indicating I cannot fulfill this
 ```
 
 ```
-53. [ ] done
+53. [X] done
 
 When all items in an order have been "fulfilled" by their merchants
 The order status changes from "pending" to "complete"

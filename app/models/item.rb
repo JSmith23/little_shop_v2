@@ -14,4 +14,8 @@ class Item < ApplicationRecord
     def merchant_name
       User.find(user_id).name
     end
+
+    def reduce_inventory(quantity)
+      update_attribute :inventory, (inventory - quantity)
+    end
 end
