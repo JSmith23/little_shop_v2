@@ -38,7 +38,7 @@ describe 'As an admin user' do
       click_on "User Orders"
 
       within("main.orders-index") do
-        expect(page).to have_content("All User Orders for #{@user_1.name}")
+        expect(page).to have_content("All Orders for #{@user_1.name}")
         expect(page).to have_content("Order #{@order_1.id}")
         expect(page).to have_selector("input[type=submit][value='Cancel Order']")
       end

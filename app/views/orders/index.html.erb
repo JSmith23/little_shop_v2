@@ -1,6 +1,6 @@
 <main class='orders-index'>
-  
-  <h1><%= @heading %></h1>
+
+  <h1>All Orders <%="for #{@user.name}" if @user%></h1>
 
   <% @orders.each do |order| %>
   <div id="order<%=order.id %>">
